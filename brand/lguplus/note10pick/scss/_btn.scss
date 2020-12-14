@@ -1,0 +1,36 @@
+.btnIr {
+  @include background-image($loc + '/btnIr.png', $pos:left top);
+  display: inline-block;
+  padding: 0;
+  border: 0;
+  cursor: pointer;
+}
+
+.btn {
+  &--kakao {
+    @include size(285px, 81px);
+    margin-right: 20px;
+    background-position-y: -161px;
+  }
+
+  &--copyUrl {
+    @include size(285px, 81px);
+    background-position-y: -242px;
+  }
+
+  &--detail {
+    @include size(179px, 58px);
+    background-position-y: -323px;
+  }
+
+  &--vote {
+    @include size(593px, 81px);
+    background-position-y: -81px;
+  }
+
+  &--close {
+    @include size(360px, 81px);
+    background-position-y: -1px;
+  }
+}
+

@@ -1,0 +1,200 @@
+// ===============================
+// page
+// ===============================
+
+.wrap {
+  // @include debugger;
+  // @include background-image($loc + '/bg.jpg');
+  // display: none;
+  
+  @include size($width-max, null);
+  @include box-center;
+  position: relative;
+}
+
+.logo {
+  height: 151px;
+  background-color: #fbf1f9;
+  padding-top: 56px;
+  &.color--darken {
+    background-color: #efe3fd;
+  }
+}
+
+.view {
+  display: none;
+}
+
+.store-authentication {
+  padding-bottom: 400px;
+
+  h2 {
+    padding-top: 26px;
+    @include size(null, 370px);
+    @include background-image($loc + '/bg-header-common-white.png', $color: #fbf1f9, $pos: center 34px);
+  }
+
+  &__title {
+    padding: 34px 0 49px;
+  }
+
+  .form {
+    padding: 0 35px;
+  }
+
+  input[type="text"] {
+    display: inline-block;
+    width: 505px;
+    height: 81px;
+    font-size: 30px;
+    box-sizing: border-box;
+    border-color: #d1d1d1;
+    border-style: solid;
+    padding-left: 30px;
+  }
+
+  dl {
+    font-size: 0;
+    &:nth-child(2) {
+      margin-bottom: 19px;
+    }
+    &:nth-child(3) {
+      margin-bottom: 65px;
+    }
+  }
+
+  dt, dd {
+    display: inline-block;
+  }
+
+  dt > label[for] {
+    display: inline-block;
+    @include size(145px, 81px);
+    @include background-image($loc + '/lb-ir.png');
+  }
+
+  dt > label[for="clerk-name"] {
+    background-position-y: bottom;
+  }
+
+  .rows {
+    margin-bottom: 72px;
+    padding-left: 5px;
+  }
+
+  .btn-wrap {
+    text-align: center;
+  }
+}
+
+.visual {
+  @include background-image($loc + '/bg-main-visual.png');
+  @include size(null, 2565px);
+
+  .btn-wrap {
+    margin: 45px 0 66px;
+    text-align: center;
+  }
+}
+
+.header {
+  margin-bottom: 33px;
+  @include size(null, 185px);
+  @include background-image($loc + '/bg-header-common-white.png', $color: #fbf1f9, $pos: center -150px);
+}
+
+// 영상 슬라이드
+.select-video {
+  padding-bottom: 400px;
+ 
+  .swiper-container {
+    height: 680px;
+    margin-bottom: 60px;
+  }
+  
+  .slider__title {
+    padding-bottom: 29px;
+  }
+
+  .btn-wrap {
+    text-align: center;
+  }
+}
+
+// 정답 작성 캔버스
+.draw-answer {
+  padding-bottom: 500px;
+  
+  .btn-wrap {
+    padding-top: 60px;
+    text-align: center;
+  }
+
+}
+
+// 사인 그리기
+.draw-signature {
+  padding-bottom: 400px;
+
+  .canvas--signature {
+    // border: 2px solid #d1d1d1;
+
+    &__cover {
+      position: absolute;
+      top: -2px;
+      left: -2px;
+      z-index: 25;
+    }
+  }
+
+  .btn-wrap {
+    padding: 60px 0 60px;
+    text-align: center;
+  }
+
+  .rows {
+    margin-bottom: 9px;
+    padding-left: 35px;
+  }
+
+  .check-box__visual {
+    margin-top: 5px;
+  }
+
+  p:nth-last-child(1) {
+    padding-top: 50px;
+  }
+
+
+}
+
+
+// loading
+// ===============================
+.is-loading {
+  position: fixed;
+  top:  0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 30;
+  @include background-image($loc + '/loading.gif', $pos: center center, $color: rgba(0,0,0,0.6))
+}
+
+[v-cloak] {
+  display: none;
+}
+
+.end-notice { 
+  position: absolute;
+  z-index: 40;
+  top: 120px;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+}
+
+.link-to-event2 {
+  display: inline-block;
+  margin-top: 30px;
+}

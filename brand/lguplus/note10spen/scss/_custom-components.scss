@@ -1,0 +1,65 @@
+/* check-box */
+
+.check-box{
+  // @include debugger;
+  position  : relative;
+  margin    : 0 auto;
+  text-align: left;
+  &__visual {
+    // @include debugger(blue);
+    margin-right: 12px;
+    display     : inline-block;
+    width       : 51px;
+    height      : 51px;
+    border: 2px solid #d1d1d1;
+    box-sizing: border-box;
+  }
+
+  label[for] {
+    display: inline-block;
+  }
+
+  input[type="checkbox"], input[type="radio"] {
+    position: absolute;
+    width   : 1px;
+    height  : 1px;
+    opacity : .01;
+  }
+  
+  input[type="checkbox"]:checked ~ span,
+  input[type="radio"]:checked ~ span {
+    @include background-image($loc + '/checkbox-visual.png', $pos: 3px 3px);
+  }
+
+}
+
+
+/* slider */
+
+.swiper-button-prev {
+  left: 50px;
+  @include size(22px, 36px);
+  @include background-image($loc + '/btn-ir.png', $pos:-43px -637px);
+}
+
+.swiper-button-next {
+  right: 50px;
+  @include size(22px, 36px);
+  @include background-image($loc + '/btn-ir.png', $pos:-79px -637px);
+}
+
+.swiper-slide {
+  text-align: center;
+}
+
+.swiper-pagination-bullet.swiper-pagination-bullet-active {
+  background: #e5007e
+}
+
+.swiper-pagination-bullet {
+  @include size(16px);
+}
+
+.swiper-container > .swiper-pagination {
+  bottom: 0;
+}

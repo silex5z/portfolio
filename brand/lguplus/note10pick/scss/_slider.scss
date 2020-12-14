@@ -1,0 +1,169 @@
+.slider {
+  position: relative;
+  background: #e8d9fa;
+  // padding: 0 40px;
+  padding-left: 64px;
+  margin-top: 36px;
+
+  .swiper-container{
+    // width: 608px;
+    padding-bottom: 60px;
+  }
+
+  /* slider */
+
+  .swiper-button-prev {
+    left: 20px;
+    top: 47%;
+    @include size(27px, 45px);
+    @include background-image($loc + '/visuals.png', $pos: -26px top);
+  }
+
+  .swiper-button-next {
+    right: 20px;
+    top: 47%;
+    @include size(27px, 45px);
+    @include background-image($loc + '/visuals.png', $pos: 1px top);
+  }
+
+  .swiper-pagination-bullet.swiper-pagination-bullet-active {
+    background: #e5007e
+  }
+
+  .swiper-pagination-bullet {
+    @include size(22px);
+    background: white;
+    opacity: 1;
+  }
+
+  .swiper-container > .swiper-pagination {
+    bottom: 0;
+    transform: translateX(-28px);
+  }
+
+  .swiper-container-horizontal>.swiper-pagination-bullets .swiper-pagination-bullet {
+    margin: 0 13px;
+  }
+  
+  /* 슬라이더 아이템의 wrap */
+  &__item{
+    
+    // @include size(290px, 380px);
+    text-align: left;
+    // overflow: hidden;    
+    // width: 290px !important;
+    height: 400px;
+    // margin: 11px 7px;
+    // &:nth-child(2n){
+    //   margin-top: 11px !important;
+    // }
+    // padding-right: 50px;
+    // &:nth-child(4n-1),
+    &:nth-child(2n){
+      // margin-right: 14px !important;
+      transform: translateX(-24px)
+    }
+    // @include debugger
+    
+  }
+
+  /* 슬라이더 아이템 라벨 */
+  &__itemCard {
+    display: inline-block;
+    border-radius: 15px;
+    cursor: pointer;
+    overflow: hidden;
+    @include size(290px, 380px);
+    // @include debugger
+
+    & > img {
+      max-width: 100%;
+      padding: 9px 0;
+      background: white;
+      transform: scale(1.06);
+        /* IE9,10 */
+        @media screen and (min-width:0\0){
+        height: auto;
+      } 
+    }
+  }
+
+  input[type="checkbox"], input[type="radio"] {
+    position: absolute;
+    width   : 1px;
+    height  : 1px;
+    opacity : .01;
+  }
+
+  /* 슬라이더 아이템의 투표수 표시 영역 row */
+  &__rows {
+    position: relative;
+    padding-top: 11px;
+    padding-left: 25px;
+    padding-bottom: 14px;
+    background: #feeaf5;
+    /* 득표수 앞 하트 */
+    &:before {
+      content: '';
+      display: inline-block;
+      margin-right: 10px;
+      // margin-top: 4px;
+      width: 24px;
+      height: 20px;
+      vertical-align: middle;
+      // outline: 1px solid red;
+
+      @include background-image($loc + '/visuals.png', $pos: left -45px );
+    }
+
+    font-size: 0;
+    
+    .count--votes {
+      font-size: 30px;
+      font-weight: 900;
+      display: inline-block;
+      width: 134px;
+      color: #e6007e;
+      margin-top: -6px;
+      @supports (-webkit-overflow-scrolling: touch) { //ios
+      margin-top: 4px;
+      // color: blue;
+      }
+    }
+    
+  }
+
+  &__rows > * {
+    vertical-align: middle;
+    // outline: 1px solid red;
+  }
+
+  /* 빈 슬라이더 기본이미지로 덮기 */  
+  &__rows.default:after {
+    content: '';
+    display: block;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    @include size(290px, 90px);
+    @include background-image($loc + '/visual-default-row.png');
+  }
+
+  /* 선택(radio) 하트 비주얼 */
+  .checkBox__visual--heart {
+    display: inline-block;
+    @include size(64px);
+    @include background-image($loc + '/visual-heart.png', $pos:left bottom);
+    @at-root [type="checkbox"]:checked ~ .checkBox__visual--heart {
+      background-position-y : top; 
+    }
+  }
+  
+}
+
+.hasShadow {
+  border-radius: 15px;
+  -webkit-box-shadow: 31px 31px 30px 0px rgba(155, 154, 162, 0.2);
+  -moz-box-shadow:    31px 31px 30px 0px rgba(155, 154, 162, 0.2);
+  box-shadow:         31px 31px 30px 0px rgba(155, 154, 162, 0.2);
+}

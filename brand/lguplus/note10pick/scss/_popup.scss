@@ -1,0 +1,250 @@
+//############################
+// variable
+//############################
+$loc: $loc + "/popup";
+
+//############################
+// dim
+//############################
+.dim {
+  @include size(100%);
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 30;
+  display: none;
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+.popup__innerDim {
+  @extend .dim;
+
+}
+
+//############################
+// popup
+//############################
+.popup {
+  // @include debugger;
+  @include size($width-max, null);
+  @include box-center;
+  @include background-image($loc + '/bg-popup-header.png', $color: #ffffff);
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 40;
+  background-color: white;
+  padding-bottom: 75px;
+
+  &.noBg {
+    background: none;
+  }
+
+  /* &.fixed {
+    position: fixed;
+  } */
+}
+
+[class^="popup__detail"] {
+  display: none;
+
+  & .popup {
+    &__header {
+      padding: 98px 0 134px;
+      text-align: center;
+    }
+  }
+
+  .btn-wrap {
+    margin-top: 80px;
+    text-align: center;
+  }
+}
+
+[class^="popup__prize"] {
+  display: none;
+}
+
+[class^="popup__notice"] {
+  display: none;
+  padding-top: 120px;
+}
+
+[class^="popup__announcement--winner"] {
+  display: none;
+
+  h4 {
+    margin: 0 0 12px 0;
+    &:nth-last-of-type(1) {
+      margin: 0 0 40px 0;
+    }
+  }
+
+  .popup__header {
+    padding: 98px 0 134px;
+    text-align: center;
+  }
+}
+
+/* 당첨자 팝업 리스트 */
+.winners {
+  $this: &;
+  
+  &--note10 {
+    @include background-image($loc + '/bg-popup-winner.jpg', $color: #ffffff);
+  }
+
+  &__row {
+    text-align: center;
+
+    &:first-child {
+      margin-bottom: 16px;
+    }
+    &:last-child {
+      margin-bottom: 52px;
+    }
+  }
+
+  &__item {
+    position: relative;
+    display: inline-block;
+    border: 1px solid #cfcfcf;
+    cursor: pointer;
+
+    &--img {
+      max-width: 100%;
+    }
+
+    &--big {
+      width: 310px;
+    }
+
+    &--middle {
+      width: 211px;
+      margin: 8px;
+    }
+
+    &--small {
+      width: 130px;
+      margin: 4px 3px;
+    }
+    
+    #{$this}__name {
+      height: 39px;
+      background-color: #ebdaff;
+      line-height: 39px;
+      font-size: 20px;
+      border-top: 1px solid #cfcfcf;
+    }
+
+
+  } 
+
+  &__deco--place {
+    position: absolute;
+    top: 6px;
+    right: 10px;
+    width: 56px;
+    height: 56px;
+    border-radius: 50px;
+    background-color: #ea3898;
+    color: white;
+    line-height: 53px;
+    font-size: 20px;
+    letter-spacing: -3px;
+
+    &::after {
+      content: '위';
+      font-size: 16px;
+      color: white;
+      
+    }
+  }
+
+  &__deco--placeSmall {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    width: 44px;
+    height: 44px;
+    border-radius: 44px;
+    background-color: #ea3898;
+    color: white;
+    line-height: 41px;
+    font-size: 20px;
+    letter-spacing: -3px;
+
+    &::after {
+      content: '위';
+      font-size: 16px;
+      color: white;
+    }
+  }
+
+  &__deco--placeBig {
+    position: absolute;
+    top: 8px;
+    right: 18px;
+    width: 67px;
+    height: 67px;
+    border-radius: 67px;
+    background-color: #ea3898;
+    color: white;
+    line-height: 60px;
+    font-size: 23px;
+    letter-spacing: -4px;
+
+    &::after {
+      content: '위';
+      font-size: 18px;
+      color: white;
+    }
+  }
+}
+
+/* 당첨 이미지 클릭 시 추가 팝업 */
+.extraPopup {
+  display: none;
+  position: absolute;
+  width: 100%;
+  text-align: center;
+  z-index: 40;
+
+  &.on {
+    display: block;
+  }
+}
+
+
+/* [class^="popup__notice--endEarly"] {
+  display: none;
+  padding-top: 120px;
+}
+
+[class^="popup__notice--eventEnd"] {
+  display: none;
+  padding-top: 120px;
+} */
+
+// 팝업 닫기
+.btn--hidePop {
+  @include size(38px);
+  @include background-image($loc + '/btn-hidepop.png');
+  position: absolute;
+  top: 40px;
+  right: 40px;
+}
+
+.btn--hidePop--white {
+  @include size(47px);
+  @include background-image($loc + '/close-btn-white.png');
+  position: absolute;
+  top: 150px;
+  right: 105px;
+  display: inline-block;
+  padding: 0;
+  border: 0;
+  cursor: pointer;
+}

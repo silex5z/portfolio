@@ -1,0 +1,68 @@
+// ===============================
+// page
+// ===============================
+
+.wrap {
+  // @include debugger;
+  // @include background-image($loc + '/bg.jpg');
+  // display: none;
+  
+  @include size($width-max, null);
+  @include box-center;
+  position: relative;
+}
+
+.logo {
+  background-color: #f4eaff;
+  padding-top: 120px;
+}
+
+aside {
+  position: fixed;
+  z-index: 20;
+  top:0;
+}
+
+.pickEntry {
+  @include size(null, 2557px);
+  @include background-image($loc + '/bg-section1-v2.png');
+  padding-top: 1px;
+
+  .btnWrap {
+    margin-top: 2400px;
+    text-align: center;
+  }
+}
+
+// 투표 리스트 슬라이드
+.pickSlider {
+  background: #e8d9fa;
+  padding-bottom: 70px;
+
+  .btnWrap {
+    margin: 64px 0 68px;
+    text-align: center;
+  }
+
+  .rows {
+    margin-left: 63px;
+    margin-bottom: 17px;
+  }
+}
+
+
+// loading
+// ===============================
+.isLoading {
+  position: fixed;
+  top:  0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 30;
+  @include background-image($loc + '/loading.gif', $pos: center center, $color: rgba(0,0,0,0.6))
+}
+
+[v-cloak] {
+  display: none;
+}

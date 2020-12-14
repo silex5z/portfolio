@@ -1,0 +1,72 @@
+//############################
+// variable
+//############################
+$loc: $loc + "/popup";
+
+//############################
+// dim
+//############################
+.dim {
+  @include size(100%);
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 30;
+  display: none;
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+//############################
+// popup
+//############################
+.popup {
+  // @include debugger;
+  @include size($width-max, null);
+  @include box-center;
+  @include background-image($loc + '/bg-popup-header.png', $color: #ffffff);
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 40;
+  background-color: white;
+  padding-bottom: 75px;
+}
+
+[class^="popup__detail"] {
+  display: none;
+
+  & .popup {
+    &__header {
+      padding: 98px 0 134px;
+      text-align: center;
+    }
+  }
+
+  .btn-wrap {
+    margin-top: 80px;
+    text-align: center;
+  }
+}
+
+[class^="popup__prize"] {
+  display: none;
+}
+
+[class^="popup__tips"] {
+  display: none;
+  & .popup {
+    &__header {
+      padding: 100px 0 105px;
+      text-align: center;
+    }
+  }
+
+  .btn-wrap {
+    text-align: center;
+  }
+}
+
+
+

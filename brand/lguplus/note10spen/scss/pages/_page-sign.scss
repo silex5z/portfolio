@@ -1,0 +1,261 @@
+// ===============================
+// page
+// ===============================
+
+.wrap {
+  // @include debugger;
+  // @include background-image($loc + '/bg.jpg');
+  // display: none;
+  padding-top: 78px;
+  @include size($width-max, null);
+  @include box-center;
+  position: relative;
+}
+
+.logo {
+  height: 151px;
+  background-color: #fbf1f9;
+  padding-top: 56px;
+  &.color--darken {
+    background-color: #efe3fd;
+  }
+}
+
+.view {
+  display: none;
+}
+
+.visual {
+  @include background-image($loc + '/bg-main-visual.png', $color:#fee0f8);
+  // @include size(null, 2215px);
+
+  .btn-wrap {
+    margin: 45px 0 66px;
+    text-align: center;
+  }
+}
+
+
+
+aside {
+  position: fixed;
+  z-index: 20;
+  top:0;
+}
+
+
+// loading
+// ===============================
+.is-loading {
+  position: fixed;
+  top:  0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 30;
+  @include background-image($loc + '/loading.gif', $pos: center center, $color: rgba(0,0,0,0.6))
+}
+
+[v-cloak] {
+  display: none;
+}
+
+
+//############################
+// button
+.btns {
+  @include background-image($loc + '/btn-ir-sign.png', $pos:left top);
+  display: inline-block;
+  padding: 0;
+  border: 0;
+  cursor: pointer;
+}
+
+.btn {
+  // 매장 찾기
+  &--search-store {
+    @include size(360px, 80px);
+  }
+
+  // 매장 검색
+  &--search {
+    @include size(190px, 80px);
+    background-position-y: -242px;
+  }
+
+  &--copy-url {
+    @include size(305px, 81px);
+    background-position-y: -162px;
+  }
+
+  &--share {
+    @include size(305px, 81px);
+    margin-right: 20px;
+    background-position-y: -81px;
+  }
+  
+  // 팝업 닫기
+  &--close {
+    @include size(38px, 38px);
+    position: absolute;
+    top: 40px;
+    right: 40px;
+    background-position-y: bottom;
+  }
+
+  &--ok {
+    @include background-image($loc + '/popup/btn-confirm.png', $pos:left top);
+    @include size(360px, 81px);
+    display: inline-block;
+    padding: 0;
+    border: 0;
+    cursor: pointer;
+  }
+
+  &--search-store-modified {
+    @include background-image($loc + '/popup/btn-ir-added.png', $pos:left top);
+    @include size(305px, 81px);
+    margin-right: 20px;
+
+  }
+
+  &--show-tips {
+    @include background-image($loc + '/popup/btn-ir-added.png', $pos:left bottom);
+    @include size(305px, 81px);
+
+  }
+}
+
+.has-shadow {
+  border-radius: 5px;
+  -webkit-box-shadow: 31px 31px 30px 0px rgba(155, 154, 162, 0.2);
+-moz-box-shadow:    31px 31px 30px 0px rgba(155, 154, 162, 0.2);
+box-shadow:         31px 31px 30px 0px rgba(155, 154, 162, 0.2);
+}
+
+
+//############################
+// dim
+.dim {
+  @include size(100%);
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 30;
+  display: none;
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+//############################
+// popup
+.popup {
+  // @include debugger;
+  @include size($width-max, null);
+  @include box-center;
+  // @include background-image($loc + '/bg-popup-header.png', $color: #ffffff);
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 40;
+  background-color: white;
+  padding-bottom: 75px;
+}
+
+.popup {
+  &__header {
+    margin-bottom: 50px;
+    text-align: center;
+    padding-top: 131px;
+    @include size(null, 298px);
+    @include background-image($loc + '/popup/bg-popup-header.png', $color: #fbf1f9);
+  }
+
+  h3 {
+    text-align: center;
+  }
+
+  .search-wrap {
+    margin: 25px 45px;
+
+  }
+
+  .list-wrap {
+    margin: 0 45px;
+    height: 500px;
+    overflow-y: scroll;
+    font-size: 20px;
+
+    .list {
+      margin-bottom: 4px;
+      padding: 0;
+      list-style: none;
+    }
+
+    .list__row {
+      padding: 10px;
+      border-bottom: 1px solid gray;
+      // @include debugger;
+    }
+
+    .store{
+      &-name, &-map-icon {
+        vertical-align: middle;
+      }
+      &-name {
+        margin-right: 10px;
+        font-weight: bold;
+      }
+      &-address {
+        margin-top: 4px;
+      }
+    }
+
+    td {
+      border:1px solid green;
+    }
+  }
+
+  input[type="text"] {
+    display: inline-block;
+    width: 440px;
+    height: 80px;
+    font-size: 25px;
+    box-sizing: border-box;
+    border-color: #d1d1d1;
+    border-style: solid;
+    padding-left: 30px;
+  }
+}
+
+[class^="popup__tips"] {
+  display: none;
+  .popup__header {
+    padding-top: 100px;
+    margin-bottom: 17px;
+  }
+
+  .btn-wrap {
+    text-align: center;
+  }
+}
+
+[class^="popup__search-store"] {
+  display: none;
+}
+
+
+.end-notice { 
+  position: absolute;
+  z-index: 40;
+  top: 200px;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+}
+
+.link-to-event2 {
+  display: inline-block;
+  margin-top: 30px;
+}

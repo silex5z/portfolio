@@ -1,0 +1,91 @@
+.btns {
+  @include background-image($loc + '/btn-ir.png', $pos:left top);
+  display: inline-block;
+  padding: 0;
+  border: 0;
+  cursor: pointer;
+}
+
+.btn {
+  // 매장 코드 입력 확인
+  &--confirm {
+    @include size(360px, 81px);
+    background-position-y: -385px;
+  }
+
+  // 메인 페이지 사인 남기기
+  &--make-sign {
+    @include size(360px, 81px);
+    background-position-y: -304px;
+  }
+
+  // 영상 넘기기
+  &--skip-video {
+    @include size(360px, 81px);
+    background-position-y: -384px;
+  }
+  
+  // 정답 제출
+  &--submit {
+    margin-right: 30px;
+    @include size(308px, 81px);
+  }
+
+  // 캔버스 리셋
+  &--reset {
+    @include size(308px, 80px);
+    margin-right: 30px;
+    background-position-y: -80px;
+  }
+
+  // 사인 응모
+  &--apply {
+    
+    background-position-y: -161px;
+    @include size(308px, 80px);
+  }
+
+  // 자세히 보기
+  &--detail {
+    @include size(189px, 62px);
+    background-position-y: -242px;
+  }
+
+  // 팝업 닫기
+  &--hide-pop {
+    @include size(38px);
+    background-position-y: -637px;
+
+    .popup > & {
+      position: absolute;
+      top: 40px;
+      right: 40px;
+    }
+  }
+
+  // 팝업 닫기
+  &--close {
+    @include size(360px, 81px);
+    background-position-y: -546px;
+  }
+
+  //────  확인
+  &--ok {
+    @include background-image($loc + '/popup/btn-confirm.png', $pos:left top);
+    @include size(360px, 81px);
+    display: inline-block;
+    padding: 0;
+    border: 0;
+    cursor: pointer;
+  }
+
+  
+
+}
+
+.has-shadow {
+  border-radius: 5px;
+  -webkit-box-shadow: 31px 31px 30px 0px rgba(155, 154, 162, 0.2);
+-moz-box-shadow:    31px 31px 30px 0px rgba(155, 154, 162, 0.2);
+box-shadow:         31px 31px 30px 0px rgba(155, 154, 162, 0.2);
+}
