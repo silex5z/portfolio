@@ -1,0 +1,337 @@
+@import '@/assets/scss/pages/tarot/popup';
+
+// button
+.btn-group {
+  display: flex;
+}
+
+a[class^='btn-'],
+button[class^='btn-'] {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  @include background(
+    map-get($tarot, 'pc-image-url') + '/btns.png',
+    $position: 0 0
+  );
+  font-family: 'Roboto Slab', -apple-system, BlinkMacSystemFont, 'Noto Sans KR',
+    'Malgun Gothic', '맑은고딕', 'Dotum', '돋움', 'Gulim', '굴림';
+  font-size: 26px;
+  font-weight: 500;
+  color: #f0ce95;
+  line-height: 1;
+  img {
+    margin-left: 20px;
+  }
+
+  &.btn {
+    &-reg {
+      width: 283px;
+      height: 72px;
+    }
+    &-big {
+      width: 303px;
+      height: 72px;
+      background-position-y: -82px;
+      &--deep-purple {
+        background-position-y: -164px;
+      }
+    }
+  }
+}
+
+.btn__enter {
+  .loading {
+    transform: scale(0.5);
+  }
+}
+
+.wrap {
+  .swiper {
+    &-pagination-group {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 200px;
+    }
+    &-pagination {
+      position: relative;
+      order: 1;
+      &-bullet {
+        width: 18px;
+        height: 18px;
+        margin: 0 6px;
+        // @include breakpoint('pc') {
+        // }
+        // @include breakpoint() {
+        //   width: 14px;
+        //   height: 14px;
+        //   margin: 0 4px;
+        // }
+        border: 2px solid #e0aa44;
+        background: none;
+        &-active {
+          background: #e0aa44;
+        }
+      }
+    }
+    &-button {
+      position: relative;
+      left: initial;
+      right: initial;
+      margin-top: initial;
+      @include background(
+        map-get($tarot, 'pc-image-url') + '/btn-arrow-small.png',
+        $size: 100%
+      );
+      width: 14px;
+      height: 24px;
+      // @include breakpoint('pc') {
+      // }
+      // @include breakpoint() {
+      //   width: 8px;
+      //   height: 16px;
+      // }
+
+      &-prev {
+        order: 0;
+        transform: rotate(180deg);
+        margin-right: 10px;
+      }
+      &-next {
+        order: 2;
+        margin-left: 10px;
+      }
+    }
+  }
+  .scene2 {
+    .swiper {
+      &-container {
+        width: inherit;
+        overflow: initial;
+        // height: 800px;
+      }
+      &-pagination-group {
+        position: fixed;
+        left: 50%;
+        // display: flex;
+        // justify-content: center;
+        // align-items: center;
+        // width: 200px;
+        transform: translateX(-50%);
+        @include breakpoint('pc') {
+          position: fixed;
+          bottom: calc(150 / 1080 * 100%);
+        }
+        @include breakpoint() {
+          position: absolute;
+          bottom: 0px;
+        }
+        z-index: 100;
+      }
+    }
+  }
+
+  .scene4 {
+    .swiper {
+      &-pagination-group {
+        position: relative;
+      }
+    }
+  }
+}
+
+// video
+.video {
+  &__desc {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    margin-bottom: 30px;
+    text-align: center;
+    letter-spacing: -1px;
+    z-index: 100;
+    p {
+      display: inline-block;
+      padding: 0 15px;
+      color: #cac3cd;
+      font-size: 30px;
+      font-weight: 500;
+      vertical-align: middle;
+      background: rgba(0, 0, 0, 0.5);
+    }
+  }
+  &--full {
+    width: 100%;
+    height: 100vh;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: translate 0.3s ease,
+      opacity 1s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+
+    @media (min-aspect-ratio: 16/9) {
+      width: 100%;
+      height: auto;
+    }
+
+    @include breakpoint('pc') {
+      @media (max-aspect-ratio: 16/9) {
+        object-fit: cover;
+        height: 100vh;
+      }
+      @media screen and (-ms-high-contrast: active),
+        (-ms-high-contrast: none) and (max-aspect-ratio: 16/9) {
+        width: auto;
+      }
+    }
+
+    @include breakpoint() {
+      object-fit: cover;
+    }
+  }
+}
+
+// ie 안내
+.browser-notice {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: #201c20;
+  z-index: 1000;
+  p {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 1200px;
+    height: 70px;
+    margin: 0 auto;
+    font-size: 16px;
+    color: #d7ab58;
+    svg {
+      margin-right: 10px;
+    }
+  }
+}
+
+// 카드
+.card {
+  &-front,
+  &-back {
+    position: absolute;
+    backface-visibility: hidden;
+    top: 0;
+    left: 0;
+  }
+  &-front {
+    transform: perspective(800px) rotateY(180deg);
+  }
+  &-back {
+    transform: perspective(800px) rotateY(0deg);
+  }
+}
+.-isActive {
+  .card {
+    &-front {
+      animation: filpCard 1s ease-in-out forwards;
+    }
+    &-back {
+      animation: filpCard 1s ease-in-out reverse forwards;
+    }
+  }
+}
+
+.scene4 .scene__contents {
+  &.-isActive {
+    .card {
+      &-front {
+        transform: perspective(800px) rotateY(0deg);
+        left: 25%;
+        animation: ApperCardFront 2s ease-in-out 1s forwards;
+      }
+      &-back {
+        transform: perspective(800px) rotateY(180deg);
+        left: auto;
+        right: 25%;
+        animation: ApperCardBack 2s ease-in-out 1s forwards;
+      }
+    }
+  }
+}
+
+// transition animation
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0;
+}
+
+// 서비스 바로가기 애니메이션
+@keyframes btnWidth {
+  from,
+  to {
+    width: 130px;
+  }
+  50% {
+    width: 140px;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes ApperCardFront {
+  0% {
+    left: 25%;
+    transform: perspective(800px) rotateY(0deg);
+  }
+  50% {
+    transform: perspective(800px) rotateY(180deg);
+  }
+  60% {
+    left: 25%;
+    transform: perspective(0) rotateY(0deg);
+    opacity: 0;
+  }
+  100% {
+    left: 0;
+    opacity: 1;
+  }
+}
+
+@keyframes ApperCardBack {
+  0% {
+    right: 25%;
+    transform: perspective(800px) rotateY(180deg);
+  }
+  50%,
+  60% {
+    transform: perspective(800px) rotateY(0deg);
+    right: 25%;
+  }
+  100% {
+    transform: perspective(0) rotateY(0deg);
+    right: 0;
+  }
+}
+
+@keyframes filpCard {
+  0% {
+    transform: perspective(800px) rotateY(-180deg);
+  }
+  100% {
+    transform: perspective(800px) rotateY(0deg);
+  }
+}

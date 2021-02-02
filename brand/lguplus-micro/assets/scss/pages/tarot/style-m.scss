@@ -1,0 +1,566 @@
+.bgm {
+  display: none;
+}
+
+.btn__skip {
+  position: fixed;
+  bottom: 100px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 188px;
+  height: 63px;
+  @include background(
+    map-get($tarot, 'image-url') + '/btn-skip.png',
+    $position: 0 -72px
+  );
+}
+.btn__prev {
+  position: fixed;
+  width: 188px;
+  height: 63px;
+  top: 100px;
+  left: 30px;
+  @include background(
+    map-get($tarot, 'image-url') + '/btn-skip.png',
+    $position: 0 0
+  );
+}
+
+.gnb {
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: space-between;
+  align-content: center;
+  width: 100vw;
+  height: 87px;
+  padding: 0 15px;
+  line-height: 82px;
+  vertical-align: middle;
+  z-index: 100;
+  .title {
+    margin-right: 50px;
+  }
+  .btn-group {
+    margin-top: 30px;
+    align-items: flex-start;
+    button {
+      margin-right: 20px;
+      &.btn__bgm {
+        width: 40px;
+        height: 47px;
+        @include background(map-get($tarot, 'pc-image-url') + '/btn-bgm.png');
+        background-position-x: right;
+        &.-isActive {
+          background-position-x: left;
+        }
+      }
+    }
+  }
+}
+
+.wrap {
+  position: relative;
+  width: 100vw;
+  height: var(--vh);
+  background: #000;
+  section[class^='scene'] {
+    width: 100%;
+    height: var(--vh);
+  }
+}
+
+.scene {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  &__contents {
+    position: relative;
+    width: 100%;
+    height: inherit;
+    max-height: calc(var(--vh) - 200px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 10;
+  }
+}
+
+// scene0 :: intro
+.scene0 {
+  .scene {
+    &__contents {
+      justify-content: center;
+      //   flex-direction: column;
+    }
+    &__tit {
+    }
+  }
+}
+
+// scene1
+.scene1 {
+  .scene {
+    &__contents {
+      justify-content: space-between;
+    }
+    // &__tit {
+    //   position: absolute;
+    //   left: 50%;
+    //   top: 0px;
+    //   transform: translateX(-50%);
+    //   // z-index: 10;
+    // }
+  }
+  .btn__start {
+    position: absolute;
+    left: 50%;
+    bottom: 0px;
+    transform: translateX(-50%);
+    // z-index: 10;
+
+    // padding: 10px 0 0 20px;
+  }
+}
+
+.scene2 {
+  .scene {
+    &__contents {
+      width: 560px;
+      height: 800px;
+      @include background(
+        map-get($tarot, 'pc-image-url') + '/scene2-bg-gazing-ball.png',
+        $position: center 55%
+      );
+      &.-isActive {
+        background: none;
+      }
+    }
+    &__txt {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+  }
+
+  .hashtag {
+    &-wrapper {
+    }
+    &-slide {
+      position: relative;
+      height: 760px;
+      margin-bottom: 40px;
+      width: 560px !important;
+    }
+    &s {
+      position: relative;
+      width: 100%;
+      margin: 0 auto;
+      height: inherit;
+    }
+
+    // hashtag
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    $positions: 1 #d599ff 33px 70px 19px, 2 #ffb3ed 33px 43px 80px 'right',
+      3 #c3b3ff 33px 30px 144px, 4 #d599ff 33px 34px 642px,
+      5 #ffb3ed 33px 23px 697px 'right';
+    @each $i, $color, $size, $x, $y, $standard in $positions {
+      &:nth-of-type(#{$i}) {
+        position: absolute;
+        top: calc(#{$y} - 2px);
+        @if $standard == 'right' {
+          right: calc(#{$x} - 20px);
+        } @else {
+          left: calc(#{$x} - 20px);
+        }
+        z-index: 100;
+        font-size: $size;
+        font-weight: bold;
+        color: $color;
+        letter-spacing: -2.5px;
+        padding: 4px 20px;
+        // text-shadow: 0 0 65px rgba(0, 0, 0, 0.85);
+        &.-isActive {
+          // button {
+          font-size: 38px;
+          transition: 0.2s ease all;
+          transform-origin: center center;
+          // }
+        }
+        &.-isInactive {
+          opacity: 0.2 !important;
+        }
+      }
+      span {
+        text-shadow: 0 0 15px rgba(0, 0, 0, 1);
+      }
+    }
+    // &__pagination {
+    //   position: fixed;
+    //   bottom: 50px;
+    //   left: 50%;
+    //   transform: translateX(-50%);
+    //   font-size: 34px;
+    //   color: #e0aa44;
+    //   button {
+    //     font-size: 22px;
+    //     color: #e0aa44;
+    //     letter-spacing: -1px;
+    //     img {
+    //       width: 8px;
+    //     }
+    //     &:first-child {
+    //       img {
+    //         transform: rotate(180deg);
+    //         margin-right: 6px;
+    //       }
+    //     }
+    //     &:last-child {
+    //       img {
+    //         margin-left: 6px;
+    //       }
+    //     }
+    //     &:disabled {
+    //       opacity: 0.3;
+    //     }
+    //   }
+    //   .divider {
+    //     font-family: inherit;
+    //     font-weight: 100;
+    //     font-size: 18px;
+    //     margin: 0 5px;
+    //     color: #906f39;
+    //   }
+    // }
+  }
+  .btn__select-hashtag {
+    position: absolute;
+    top: 54%;
+    left: 50%;
+    width: 300px;
+    height: 300px;
+    transform: translate(-50%, -50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    @include background(
+      map-get($tarot, 'mo-image-url') + '/scene2-txt-hashtag.png',
+      $position: center center
+    );
+    // background: rgba(0, 0, 0, 0.3);
+    z-index: 90;
+  }
+}
+
+.scene3 {
+  .scene {
+    &__contents {
+      position: fixed;
+      left: 50%;
+      bottom: 120px;
+      height: auto;
+      transform: translateX(-50%);
+    }
+    &__txt {
+      margin-bottom: 90px;
+    }
+  }
+
+  .card {
+    position: relative;
+    width: 223px;
+    height: 404px;
+    margin: 0 20px;
+    border-radius: 10px;
+    font-size: 0;
+    img {
+      width: 100%;
+      box-shadow: 0 0 30px 0 rgba(0, 0, 0, 0.8);
+    }
+  }
+}
+
+.scene4 {
+  // position: fixed;
+  // top: 0;
+  // left: 0%;
+  // width: 100%;
+  // height: var(--vh);
+  // z-index: 100;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  letter-spacing: -0.5px;
+  .dimm {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: var(--vh);
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 1;
+  }
+  .scene__contents {
+    width: 560px;
+    // max-height: 900px;
+    flex-direction: row;
+    height: auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    &.-hasService {
+      justify-content: unset;
+    }
+  }
+  .card {
+    &s {
+      position: fixed;
+      left: 50%;
+      bottom: 120px;
+      height: auto;
+      transform: translateX(-50%);
+      display: flex;
+      z-index: 10;
+    }
+
+    width: 223px;
+    height: 404px;
+    font-size: 0;
+    margin: 0 20px;
+    transform-origin: bottom center;
+
+    img {
+      width: 100%;
+      border-radius: 10px;
+      box-shadow: 0 0 30px 0 rgba(0, 0, 0, 0.8);
+    }
+    &1 {
+      position: relative;
+      transform: scale(0.9);
+      &::after {
+        content: '';
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0px;
+        left: 0px;
+        border-radius: 10px;
+        background: rgba(0, 0, 0, 0.7);
+        z-index: 11;
+      }
+    }
+    &2 {
+      transform: scale(1.1);
+      img {
+        box-shadow: 0 0 30px 0 rgba(255, 217, 0, 0.7);
+      }
+    }
+  }
+  .card-result {
+    &-slide {
+      width: 560px !important;
+      padding: 62px 0;
+    }
+    &__desc {
+      position: relative;
+
+      display: flex;
+      width: 100%;
+      height: 478px;
+      b {
+        font-weight: bold;
+      }
+      dt,
+      dd {
+        width: 262px;
+        height: 478px;
+        border-radius: 10px;
+        overflow: hidden;
+      }
+      dt {
+        img {
+          width: 100%;
+        }
+      }
+      dd {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        margin-left: 20px;
+        text-align: center;
+        @include background(
+          map-get($tarot, 'image-url') + '/card/back.jpg',
+          $size: cover
+        );
+        .img {
+          margin-bottom: 30px;
+        }
+        .mean {
+          color: #fff;
+          font-size: 26px;
+          font-weight: 500;
+          margin-bottom: 20px;
+          line-height: 1;
+          strong {
+            font-size: 32px;
+            line-height: 1.5;
+            font-weight: 700;
+            span {
+              font-weight: 200;
+            }
+          }
+        }
+        .desc {
+          width: 230px;
+          color: #d7ab58;
+          font-size: 20px;
+          font-weight: 300;
+          line-height: 1.5;
+
+          word-break: keep-all;
+        }
+      }
+    }
+    &__notice {
+      text-align: center;
+      color: #e0aa44;
+      font-size: 20px;
+      margin-top: 10px;
+      line-height: 1;
+      vertical-align: middle;
+      &:first-of-type {
+        margin-top: 35px;
+      }
+      svg {
+        margin: 0 5px -2px;
+      }
+    }
+    &__service {
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      width: 435px;
+      min-height: 478px;
+      font-size: 20px;
+      margin-left: 70px;
+      text-align: center;
+
+      color: #fff;
+      h3 {
+        margin-bottom: 36px;
+        padding-bottom: 24px;
+        border-bottom: 1px solid #525059;
+        font-size: 26px;
+        font-weight: 500;
+        line-height: 1;
+
+        strong {
+          display: inline-block;
+          margin-top: 5px;
+          font-size: 38px;
+          font-weight: 700;
+          img {
+            display: inline-block;
+            margin: 0 -4px -8px 0;
+          }
+        }
+      }
+      .service {
+        &:nth-child(2) {
+          margin-top: 50px;
+        }
+        &__desc {
+          margin: 5px 0 30px;
+          word-break: keep-all;
+          line-height: 1.5;
+          letter-spacing: -1.4px;
+        }
+        &__link-more {
+          display: inline-flex;
+          align-items: flex-start;
+          justify-content: center;
+          width: 130px;
+          height: 32px;
+          padding-right: 10px;
+          @include background(
+            map-get($tarot, 'pc-image-url') + '/bg-service-more.png',
+            $position: right 17px
+          );
+          font-size: 20px;
+          font-weight: 500;
+          color: #ef008a;
+          border-bottom: 1px solid #ef008a;
+          line-height: 1;
+          animation: btnWidth 0.5s ease infinite both;
+        }
+      }
+    }
+  }
+  .btn-group {
+    width: inherit;
+    justify-content: center;
+    // margin: 62px 0 0 0;
+    //
+  }
+}
+
+.scene6 {
+  // &.name {
+  //   .vid6_1 {
+  //     display: none;
+  //   }
+  // }
+  // .vid6_2 {
+  //   display: none;
+  // }
+
+  .scene__contents {
+    position: fixed;
+    height: auto;
+    width: 560px;
+    bottom: 140px;
+    flex-direction: initial;
+    text-align: center;
+    justify-content: center;
+    align-items: flex-start;
+    h2 {
+    }
+    .share-box {
+      .btn-group {
+        flex-wrap: wrap;
+        justify-content: center;
+        width: inherit;
+        margin: 0 50px;
+        button {
+          width: 72px;
+          height: 72px;
+          margin: 5px 5px;
+          @include background(
+            map-get($tarot, 'pc-image-url') + '/btn-share.png'
+          );
+          @for $i from 1 through 4 {
+            &:nth-child(#{$i}) {
+              background-position-x: -82px * ($i - 1);
+            }
+          }
+        }
+      }
+    }
+    .retry-box {
+      button {
+        width: 233px;
+        margin: 0 auto;
+        background-position-y: -246px;
+      }
+    }
+  }
+}

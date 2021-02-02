@@ -1,0 +1,7 @@
+@mixin breakpoint($device: 'm') {
+  @at-root {
+    .wrap__#{$device} & {
+      @content;
+    }
+  }
+}
