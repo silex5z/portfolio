@@ -1,0 +1,28 @@
+// background
+@mixin background(
+  $file,
+  $position: null,
+  $repeat: no-repeat,
+  $color: null,
+  $size: null
+) {
+  background: $color url($file) $position $repeat;
+  background-size: $size;
+}
+
+@mixin linear-gradient($direction, $color-stops...) {
+  background: nth(nth($color-stops, 1), 1);
+  background: -webkit-linear-gradient(
+    legacy-direction($direction),
+    $color-stops
+  );
+  background: linear-gradient($direction, $color-stops);
+}
+
+@mixin darkBackground($file, $position: center, $size: cover) {
+  background: linear-gradient(rgba(71, 55, 55, 0.5), rgba(0, 0, 0, 0.5)),
+    url($file);
+  background-position: $position;
+  background-size: $size;
+  background-repeat: no-repeat;
+}
