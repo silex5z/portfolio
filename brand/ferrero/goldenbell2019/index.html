@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="shared/layout">
+
+<head>
+  <title>페레로로쉐 골든벨 2019</title>
+  <link href="/goldenbell2019/css/style.min.css" rel="stylesheet">
+  <!-- 이벤트 Meta 태그 추가 -->
+  <th:block layout:fragment="meta" th:remove="tag">
+    <meta property="og:url" th:attr="content=${url}" />
+    <meta property="og:title" th:attr="content=${title}" />
+    <meta property="og:image" th:attr="content=${image}" />
+    <meta property="og:description" th:attr="content=${contents}" />
+  </th:block>
+</head>
+
+
+
+<body>
+  <div layout:fragment="content">
+    <div id="app" class="wrap" v-cloak>
+      <!-- nav -->
+      <nav class="nav" ref="nav">
+        <h2 class="a11y-hidden">이벤트 네비게이션</h2>
+        <ul class="nav__list">
+          <li v-for="nav in navList" class="nav__item" :class="{ on: currentSection == nav.name }">
+            <a @click.prevent="goSection(nav.name)" :href="'#' + nav.name">{{nav.name}}</a>
+          </li>
+        </ul>
+      </nav>
+
+      <div class="kv" id="event1">
+        <h1><img src="https://fr-ferrerorocher.s3.ap-northeast-2.amazonaws.com/static/goldenBell2019/pc/kv-logo.png" alt="페레로로쉐 로고"></h1>
+        <div class="inner">
+          <h2 class="kv__tit"><img src="https://fr-ferrerorocher.s3.ap-northeast-2.amazonaws.com/static/goldenBell2019/pc/kv-title.png" alt="골든벨"></h2>
+          <div class="kv__mv" ref="mv">
+            <button class="btn btn__momPlay" type="button" @click="playMv()" v-show="playBtnState"></button>
+            <div id="player"></div>
+          </div>
+          <div class="kv__content a11y-hidden">
+            <h3>황금빛 응원 영상공유 이벤트</h3>
+            <p>소중한 사람에게 진심 어린 응원을 보내주고 싶다면, 페레로 로쉐 영상을 공유하고 즉석 당첨 이벤트에 참여해 보세요!</p>
+            <dl class="a11y-hidden">
+              <dt>이벤트 경품</dt>
+              <dd>페레로 로쉐 5개입(500명)</dd>
+              <dt>이벤트 기간</dt>
+              <dd>2019.10.15 - 11.10</dd>
+            </dl>
+          </div>
+          <button class="btn btn__eventNotice" @click="openPop('event-notice')" type="button">이벤트 유의사항</button>
+
+          <button class="btn btn__movShare" @click="movCheck()" type="button">영상 공유하기</button>
+        </div>
+      </div>
+      <div class="quiz" id="event2">
+        <div class="inner">
+          <div class="quiz__content a11y-hidden">
+            <h3>페리로 로쉐와 함께하는 YOU 퀴즈 이벤트</h3>
+            <p>주변에 소중한 사람들이 나를 조금 더 잘 알 수 있도록, 나에 대한 모의고사를 완성하고 나만을 위한 응원을 받아보세요!</p>
+            <dl>
+              <dt>이벤트 기간</dt>
+              <dd>2019.10.15 - 11.14</dd>
+            </dl>
+          </div>
+          <!-- text -->
+          <ul class="quiz__sparkley">
+            <li class="sparkle on">
+              <div class="before"><img src="https://fr-ferrerorocher.s3.ap-northeast-2.amazonaws.com/static/goldenBell2019/pc/text_01.jpg" /></div>
+              <div class="after"><img src="https://fr-ferrerorocher.s3.ap-northeast-2.amazonaws.com/static/goldenBell2019/pc/text_01.gif" /></div>
+            </li>
+            <li class="sparkle">
+              <div class="before"><img src="https://fr-ferrerorocher.s3.ap-northeast-2.amazonaws.com/static/goldenBell2019/pc/text_02.jpg" /></div>
+              <div class="after"><img src="https://fr-ferrerorocher.s3.ap-northeast-2.amazonaws.com/static/goldenBell2019/pc/text_02.gif" /></div>
+            </li>
+            <li class="sparkle">
+              <div class="before"><img src="https://fr-ferrerorocher.s3.ap-northeast-2.amazonaws.com/static/goldenBell2019/pc/text_03.jpg" /></div>
+              <div class="after"><img src="https://fr-ferrerorocher.s3.ap-northeast-2.amazonaws.com/static/goldenBell2019/pc/text_03.gif" /></div>
+            </li>
+            <li class="sparkle">
+              <div class="before"><img src="https://fr-ferrerorocher.s3.ap-northeast-2.amazonaws.com/static/goldenBell2019/pc/text_04.jpg" /></div>
+              <div class="after"><img src="https://fr-ferrerorocher.s3.ap-northeast-2.amazonaws.com/static/goldenBell2019/pc/text_04.gif" /></div>
+            </li>
+          </ul>
+          <button class="btn btn__eventNotice" @click="openPop('event-notice')" type="button">이벤트 유의사항</button>
+          <!-- <button class="btn btn__join" type="button" @click="event2OpenCheck()">참여하기</button> -->
+          <button class="btn btn__join" type="button" @click="openPop('winner')">참여하기</button>
+        </div>
+      </div>
+
+      <!-- gift -->
+      <div class="gift" id="gift">
+        <div class="inner">
+          <div class="a11y-hidden">
+            <h4>YOU 퀴즈 이벤트 경품안내</h4>
+            <p>소중한 사람들에게 you퀴즈를 출제하고, 황금빛 응원과 경품을 받아보세요!</p>
+            <span>더 많은 사람들이 퀴즈를 풀수록 당첨 확률 up!</span>
+            <dl>
+              <dt>1등 (5명)</dt>
+              <dd>미술 심리 상담권</dd>
+              <dt>2등 (10명)</dt>
+              <dd>외식 상품권 10만원 & 페레로 로쉐 16개입 벨</dd>
+              <dt>3등 (50명)</dt>
+              <dd>페레로 로쉐 5개입</dd>
+            </dl>
+          </div>
+        </div>
+      </div>
+
+      <!-- shop -->
+      <div class="shop" id="shop">
+        <div class="inner">
+          <div class="shop__content a11y-hidden">
+            <h3>Ferrero Rocher Gift</h3>
+            <p>함께하는 마음으로 황금빛 응원을 전해보세요</p>
+            <p>지금 전국 마트에서 진행중인 페레로 로쉐 프로모션 기회도 놓치지 마세요!</p>
+          </div>
+          <div class="shop__btns">
+            <a class="btn" :class="shop.name" v-for="shop in shopList" :href="shop.url" target="_blank">{{shop.txt}}</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- canvas hide-->
+      <div class="canvas">
+
+        <canvas id="shareFb" width="600" height="315"></canvas>
+        <canvas id="shareKt" width="300" height="200"></canvas>
+        <canvas id="shareKs" width="632" height="300"></canvas>
+      </div>
+
+      <!-- popup group : start -->
+      <div th:include="goldenbell2019/_popup :: partial-popup"></div>
+      <!-- popup group : end -->
+    </div>
+  </div>
+
+
+
+  <th:block layout:fragment="body-script" th:remove="tag">
+    <script src="/vendor/jquery/jquery-1.10.2.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.17/vue.min.js"></script>
+
+    <script src="/goldenbell2019/js/deviceCheck.js"></script>
+    <script src="/goldenbell2019/js/use-youtube.js"></script>
+    <script src="/goldenbell2019/js/winner-data.js"></script>
+    <script src="/goldenbell2019/js/main.js"></script>
+
+    <!--랩사 트래킹코드-->
+    <script src='https://vtag11.midas-i.com/vat-tag?cmp_no=3661&depth=1'></script>
+    <script th:inline="javascript">
+      /*<![CDATA[*/
+      var isOpen = /*[[${isOpen}]]*/ ;
+      var quizIsOpen = /*[[${quizIsOpen}]]*/ ;
+      /*]]>*/
+    </script>
+  </th:block>
+</body>
+
+</html>

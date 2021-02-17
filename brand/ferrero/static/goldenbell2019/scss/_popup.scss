@@ -1,0 +1,510 @@
+$popWidth:640px;
+$popInnerWidth:560px;
+$txtBeige:#ffebb1;
+$lineColor:#b58539;
+
+%inputText {
+  height: 60px;
+  padding: 0 20px;
+  background-color: $txtBeige;
+  color: #472412;
+  border: none;
+  font-size: 22px;
+  line-height: 60px;
+  vertical-align: middle;
+  font-family: 'NotoSansKR', sans-serif;
+}
+
+%dimmed {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+
+}
+
+
+
+.dimmed {
+  @extend %dimmed;
+  z-index: 30;
+
+  &.loading {
+    z-index: 1000;
+  }
+
+  >img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100px;
+    margin: -50px -50px;
+  }
+}
+
+.pop {
+  position: absolute;
+  left: 50%;
+  width: $popWidth;
+  padding-bottom: 50px;
+  text-align: left;
+  transform: translateX(-50%);
+  @include bg($loc-pop + 'bg.jpg');
+  font-size: 0;
+  font-family: 'NotoSansKR', sans-serif;
+  letter-spacing: -1.5px;
+  z-index: 110;
+
+  h4 {
+    width: $popInnerWidth;
+    text-align: center;
+    padding-bottom: 30px;
+    margin: 120px auto 30px;
+    border-bottom: 1px solid $lineColor;
+    font-family: "NotoSerifKR";
+    color: #ffebb1;
+    font-size: 44px;
+
+    >span {
+      font-size: 44px;
+      color: #fedc68;
+    }
+
+    .subTitle {
+      margin-top: 20px;
+      font-size: 26px;
+      font-family: 'NotoSansKR', sans-serif;
+      font-weight: normal;
+      color: #ffebb1;
+    }
+
+    &.line {
+      padding-bottom: 50px;
+      border-bottom: 1px solid $lineColor;
+    }
+  }
+
+  &__inner {
+    width: $popInnerWidth;
+    margin: 0 auto;
+  }
+
+  &__header {
+    width: 100%;
+    font-size: 0;
+  }
+
+  &__content {
+    font-size: 0;
+    text-align: center;
+  }
+
+  input[type='text'],
+  input[type='tel'],
+  input[type='number'],
+  textarea,
+  select {
+    @extend %inputText;
+    width: 100%;
+
+    &::placeholder {
+      color: #938161;
+    }
+  }
+
+
+  select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    @include bg($loc-pop + 'select-arrow.png', $color: $txtBeige);
+    background-position: 95% 50%;
+
+    &::-ms-expand {
+      display: none;
+    }
+  }
+
+  input[type='checkbox'] {
+    position: absolute;
+    opacity: 0.01;
+
+    &~span {
+      display: inline-block;
+      width: 40px;
+      height: 40px;
+      vertical-align: middle;
+      @include bg($loc-pop + 'checkbox.jpg');
+      background-position: 0 top;
+      cursor: pointer;
+    }
+
+    &:checked~span {
+      background-position: 0 bottom;
+    }
+  }
+
+  input[type='radio'] {
+    position: absolute;
+    opacity: 0.01;
+
+    &~span {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      margin-right: 5px;
+      vertical-align: middle;
+      @include bg($loc-pop + 'radio.png');
+      background-position: 0 top;
+      cursor: pointer;
+    }
+
+    &:checked~span {
+      background-position: 0 bottom;
+    }
+  }
+
+  dt {
+    display: inline-block;
+    width: 80px;
+    line-height: 60px;
+    vertical-align: -10px;
+    text-align: left;
+    font-size: 24px;
+    color: $txtBeige;
+  }
+
+  dd {
+    display: inline-block;
+    width: 480px;
+    margin-bottom: 10px;
+  }
+
+  .agreeWrap {
+    &--line {
+      margin-top: 20px;
+      padding-top: 30px;
+      border-top: 1px solid $lineColor;
+    }
+
+    li {
+      margin-bottom: 10px;
+      padding-left: 60px;
+      text-align: left;
+    }
+
+    &--text {
+      display: inline-block;
+      margin: 0 20px;
+      vertical-align: middle;
+      color: $txtBeige;
+      font-size: 22px;
+    }
+  }
+
+
+}
+
+.popbtn {
+  font-size: 0;
+  @include bg($loc-pop + 'btns.png');
+  box-shadow: 0px 30px 30px #985d20;
+
+  &__close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 40px;
+    height: 40px;
+    font-size: 0;
+    background-position: 0 0;
+    box-shadow: none;
+  }
+
+  &[class$="Share"] {
+    width: 60px;
+    height: 61px;
+    margin-left: 20px;
+    box-shadow: none;
+  }
+
+  &__fbShare {
+    background-position: -60px 0;
+  }
+
+  &__ktShare {
+    background-position: -140px 0;
+  }
+
+  &__ksShare {
+    background-position: -220px 0;
+  }
+
+  &__agreeDetail {
+    width: 135px;
+    height: 40px;
+    background-position: -298px -1px;
+    box-shadow: none;
+  }
+
+  &__lotteryResult {
+    width: 320px;
+    height: 80px;
+    background-position: 0 -87px;
+  }
+
+  &__complete {
+    width: 320px;
+    height: 80px;
+    background-position: -330px -87px;
+  }
+
+  &__replay {
+    width: 320px;
+    height: 80px;
+    background-position: -330px -87px;
+  }
+
+  &__next {
+    width: 320px;
+    height: 80px;
+    background-position: 0 -267px;
+  }
+
+  &__quizComplete {
+    width: 320px;
+    height: 80px;
+    background-position: -330px -267px;
+  }
+
+  &__copy {
+    width: 100px;
+    height: 60px;
+    background-position: -442px 0;
+    box-shadow: none;
+  }
+
+  &__quizEventEnd {
+    width: 320px;
+    height: 80px;
+    margin-top: 20px;
+    background-position: -331px -178px;
+  }
+}
+
+
+//즉당 / 퀴즈 : 개인정보
+.pop {
+  &__snsShare-txt {
+    margin-right: 20px;
+    line-height: 60px;
+    vertical-align: middle;
+    font-size: 24px;
+    color: $txtBeige;
+  }
+
+  &__ageNotice {
+    margin: 30px 0 50px;
+    font-size: 23px;
+    color: $txtBeige;
+  }
+
+  &__btnWrap {
+    padding: 10px 0;
+    margin: 20px 0 30px;
+    border-bottom: 1px solid $lineColor;
+    border-top: 1px solid $lineColor;
+  }
+
+  &__winGift {
+    margin-top: 120px;
+  }
+}
+
+
+
+
+
+//퀴즈 : 설문
+.quiz-survey {
+  color: $txtBeige;
+  letter-spacing: -2.5px;
+
+  .pop {
+    &__question {
+      margin-bottom: 30px;
+      text-align: left;
+      font-weight: 500;
+      font-size: 24px;
+
+      >span {
+        display: inline-block;
+        width: 70px;
+        text-align: center;
+        vertical-align: 1px;
+        margin-right: 13px;
+        padding: 5px 10px;
+        border-radius: 20px;
+        font-size: 18px;
+        color: $txtBeige;
+        background: #713e0c;
+      }
+    }
+
+    &__line {
+      display: block;
+      border-bottom: 1px solid $lineColor;
+      margin-bottom: 30px;
+    }
+  }
+
+  ul {
+    width: 456px;
+    margin: 0 auto 20px;
+  }
+
+  li {
+    display: inline-block;
+    width: 46%;
+    margin-bottom: 20px;
+    text-align: left;
+    font-size: 21px;
+
+    &:nth-child(odd) {
+      width: 54%;
+    }
+
+    &.anwer-etc {
+      width: 100%;
+
+      input[type='text'] {
+        width: 370px;
+        margin-left: 12px;
+      }
+    }
+  }
+
+  label {
+    position: relative;
+
+    p {
+      display: inline;
+    }
+  }
+}
+
+.quiz-share {
+
+  .pop {
+    &__subTitle {
+      text-align: center;
+      font-size: 26px;
+      color: $txtBeige;
+
+      &-txt {
+        margin: 20px 0 30px;
+        font-size: 24px;
+        font-weight: inherit;
+        text-align: center;
+        line-height: 30px;
+        color: $txtBeige;
+
+        >span {
+          line-height: 35px;
+          font-size: 21px;
+        }
+      }
+    }
+
+    &__subTxt {
+      margin: 20px 0 30px;
+      font-size: 23px;
+      color: $txtBeige;
+    }
+
+    &__fakeInputbox {
+      display: inline-block;
+      width: 460px;
+      height: 60px;
+      padding: 0 20px;
+      background: $txtBeige;
+
+      >span {
+        width: 100%;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        word-wrap: normal;
+        overflow: hidden;
+        display: inline-block;
+        line-height: 60px;
+        font-size: 17px;
+        color: #71530c;
+      }
+    }
+  }
+}
+
+.event-personal-notice,
+.event-notice {
+  padding-bottom: 0;
+}
+
+.winner {
+  &__box {
+    margin-bottom: 30px;
+
+
+
+    ul {
+      width: 100%;
+      height: 180px;
+      padding: 15px 0;
+      background-color: #e6c788;
+      text-align: left;
+      overflow-y: scroll;
+
+      &.winner__box-first {
+        overflow: auto;
+      }
+    }
+
+    li {
+      display: inline-block;
+      width: 50%;
+      text-align: center;
+      color: #7f582e;
+      font-size: 20px;
+      line-height: 50px;
+    }
+  }
+
+  &__header {
+    height: 60px;
+    background-color: #794410;
+    color: #ffebb1;
+    font-size: 24px;
+    margin: 0;
+    line-height: 60px;
+    font-weight: normal;
+  }
+
+
+  &__notice {
+    >li {
+      line-height: 26px;
+      color: #ffebb1;
+      font-size: 18px;
+
+      span {
+        display: inline-block;
+        width: 4px;
+        height: 4px;
+        margin-right: 5px;
+        vertical-align: middle;
+        background: #ffebb1;
+      }
+    }
+  }
+}

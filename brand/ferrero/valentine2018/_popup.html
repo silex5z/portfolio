@@ -1,0 +1,41 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>valentine2018 popup</title>
+</head>
+
+<body>
+  <!-- fragment -->
+  <div th:fragment="partial-popup">
+	<!-- 팝업 : 개인정보 활용동의 -->
+	<div class="popup pop-policy" id="pop-policy" tabindex="0" role="dialog">
+	    <div class="pop-header">
+	        <h3>개인정보 활용동의</h3>
+	    </div>
+	    <div class="pop-con">
+	        <div><img src="https://fr-ferrerorocher.s3.amazonaws.com/static/2018-valentine/pop/policy-txt.png" alt="개인정보 활용동의"></div>
+	    </div>
+	    <button type="button" class="btn-close" onclick="closePop('policy', false); return false;"></button>
+	</div>
+
+	<!-- 팝업 : 구매하기 -->
+	<div class="popup pop-buy" id="pop-buy" role="dialog">
+	    <span class="pop-buy-logo"><img src="https://fr-ferrerorocher.s3.amazonaws.com/static/2018-valentine/pop/pop-logo.png" alt="페레로로쉐" /></span>
+	    <h3><img src="https://fr-ferrerorocher.s3.amazonaws.com/static/2018-valentine/pop/pop-buy-tit.png" alt="구매하기" /></h3>
+	    <p class="pop-buy-txt"><img src="https://fr-ferrerorocher.s3.amazonaws.com/static/2018-valentine/pop/pop-txt-buy.png" alt="페레로 로쉐 스페셜 패키지는 G마켓과 옥션에서 구매하실 수 있습니다." /></p>
+	    <div class="pop-buy-btns">
+	        <a href="http://item.gmarket.co.kr/Item?goodscode=900877723" target="_blank" class="ga-event" data-action="구매하기 - Gmarket"><img src="https://fr-ferrerorocher.s3.amazonaws.com/static/2018-valentine/pop/pop-btn-buy-g.png" alt="g market 구매하러 가기" /></a>
+	        <a href="http://itempage3.auction.co.kr/DetailView.aspx?ItemNo=B387366927" target="_blank" class="ga-event" data-action="구매하기 - Auction"><img src="https://fr-ferrerorocher.s3.amazonaws.com/static/2018-valentine/pop/pop-btn-buy-auction.png" alt="auction 구매하러 가기" /></a>
+	    </div>
+	    <button type="button" class="btn-close" onclick="closePop('buy'); return false;"></button>
+	</div>
+	    	
+
+
+  </div>
+  <!-- // fragment -->
+</body>
+
+</html>

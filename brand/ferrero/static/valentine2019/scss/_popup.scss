@@ -1,0 +1,586 @@
+$kind-of-userInfo: ('romantic', 'valentine');
+$width-lb: 139px;
+$txt-size: 26px;
+$txt-color: #a48150;
+
+// 사용자 정보 radio, 동의하기 checkbox
+.check-radio {
+
+  &::before,
+  &::after {
+    content: ''
+  }
+
+  &::before {
+    @include size(40px);
+    display: inline-block;
+    border: 2px solid #c5af76;
+  }
+
+  &::after {
+    @include absolute($top: 10px, $left: 6px);
+    @include size(30px, 22px);
+    @include bg($loc-pop + 'ir-btn-popup.png');
+    transform: translateY(-40px);
+    background-position: -107px -409px;
+  }
+}
+
+// popup btn
+// ===========================================
+@mixin btn($w: 600px, $h: 100px, $pos: null, $img: 'ir-btn-popup.png') {
+  @include size($w, $h);
+  @include bg($loc-pop + $img);
+  @include text-hidden;
+  background-position: $pos;
+  cursor: pointer;
+}
+
+// dim
+// ===========================================
+.dim {
+  @include fixed($top: 0, $left: 0, $right: 0, $bottom: 0);
+  display: none;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 15;
+
+  &.is-active {
+    display: block;
+  }
+}
+
+// layout
+// ===========================================
+.popup {
+  // @include debug;
+  @include absolute($top: 0, $left: 50%);
+  @include size(720px, null);
+  transform: translateX(-50%);
+  z-index: 20;
+  display: none;
+  text-align: center;
+
+  &.is-active {
+    display: block;
+  }
+}
+
+.btn-ok {
+  @include btn($pos: center -100px);
+}
+
+.btn-close {
+  @include btn($w: 41px, $h: 42px, $pos: left -400px);
+  @include absolute($top: 20px, $right: 20px);
+}
+
+
+// ===========================================
+// win
+// ===========================================
+.popup--win {
+  @include size(null, 820px);
+  @include bg($loc-pop + 'bg-romantic-prize.jpg');
+  padding-top: 640px;
+}
+
+// ===========================================
+// bang
+// ===========================================
+.popup--bang {
+  @include size(null, 590px);
+  @include bg($loc-pop + 'bg-romantic-bang.jpg');
+  padding-top: 410px;
+}
+
+.btn-again {
+  @include btn($pos: center top);
+}
+
+// ===========================================
+// sns
+// ===========================================
+
+.popup--sns {
+  @each $type in $kind-of-userInfo {
+    &-#{$type} {
+      @include size(null, if($type=='romantic', 710px, 670px));
+      @include bg($loc-pop + 'bg-#{$type}-sns.jpg');
+
+      .sns {
+        margin-top: if($type=='romantic', 348px, 308px);
+      }
+    }
+  }
+}
+
+// sns list
+// ===========================================
+.sns {
+  // @include debug;
+  @include size(434px, null);
+  display: flex;
+  justify-content: space-between;
+
+  margin: {
+    left: auto;
+    right: auto;
+    bottom: 57px;
+  }
+
+  &__btn {
+    @include bg($loc-pop + 'ir-btn-sns.png');
+    @include size(125px);
+    cursor: pointer;
+    text-indent: -9999em;
+  }
+
+  &__talk {
+    background-position: left top;
+  }
+
+  &__face {
+    background-position: right top;
+  }
+}
+
+// ===========================================
+// (romantic / valentine) user info question common
+// ===========================================
+@each $name in $kind-of-userInfo {
+  .popup--#{$name} {
+    @include bg($loc-pop + 'bg-#{$name}-user-info.jpg');
+    padding: 275px 60px if($name=='romantic', 80px, 79px);
+  }
+
+  // romantic / valentine user info
+  .#{$name}__field-info {
+    margin-bottom: if($name=='romantic', 59px, 40px);
+  }
+}
+
+// ===========================================
+// user info row
+// ===========================================
+.row {
+  // @include debug;
+  border-bottom: 2px solid rgba(140, 103, 51, .2);
+
+  &:nth-of-type(4) {
+    border-bottom-width: 0px;
+  }
+
+  &__left {
+    float: left;
+  }
+
+  &__right {
+    @include size(600px - $width-lb, null);
+    float: right;
+    text-align: left;
+
+    [type="text"],
+    [type="tel"] {
+      @include size(100%, 84px);
+      border: 0;
+      background-color: transparent;
+      font-size: $txt-size;
+      font-family: 'Nanum Gothic', sans-serif;
+      color: $txt-color;
+    }
+  }
+}
+
+.user-info [type="text"],
+.user-info [type="tel"],
+.user-info .select,
+  {
+  @include size(null, 54px);
+  margin-top: 30px;
+}
+
+.user-info .radio-wrap {
+  margin-top: 38px;
+}
+
+.btn-romantic-ok {
+  @include btn($w: 610px, $h: 110px, $img: 'btn-show-result.png');
+  box-shadow: 20px 30px 40px rgba(139, 88, 28, 0.3);
+}
+
+.btn-valentine-ok {
+  @include btn($pos: center -200px);
+}
+
+// ===========================================
+// userinfo label (name, phone, age, gender)
+// ===========================================
+.lb {
+  $term-lb: 46px;
+  $lb-type: ((class: 'name', value: 0),
+    (class: 'phone', value: -86px),
+    (class: 'age', value: -172px),
+    (class: 'gender', value: -258px));
+  // @include debug;
+  @include bg($loc-pop + 'ir-label.png');
+
+  &--tit {
+    @include size($width-lb, 84px);
+  }
+
+  @each $item in $lb-type {
+    &--#{map-get($item, class)} {
+      background-position: left (map-get($item, value)) + $term-lb;
+    }
+  }
+}
+
+// ===========================================
+// select
+// userinfo age select, survey select
+// ===========================================
+.select {
+  border: 0;
+  background-color: transparent;
+  color: $txt-color;
+  font-size: $txt-size;
+
+  &--user-info {
+    @include size(600px - $width-lb, null);
+  }
+
+  &--question {
+    // @include debug;
+    @include size(520px, 52px);
+    display: block;
+    border-bottom: 2px solid rgba(140, 103, 51, .2);
+  }
+}
+
+// ===========================================
+// radio
+// user info (남/여)
+// ===========================================
+.radio {
+  // @include debug;
+  @include relative;
+  @include size(80px, null);
+
+
+  &--float {
+    float: left;
+  }
+
+  &:last-child {
+    margin-left: 60px;
+  }
+
+  [type="radio"] {
+    @include absolute();
+    @include size(1px);
+
+    overflow: hidden;
+
+    &:checked+.radio__lb::after {
+      transform: translateY(0);
+    }
+  }
+
+  &__lb {
+    // @include debug;
+
+    @include relative;
+    @include size(null, 40px);
+    overflow: hidden;
+    display: block;
+
+    &--man,
+    &--woman {
+      @include bg($loc-pop + 'ir-radio.png', $pos: center 7px);
+    }
+
+    &--man {
+      background-position-x: 58px;
+    }
+
+    &--woman {
+      background-position-x: 100%;
+    }
+
+
+    &--yes,
+    &--no {
+      // @include debug;
+      @include bg($loc-pop + 'ir-yes-no.png', $pos: center 7px);
+      display: inline-block;
+      text-align: left;
+    }
+
+    &--yes {
+      @include size(78px, null);
+      background-position-x: 58px;
+    }
+
+    &--no {
+      @include size(126px, null);
+      background-position-x: 100%;
+    }
+
+  }
+
+  //lb
+}
+
+// ===========================================
+// agree
+// ===========================================
+.agree {
+  // @include debug;
+  margin-top: 50px;
+  // margin: 50px 0 95px;
+  text-align: left;
+
+  .popup--romantic & {
+    margin-bottom: 95px;
+  }
+
+  .popup--valentine & {
+    margin-bottom: 86px;
+  }
+
+  &__item {
+    // @include debug;
+    @include relative;
+
+    &:first-child {
+      margin-bottom: 10px;
+    }
+  }
+
+  // item
+
+  [type="checkbox"] {
+    @include absolute;
+    @include size(1px);
+
+    &:checked+.agree__lb::after {
+      transform: translateY(0);
+    }
+  }
+
+  &__lb {
+    @include relative;
+    @include size(null, 40px);
+    @include bg($loc-pop + 'ir-agree.png');
+    overflow: hidden;
+    display: block;
+    background-position-x: 54px;
+
+    &::before {
+      border-color: rgba(140, 103, 51, .3);
+    }
+
+    &1 {
+      background-position-y: 9px;
+    }
+
+    &2 {
+      background-position-y: -42px;
+    }
+  }
+
+  // lb
+}
+
+// agree
+
+.btn-detail {
+  @include btn($w: 114px, $h: 38px, $img: 'txt-detail-view.png');
+  @include absolute($top: 0, $right: 0);
+  background-color: #af8c4f;
+  border-radius: 5px;
+}
+
+// ===========================================
+// romantic survey
+// ===========================================
+.survey {
+  // @include debug;
+  margin-top: 33px;
+
+  &__inner {
+    @include bg($loc-pop + 'bg-survey.png', $repeat: repeat-y);
+  }
+
+  // border-radius: 20px;
+
+  &::before,
+  &::after {
+    @include size(null, 50px);
+    display: block;
+    content: '';
+  }
+
+  &::before {
+    @include bg($loc-pop + 'bg-survey-border-top.png');
+  }
+
+  &::after {
+    @include bg($loc-pop + 'bg-survey-border-btm.png');
+  }
+
+  &__tit {
+    @include bg($loc-pop + 'ico-heart.png', $pos: 40px 3px);
+    margin-bottom: 15px;
+  }
+
+  &__answer {
+    @include size(520px, null);
+    @include box-center;
+    // @include debug(green);
+
+    &:nth-of-type(1) {
+      margin-bottom: 38px;
+    }
+  }
+
+  .select {
+    // @include box-center;
+    // margin-bottom: 12px;
+    padding-left: 26px;
+  }
+
+  &__input {
+    overflow: hidden;
+    margin-top: 12px;
+    border-radius: 5px;
+
+    [type="text"] {
+      @include size(100%, 48px);
+      padding: 0 10px 0 26px;
+      background-color: rgba(140, 103, 51, .1);
+      border: 0;
+      color: $txt-color;
+      font-size: $txt-size;
+    }
+  }
+
+  // input
+}
+
+// ===========================================
+// valentine user info
+// image upload
+// ===========================================
+.image-upload {
+  // @include debug;
+  @include relative;
+  @include size(280px);
+  overflow: hidden;
+  margin: 0 auto;
+
+  [type="file"] {
+    @include absolute($top: 0, $left: 0);
+    @include size(null, 100%);
+    z-index: 10;
+    opacity: 0;
+    cursor: pointer;
+  }
+}
+
+.btn-upload {
+  @include btn($w: 280px, $h: 280px, $pos: left -450px);
+}
+
+
+.prev-img {
+  @include absolute($top: 50%, $left: 50%);
+  @include size(275px);
+  transform: translate(-50%, -50%);
+  border-radius: 25px;
+  object-fit: cover;
+}
+
+
+.flip {
+  transform: scaleX(-1);
+}
+
+.rotate-180 {
+  transform: translate(-50%, -50%) rotate(180deg);
+}
+
+.flip-and-rotate-180 {
+  transform: translate(-50%, -50%) rotate(180deg) scaleX(-1);
+}
+
+.flip-and-rotate-270 {
+  transform: translate(-50%, -50%) rotate(270deg) scaleX(-1);
+}
+
+.rotate-90 {
+  transform: translate(-50%, -50%) rotate(90deg);
+}
+
+.flip-and-rotate-90 {
+  transform: translate(-50%, -50%) rotate(90deg) scaleX(-1);
+}
+
+.rotate-270 {
+  transform: translate(-50%, -50%) rotate(270deg);
+}
+
+.loading {
+  @include fixed($top: 0, $right: 0, $bottom: 0, $left: 0);
+  z-index: 25;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.6);
+
+  &.is-active {
+    display: flex;
+  }
+}
+
+// ===========================================
+// 당첨자 팝업
+// ===========================================
+.prize-valentine {
+  @if $type == 'pc' {
+    @include absolute($top: 1260px, $left: 50%);
+  } @else {
+    @include absolute($top: 1800px, $left: 50%);
+  }
+  //@include debug;
+  @include size(720px, 1520px);
+  @include bg($loc-pop + 'bg-prize.png');
+
+  padding: 365px 60px 0;
+  font-size: 26px;
+  color: #7f582e;
+
+  .prize-list {
+   // @include debug;
+    @include size(null, 185px);
+    display: flex;
+    flex-wrap: wrap;
+    padding: 14px 0;
+    overflow-y: auto;
+    padding-left: 34px;
+    text-align: left;
+
+    &:nth-of-type(n + 2) {
+      margin-top: 90px;
+    }
+
+    li {
+      @include size(33.333333%, null);
+      line-height: 1.5;
+    }
+
+    &:nth-of-type(3) {
+      @include size(null, 330px);
+    }
+  }
+}

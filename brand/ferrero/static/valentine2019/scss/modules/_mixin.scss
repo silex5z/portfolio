@@ -1,0 +1,59 @@
+// =============================================
+// @params hex / string color
+// =============================================
+@mixin debug($color: red) {
+  outline: 1px dashed $color;
+}
+
+// =============================================
+// background
+// =============================================
+@mixin bg($name, $repeat: no-repeat, $pos: center top, $color: null) {
+  background: $color url($name) $repeat $pos;
+}
+
+// =============================================
+// @params($w: width, $h: default $w)
+// =============================================
+@mixin size($w, $h: $w) {
+  width: $w;
+  height: $h;
+}
+
+// =============================================
+// 직접 position mixin을 사용하지 말고
+// @mixin absolute / fixed / relative를 사용할것
+// =============================================
+@mixin position($position, $top: null, $right: null, $bottom: null, $left: null) {
+  position: $position;
+  top: $top;
+  right: $right;
+  bottom: $bottom;
+  left: $left;
+}
+
+// =============================================
+// @params($args: $top: value, $right: value, $bottom: value, $left: value)
+// =============================================
+@mixin absolute($args...) {
+  @include position(absolute, $args...);
+}
+
+@mixin fixed($args...) {
+  @include position(fixed, $args...);
+}
+
+@mixin relative($args...) {
+  @include position(relative, $args...);
+}
+
+@mixin text-hidden {
+  overflow: hidden;
+  text-indent: -9999em;
+}
+
+@mixin box-center($width: null) {
+  width: $width;
+  margin-left: auto;
+  margin-right: auto;
+}

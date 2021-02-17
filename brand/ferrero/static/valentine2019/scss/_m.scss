@@ -1,0 +1,203 @@
+$type : 'm';
+
+// layout
+// 섹션 높이 padding-top 설정
+// ========================================================
+$section-info: (1750px 705px, 1541px 40px, 2780px 2570px);
+
+@for $i from 1 through length($section-info) {
+  .ev#{$i} {
+    // @include debug;
+    @include size(null, nth(nth($section-info, $i), 1));
+    @include bg($loc-m + 'bg-ev#{$i}.jpg');
+    padding-top: nth(nth($section-info, $i), 2);
+    text-align: center;
+
+    @if $i > 1 {
+      margin-top: -1px;
+    }
+  }
+}
+
+// page btn
+// =====================================
+@mixin btn($w, $h: $w, $img:null) {
+  @include size($w, $h);
+  @include bg($loc-m + $img);
+  display: inline-block;
+  padding: 0;
+  text-indent: -9999em;
+}
+
+.btn {
+
+  &--play {
+    @include btn($w: 100%, $img: 'img-cover-mv.jpg');
+    @include absolute($top: 0, $left: 0);
+  }
+
+  &--join-evt {
+    @include btn(600px, 100px, 'btn-join-event.jpg');
+    @include box-center;
+    margin-bottom: 68px;
+  }
+
+  &--prize-evt {
+    @include btn(600px, 100px, 'btn-prize.png');
+    @include box-center;
+    margin-bottom: 68px;
+  }
+
+
+  &--arrow-down {
+    @include btn(54px, 28px, 'btn-arrow.png');
+    @include box-center;
+    display: block;
+  }
+
+  &__event-caution {
+    @include btn(198px, 25px, 'btn-caution.png');
+    margin-left: 420px;
+  }
+
+  &--go-gift {
+    @include btn(600px, 100px, 'btn-go-gift.png');
+  }
+}
+
+// nav
+// =====================================
+.nav {
+  // @include debug;
+  @include fixed($top: 0, $left: 0);
+  @include size(100%, 211px);
+  @include bg($loc-m + 'bg-nav.png');
+  display: flex;
+  padding-top: 39px;
+  z-index: 15;
+
+  &__list {
+    // @include debug;
+    @include size(441px, 26px);
+    display: flex;
+    margin-left: 107px;
+  }
+
+  @for $i from 1 through 3 {
+    @if $i > 1 {
+      &__item:nth-child(#{$i}) {
+        margin-left: if($i == 2, 65px, 69px);
+      }
+    }
+  }
+
+  &__link {
+    $link-loc: left, -190px, -384px;
+
+    // @include debug;
+    @include size(125px, 28px);
+    @include bg($loc-m + 'ir-btn-nav.png');
+    display: block;
+    text-indent: -9999em;
+
+    @for $i from 1 through length($link-loc) {
+      @at-root .nav__item:nth-child(#{$i}) & {
+        background-position: nth($link-loc, $i) top;
+
+        &.is-active {
+          background-position: nth($link-loc, $i) bottom;
+        }
+      }
+    }
+  }
+}
+
+.wrap {
+  overflow: hidden;
+}
+
+// ev1
+// =====================================
+.ev1 {
+
+  &__mv {
+    @include relative;
+    @include size(600px, 337px);
+    @include box-center;
+
+    margin-bottom: 80px;
+
+    &::before {
+      @include absolute($top: -278px, $left: -50px);
+      @include size(433px, 382px);
+      @include bg($loc-m + 'img-mv-front.png');
+      z-index: 10;
+      content: '';
+    }
+  }
+
+  &__content {
+    @include size(null, 323px);
+    @include bg($loc-m + 'txt-ev1.png');
+
+    margin-bottom: 45px;
+  }
+
+  .btn__event-caution {
+    margin-bottom: 7px;
+  }
+}
+
+// ev2
+// =====================================
+.ev2 {
+  &__content {
+    @include size(null, 440px);
+    @include bg($loc-m + 'txt-ev2.png');
+  }
+
+  .swiper-container {
+    // @include debug;
+    @include size(600px, 736px);
+    margin-bottom: 135px;
+    overflow: initial;
+  }
+
+  .swiper-slide {
+    // @include debug;
+    @include size(auto, null);
+
+    &:nth-of-type(odd) {
+      padding-top: 50px;
+    }
+
+    &:nth-of-type(even) {
+      padding-top: 130px;
+    }
+  }
+
+  .frame {
+    @include size(260px);
+    @include bg($loc-m + 'frame.jpg');
+    // @include box-center;
+    padding: 5px;
+    box-shadow: 31px 31px 70px rgba(120, 88, 54, .4);
+
+    &:nth-of-type(1) {
+      margin-bottom: 30px;
+    }
+
+    img {
+      @include size(100%);
+      object-fit: cover;
+    }
+  }
+
+  .swiper-scrollbar {
+    background: $color-scrollbar;
+  }
+
+  .swiper-scrollbar-drag {
+    background: $color-drag;
+  }
+}

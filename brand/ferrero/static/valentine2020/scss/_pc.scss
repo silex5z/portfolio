@@ -1,0 +1,247 @@
+$type: 'pc';
+
+body {
+  background: #dcb860;
+}
+
+[v-cloak] {
+  display: none;
+}
+
+/* .canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  @include size(500px, 300px);
+} */
+
+// layout
+// ==============================================
+.wrap {
+  @include relative;
+  @include box-center;
+  max-width: $width-max;
+  min-width: $width-min;
+  
+
+  .inner {
+    position: relative;
+    @include box-center($width-min);
+  }
+
+  h1 {
+    position: absolute;
+    left: 50%;
+    top: 38px;
+    transform: translateX(-50%);
+  }
+}
+
+
+// nav
+// ==============================================
+
+.nav {
+  position: fixed;
+  z-index: 2;
+  right: 35px;
+  top: 445px;
+
+  &__list:after {
+    content:'';
+    position: absolute;
+    display: block;
+    width: 71px;
+    height: 73px;
+    top: -65px;
+    left: 50px;
+    @include bg($loc-pc + 'deco-nav.png')
+  }
+
+  &__item {
+    margin-bottom: 10px;
+    position: relative;
+    box-shadow: 0px 25px 50px #5F4422B3;
+    border-radius: 30px;
+
+    @for $i from 1 through 3 {
+      &:nth-child(#{$i}) {
+        width: 182px;
+        height: 56px;
+        @include bg($loc-pc + 'nav.png');
+        background-position-x: -182px;
+        background-position-y: (56 * (1-$i)) + px;
+
+        @if $i < 3 {
+          &::after {
+            content: '';
+            display: block;
+            position: absolute;
+            width: 62px;
+            height: 10px;
+            /* background: #85682f; */
+            right: 60px;
+            top: 100%;
+            border-left: 2px solid #85682f;
+            border-right: 2px solid #85682f;
+          }
+        }
+      }
+    }
+
+    &.on {
+      background-position-x: 0;
+    }
+
+    a {
+      display: inline-block;
+      width: 100%;
+      height: 56px;
+    }
+  }
+}
+
+// kv
+// ===================================================================
+.kv {
+  height: 1205px;
+  @include bg($loc-pc + 'bg_01.jpg');
+
+  &__tit {
+    position: relative;
+    top: 204px;
+    left: 64px;
+    display: inline;
+    z-index: 1;
+  }
+
+  &__mv {
+    position: absolute;
+    top: 325px;
+    right: 235px;
+    width: 712px;
+    height: 400px;
+  }
+}
+
+// card
+// ===================================================================
+.card {
+  height: 1074px;
+  @include bg($loc-pc + 'bg_02.jpg');
+
+  .btn__eventNotice {
+    left: 740px;
+    top: 304px;
+  }
+}
+
+// gift
+// ===================================================================
+.gift {
+  height: 1359px;
+  @include bg($loc-pc + 'bg_03.jpg');
+}
+
+// shop
+// ===================================================================
+.shop {
+  height: 871px;
+  @include bg($loc-pc + 'bg_04.jpg');
+
+  &__btns {
+    position: absolute;
+    left: 790px;
+    top: 442px;
+    width: 310px;
+
+    > a {
+      position: relative;
+      display: inline-block;
+      width: 100%;
+      height: 70px;
+      margin-bottom: 20px;
+      // box-shadow: 0px 25px 50px #6a3410;
+    }
+
+    &:after {
+      content:'';
+      position: absolute;
+      display: block;
+      width: 167px;
+      height: 150px;
+      top:  255px;
+      left: 245px;
+      @include bg($loc-pc + 'label-cu.png')
+    }
+  }
+}
+
+// notice
+// ===================================================================
+.notice {
+  position: relative;
+  height: 91px;
+  @include bg($loc-pc + 'bg_05.jpg');
+  margin-top: -1px;
+}
+
+// button
+// ===================================================================
+.btn {
+  position: absolute;
+  font-size: 0;
+  border-radius: 46px;
+  box-shadow: 0px 25px 50px #5F4422B3;
+  @include bg($loc-pc + 'btnIr.png');
+  @include size(320px, 75px);
+  // @include bg($loc-pc + 'btns.png');
+
+  &--videoPlay {
+    width: 712px;
+    height: 400px;
+    border-radius: 0;
+    @include bg($loc-pc + 'videocover.jpg');
+}
+
+  &--joinLotteryEvent {
+    top: 1052px;
+    left: 439px;
+    background-position: 0 -355px;
+  }
+
+  &--eventNotice {
+    width: 203px;
+    height: 41px;
+    top: 25px;
+    left: 205px;
+    background-position: 0 -430px;
+  }
+
+  &--joinCardEvent {
+    top: 910px;
+    left: 440px;
+    background-position: 0 -280px;
+
+  }
+
+  &--emart {
+    background-position: 0 0;
+    box-shadow: 0px 25px 50px #B1995673;
+  }
+  
+  &--lotte {
+    background-position: 0 -70px;
+    box-shadow: 0px 25px 50px #B1995673;
+  }
+
+  &--naver {
+    background-position: 0 -140px;
+    box-shadow: 0px 25px 50px #B1995673;
+  }
+
+  &--cu {
+    background-position: 0 -210px;
+    box-shadow: 0px 25px 50px #B1995673;
+  }
+}

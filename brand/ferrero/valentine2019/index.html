@@ -1,0 +1,149 @@
+﻿<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="shared/layout">
+
+<head>
+  <title>페레로로쉐 : 발렌타인 이벤트</title>
+  <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.4.6/css/swiper.min.css">
+  <!-- <link rel="stylesheet" href="/valentine2019/css/polyfill.object-fit.min.css"> -->
+  <link rel="stylesheet" href="/valentine2019/css/style.min.css">
+</head>
+
+  <!-- 이벤트 Meta 태그 추가 -->
+ <th:block layout:fragment="meta" th:remove="tag">
+   <meta property="og:url" th:attr="content=${url}" />
+   <meta property="og:title" th:attr="content=${title}" />
+   <meta property="og:image" th:attr="content=${image}" />
+   <meta property="og:description" th:attr="content=${contents}" />
+ </th:block>
+
+<body>
+  <!-- layout -->
+  <div layout:fragment="content">
+    <h1 class="a11y-hidden">페레로로쉐 발렌타인 이벤트</h1>
+
+    <div v-cloak class="wrap" id="app" ref="wrap">
+      <nav v-bind:class="['nav', showNav]" ref="nav" v-bind:style="navStyle">
+        <h2 class="a11y-hidden">이벤트 네비게이션</h2>
+        <ul class="nav__list">
+          <li v-for="link in navLinks" class="nav__item">
+            <a v-on:click.prevent="goSection(link)" class="nav__link" v-bind:href="'#' + link">{{link}}</a>
+          </li>
+        </ul>
+      </nav>
+      <!-- ev1 -->
+      <section class="ev1" v-bind:id="navLinks[0]">
+
+        <div class="inner">
+          <h2 class="ev1__tit">romantic day</h2>
+          <div class="ev1__mv" ref="mv">
+            <button v-if="playBtnState" v-on:click="playMv" class="play vtag-event" vtag-depth="2" type="button">play</button>
+            <div id="player"></div>
+          </div>
+          <div class="ev1__content">
+            <h3 class="a11y-hidden">로멘틱 이벤트</h3>
+            <p class="a11y-hidden">올해 여러분은 어떤 발렌타인 데이를 준비하고 있나요? 영상을 시청하고 이벤트에 참여하면 <b>즉석당첨</b>을 통해 <em>1,000분께 페레로 로쉐를
+                드립니다!</em></p>
+            <dl class="a11y-hidden">
+              <dt>이벤트 참여</dt>
+              <dd>2019. 1. 15 ~ 2. 8</dd>
+              <dt>경품발송</dt>
+              <dd>2019.2.12</dd>
+            </dl>
+            <button v-on:click="visibleCaution(0)" class="event-caution" type="button">이벤트 유의사항</button>
+          </div>
+
+          <button th:if="${isClose == false}" v-on:click="joinEvent('romantic', 0)" class="join-event vtag-event" vtag-depth="3" id="valentine-2019-instantlosttery-btn" type="button">이벤트 참여하기</button>
+          <button th:if="${isClose == true}"  onClick="alert('이벤트 참여가 종료되었습니다.')" class="join-event vtag-event" vtag-depth="3" id="valentine-2019-instantlosttery-btn" type="button">이벤트 참여하기</button>
+          
+          <a v-on:click.prevent="goSection('event2')" class="arrow-down" href="#event2">이벤트 2로 가기</a>
+        </div>
+      </section>
+      <!-- // ev1 -->
+
+      <!-- ev2 -->
+      <section class="ev2" v-bind:id="navLinks[1]">
+        <div class="ev2__content">
+          <h2 class="a11y-hidden">발렌타인데이 이벤트</h2>
+          <p class="a11y-hidden"><strong>페레로 로쉐가 선사하는 특별한 발렌타인 데이</strong></p>
+          <p class="a11y-hidden">연인과의 추억이 가득 담긴 사진을 업로드 하면 추첨을 통해 사랑하는 연인과 함께하는 특별한 발렌타인 데이 데이트를 선물해드립니다!</p>
+          <dl class="a11y-hidden">
+            <dt>이벤트 참여</dt>
+            <dd>2019. 1. 15 ~ 1. 29</dd>
+            <dt>경품발송</dt>
+            <dd>2019.2.1</dd>
+          </dl>
+          <button v-on:click="visibleCaution(1260)" ref="caution" class="event-caution" type="button">이벤트 유의사항</button>
+        </div>
+        <!-- slider -->
+        <div class="swiper-container">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide" v-for="(pic, idx) in picDatas">
+              <figure class="frame">
+                <div class="frame-inner">
+                  <img v-bind:src="pic" alt="">
+                </div>         
+              </figure>
+            </div>
+
+          </div>
+          <div class="swiper-scrollbar"></div>
+        </div>
+        <!-- // slider -->
+        <p class="a11y-hidden">howto <em>직접 촬영한 추억 가득한 사진을 올리면 당첨확률이 올라갑니다!</em></p>
+        
+        <!--<button th:if="${isClose == false}" class="join-event vtag-event" vtag-depth="8" v-on:click="joinEvent('valentine', 1260)" id="valentine-2019-picture-btn" type="button">이벤트 참여하기</button>
+         <button th:if="${isClose == true}" class="join-event vtag-event" vtag-depth="8" onClick="alert('이벤트 참여가 종료되었습니다. 당첨자 발표는 2월 1일 있을 예정입니다.')" id="valentine-2019-picture-btn" type="button">이벤트 참여하기</button> -->
+        <button class="join-event prize-btn vtag-event" vtag-depth="8" onClick="alert('이벤트가 종료되었습니다.');" id="valentine-2019-picture-btn" type="button">이벤트 참여하기</button>
+        <p class="a11y-hidden"><em>*만 14세 미만인 이용자는 본 서비스 이용이 제한됩니다.</em></p>
+      </section>
+      <!-- // ev2 -->
+
+      <!-- gift -->
+      <section class="ev3" v-bind:id="navLinks[2]">
+        <div class="a11y-hidden">
+          <h2>발렌타인데이 이벤트 선물</h2>
+          <p><strong>페레로 로쉐가 드리는 발렌타인 데이 이벤트 경품</strong></p>
+          <p>페레로 로쉐와 함께 사랑하는 연인에게 서프라이즈한 선물을 선사하세요!</p>
+        </div>
+        <ol class="a11y-hidden">
+          <li>
+            <strong>1등: 로멘틱 골든 시네마</strong>영화 관람 전, 당첨 되신 연인분들의 추억이 가득 담긴 사진으로 영상을 만들어 드립니다.
+            <b>(총 24쌍, 48명 / 2월 14일 저녁 청담 CGV)</b>
+          </li>
+          <li>
+            <strong>2등: 페레로로쉐 96개입</strong><b>(10명)</b>
+          </li>
+          <li>
+            <strong>3등: 페레로로쉐 5개입</strong><b>(50명)</b>
+          </li>
+        </ol>
+        <aside class="banner">
+          <h2 class="a11y-hidden">페레로로쉐 구매페이지</h2>
+          <p class="a11y-hidden">이번 발렌타인 데이에는 페레로 로쉐로 황금빛 사랑을 전해보세요</p>
+          <a class="go-gift vtag-event" vtag-depth="11" v-bind:href="giftLink" target="_blank">선물하기</a>
+        </aside>
+      </section>
+      <!-- // gift -->
+    </div>
+    <!-- // wrap -->
+
+    <script src="/vendor/jquery/jquery-3.3.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/blueimp-load-image/2.20.1/load-image.all.min.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/exif-js"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.4.6/js/swiper.min.js"></script>
+    <script src="/valentine2019/js/anime.min.js"></script>
+    <script src="/valentine2019/js/use-youtube.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.21/vue.js"></script>
+    <!-- <script src="/valentine2019/js/polyfill.object-fit.min.js"></script> -->
+    <script src="/valentine2019/js/polyfill.utils.js"></script>
+    <script src="/valentine2019/js/pub.js"></script>
+
+    <!-- 랩사태그추가 -->
+    <script src='https://vtag21.midas-i.com/vat-tag?cmp_no=3721&depth=1'></script>
+    <script src="/valentine2019/js/dev.js"></script>
+  </div>
+  <!-- // layout -->
+</body>
+
+</html>

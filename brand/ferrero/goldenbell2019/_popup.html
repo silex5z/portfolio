@@ -1,0 +1,271 @@
+<div th:fragment="partial-popup">
+  <!-- dimmed -->
+  <div class="dimmed" v-show="dimmed"></div>
+  <div class="dimmed loading" v-show="loading">
+    <img src="https://fr-ferrerorocher.s3.ap-northeast-2.amazonaws.com/static/loading.gif" alt="로딩중" />
+  </div>
+  <!-- 영상공유 즉당 : 개인정보 -->
+  <div class="pop lottery-user" v-show="currentPopup === 'lottery-user'">
+    <div class="pop__inner">
+      <div class="pop__header">
+        <h4>
+          <img src="https://fr-ferrerorocher.s3.ap-northeast-2.amazonaws.com/static/goldenBell2019/popup/tl-ev1-step1.png" alt="영상 공유 이벤트" />
+        </h4>
+      </div>
+      <div class="pop__content">
+        <form action="" @submit.prevent>
+          <dl>
+            <dt>이름</dt>
+            <dd class="input-name"><input type="text" v-model="lotteryUserData.name" maxlength="4" /></dd>
+
+            <dt>연락처</dt>
+            <dd class="input-phone">
+              <input type="tel" v-model="lotteryUserData.mobile" placeholder="'-'기호를 제외하고 입력해 주세요." maxlength="11" />
+            </dd>
+          </dl>
+
+          <div class="pop__btnWrap">
+            <span class="pop__snsShare-txt">SNS로 공유하기</span>
+            <button class="popbtn popbtn__fbShare" type="button" @click="shareFacebook('event1')">event1 페이스북 공유</button>
+            <button class="popbtn popbtn__ktShare" type="button" @click="shareKakaotalk('event1')">event1 카카오톡 공유</button>
+            <button class="popbtn popbtn__ksShare" type="button" @click="shareKakaostory('event1')">event1 카카오스토리 공유</button>
+          </div>
+          <ul class="agreeWrap">
+            <li>
+              <label for="agree1">
+                <input type="checkbox" id="agree1" name="agree1" value="true" v-model="lotteryUserData.agree1" />
+                <span></span>
+                <p class="agreeWrap--text">개인정보 수집 및 이용동의</p>
+              </label>
+              <button type="button" class="popbtn popbtn__agreeDetail" @click="openPop('event-personal-notice1')">
+                개인정보 수집 및 이용동의 자세히보기
+              </button>
+            </li>
+            <li>
+              <label for="agree2">
+                <input type="checkbox" id="agree2" name="agree2" value="true" v-model="lotteryUserData.agree2" />
+                <span></span>
+                <p class="agreeWrap--text">개인정보 처리 위탁동의</p>
+              </label>
+              <button type="button" class="popbtn popbtn__agreeDetail" @click="openPop('event-personal-notice1')">
+                개인정보 처리 위탁동의 자세히보기
+              </button>
+            </li>
+          </ul>
+          <p class="pop__ageNotice">만 14세 미만인 이용자는 본 서비스 이용이 제한됩니다</p>
+        </form>
+        <button class="popbtn popbtn__lotteryResult" @click="checkEvent1End()">당첨결과 확인하기</button>
+        <button class="popbtn popbtn__close" @click="closePop()" type="button">닫기</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 즉당:결과 -->
+  <div class="pop lottery-result" v-if="currentPopup === 'lottery-result'">
+    <div class="pop__inner">
+      <!-- <div class="pop__header">
+          <h4></h4>
+        </div> -->
+      <div class="pop__content">
+        <div class="pop__winGift">
+          <img :src="'https://fr-ferrerorocher.s3.ap-northeast-2.amazonaws.com/static/goldenBell2019/popup/'+lotteryResult+'.jpg'" alt="" />
+        </div>
+
+        <button class="popbtn popbtn__close" @click="closePop()" type="button">닫기</button>
+
+        <button class="popbtn popbtn__replay" v-if="lotteryResult === 'E13dfdfewaWR'" @click="closePop()">다시 도전하기</button>
+        <button class="popbtn popbtn__complete" v-else @click="closePop()">완료</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- you퀴즈 : 개인정보-->
+  <div class="pop quiz-user" v-show="currentPopup === 'quiz-user'">
+    <div class="pop__inner">
+      <div class="pop__header">
+        <!-- <h4><img src="https://fr-ferrerorocher.s3.ap-northeast-2.amazonaws.com/static/goldenBell2019/popup/tl-ev2-step1.png" alt="YOU퀴즈 이벤트"></h4> -->
+        <h4>
+          <span>YOU 퀴즈</span> 이벤트
+          <p class="subTitle">이벤트 참여를 위해 정보를 입력해주세요!</p>
+        </h4>
+      </div>
+      <div class="pop__content">
+        <form action="" @submit.prevent>
+          <dl>
+            <dt>이름</dt>
+            <dd class="input-name"><input type="text" v-model="quizUserData.name" maxlength="4" /></dd>
+
+            <dt>연락처</dt>
+            <dd class="input-phone">
+              <input type="tel" v-model="quizUserData.mobile" placeholder="'-'기호를 제외하고 입력해 주세요." maxlength="11" />
+            </dd>
+
+            <dt>연령대</dt>
+            <dd>
+              <select class="sido" v-model="quizUserData.age" name="age">
+                <option value="null" selected disabled hidden>연령대를 선택하세요</option>
+                <option v-for="idx in 6" :value="(idx * 10)" :key="idx">
+                  {{ (idx * 10) + '대' }}
+                </option>
+              </select>
+            </dd>
+          </dl>
+
+          <ul class="agreeWrap agreeWrap--line">
+            <li>
+              <label for="quizAgree1">
+                <input type="checkbox" id="quizAgree1" name="quizAgree1" value="true" v-model="quizUserData.agree1" />
+                <span></span>
+                <p class="agreeWrap--text">개인정보 수집 및 이용동의</p>
+              </label>
+              <button type="button" class="popbtn popbtn__agreeDetail" @click="openPop('event-personal-notice2')">
+                개인정보 수집 및 이용동의 자세히보기
+              </button>
+            </li>
+            <li>
+              <label for="quizAgree2">
+                <input type="checkbox" id="quizAgree2" name="quizAgree2" value="true" v-model="quizUserData.agree2" />
+                <span></span>
+                <p class="agreeWrap--text">개인정보 처리 위탁동의</p>
+              </label>
+              <button type="button" class="popbtn popbtn__agreeDetail" @click="openPop('event-personal-notice2')">
+                개인정보 처리 위탁동의 자세히보기
+              </button>
+            </li>
+          </ul>
+          <p class="pop__ageNotice">만 14세 미만인 이용자는 본 서비스 이용이 제한됩니다</p>
+        </form>
+        <button class="popbtn popbtn__next" @click="quizUserInfo()">다음</button>
+        <button class="popbtn popbtn__close" @click="closePop()" type="button">닫기</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- you퀴즈 : 설문입력-->
+  <div class="pop quiz-survey" v-show="currentPopup === 'quiz-survey'">
+    <div class="pop__inner">
+      <div class="pop__header">
+        <h4><img src="https://fr-ferrerorocher.s3.ap-northeast-2.amazonaws.com/static/goldenBell2019/popup/tl-ev2-step2.png" alt="" /></h4>
+      </div>
+      <div class="pop__content">
+        <p class="pop__question"><span>문제1</span>내가 가족/친구들과 가장 하고 싶은 것은?</p>
+        <ul>
+          <li v-for="anwer in quizData[0]">
+            <label>
+              <input name="survey01" type="radio" :value="anwer" v-model="quizAnswerData.quiz1" />
+              <span></span>
+              <p>{{anwer}}</p>
+            </label>
+          </li>
+        </ul>
+
+        <p class="pop__question"><span>문제2</span>내가 수능 또는 중요한 날 전에 가장 듣고 싶은 말은?</p>
+        <ul>
+          <li v-for="anwer in quizData[1]">
+            <label>
+              <input name="survey02" type="radio" :value="anwer" v-model="quizAnswerData.quiz2" @click="checkConfirm" />
+              <span></span>
+              <p>{{anwer}}</p>
+            </label>
+          </li>
+          <li class="anwer-etc">
+            <label>
+              <input id="answerEtc" name="survey02" type="radio" value="etc" @click="checkConfirm" />
+              <span></span>
+              <p>기타 :</p>
+              <input placeholder="기타" readonly="readonly" type="text" class="check__only" v-model="userAnserEtc" />
+            </label>
+          </li>
+        </ul>
+        <span class="pop__line"></span>
+        <button class="popbtn popbtn__close" @click="closePop()" type="button">닫기</button>
+        <button class="popbtn popbtn__quizComplete" type="button" @click="userAnserSend()">퀴즈 완성하기</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- you퀴즈 : 공유하기-->
+  <div class="pop quiz-share" v-show="currentPopup === 'quiz-share'">
+    <div class="pop__inner">
+      <div class="pop__header">
+        <h4><img src="https://fr-ferrerorocher.s3.ap-northeast-2.amazonaws.com/static/goldenBell2019/popup/tl-ev2-step3.png" alt="" /></h4>
+        <p class="pop__subTitle">{{quizUserData.name}} 탐구영역의 퀴즈가 완성되었습니다!</p>
+        <p class="pop__subTitle-txt">
+          응원을 받고 싶은 사람에게 아래 링크로<br />내가 만든 퀴즈를 공유하면 이벤트 참여 완료!<br />
+          <span>(더 많은 사람들이 퀴즈를 풀수록 당첨 확률 UP!)</span>
+        </p>
+      </div>
+      <div class="pop__content">
+        <div class="pop__fakeInputbox">
+          <span id="pageUrl">{{personalUrl}}</span>
+        </div>
+        <button type="button" class="popbtn popbtn__copy codecopy" id="copyBtn" data-clipboard-target="#pageUrl">링크복사</button>
+        <p class="pop__subTxt">친구들의 점수와 응원도 위 링크를 통해 확인 하실 수 있어요!</p>
+
+        <div class="pop__btnWrap">
+          <span class="pop__snsShare-txt">SNS로 링크 공유하기</span>
+          <button class="popbtn popbtn__fbShare" type="button" @click="shareFacebook('event2')">evnet2 페북</button>
+          <button class="popbtn popbtn__ktShare" type="button" @click="shareKakaotalk('event2')">evnet2 카톡</button>
+          <button class="popbtn popbtn__ksShare" type="button" @click="shareKakaostory('event2')">evnet2 카스</button>
+        </div>
+        <button class="popbtn popbtn__close" @click="closePop()" type="button">닫기</button>
+        <button class="popbtn popbtn__quizEventEnd" @click="checkEvent2End()" type="button">참여 완료</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 참여안내 및 유의사항 -->
+  <div class="pop event-notice" v-show="currentPopup === 'event-notice'">
+    <img src="https://fr-ferrerorocher.s3.ap-northeast-2.amazonaws.com/static/goldenBell2019/popup/pop-notice.png" alt="" />
+    <button class="popbtn popbtn__close" @click="closePop()" type="button">닫기</button>
+  </div>
+
+  <!-- 개인정보 수집 이용 및 위탁 방침안내//event1 -->
+  <div class="pop event-personal-notice" v-show="currentPopup === 'event-personal-notice1'">
+    <img src="https://fr-ferrerorocher.s3.ap-northeast-2.amazonaws.com/static/goldenBell2019/popup/pop-personal-notice.png" alt="" />
+    <button class="popbtn popbtn__close" @click="openPop('lottery-user')" type="button">닫기</button>
+  </div>
+
+  <!-- 개인정보 수집 이용 및 위탁 방침안내//event2-->
+  <div class="pop event-personal-notice" v-show="currentPopup === 'event-personal-notice2'">
+    <img src="https://fr-ferrerorocher.s3.ap-northeast-2.amazonaws.com/static/goldenBell2019/popup/pop-personal-notice.png" alt="" />
+    <button class="popbtn popbtn__close" @click="openPop('quiz-user')" type="button">닫기</button>
+  </div>
+
+  <!-- 당첨자발표 -->
+  <div class="pop winner" v-if="currentPopup === 'winner'">
+    <div class="pop__inner">
+      <div class="pop__header">
+        <h4><img src="https://fr-ferrerorocher.s3.ap-northeast-2.amazonaws.com/static/goldenBell2019/popup/tl-winner.png" alt="당첨을 축하합니다"></h4>
+
+      </div>
+      <div class="pop__content">
+        <div class="winner__box">
+          <h5 class="winner__header">미술 심리 상담권 (5명)</h5>
+          <ul class="winner__box-first">
+            <li v-for="winner in winnerList[0]" :key="winner">{{winner}}</li>
+          </ul>
+        </div>
+        <div class="winner__box">
+          <h5 class="winner__header">외식 상품권 & 페레로 로쉐 16개입 (10명)</h5>
+          <ul>
+            <li v-for="winner in winnerList[1]" :key="winner">{{winner}}</li>
+          </ul>
+        </div>
+        <div class="winner__box">
+          <h5 class="winner__header">페레로 로쉐 5개입 기프티콘 (50명)</h5>
+          <ul>
+            <li v-for="winner in winnerList[2]" :key="winner">{{winner}}</li>
+          </ul>
+        </div>
+
+        <ul class="winner__notice">
+          <li><span></span>ctrl+f 로 전화번호 뒷자리(4자리)를 검색하시면 편리합니다</li>
+          <li><span></span>1등, 2등 경품 당첨자들에게는 개별적으로 연락드릴 예정입니다</li>
+          <li><span></span>5개입 기프티콘은 11월 22일 일괄 발송 될 예정입니다</li>
+        </ul>
+        <button class="popbtn popbtn__close" @click="closePop()" type="button">닫기</button>
+      </div>
+    </div>
+  </div>
+</div>

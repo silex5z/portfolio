@@ -1,0 +1,256 @@
+$type : 'pc';
+
+[v-cloak] {
+  display: none;
+}
+
+// pc btn mixin
+// ==============================================
+
+@mixin btn($display: inline-block, $w:320px, $h: 75px, $img:null) {
+  @include size($w, $h);
+  @include bg($loc-pc + $img);
+  @include text-hidden;
+  display: $display;
+  cursor: pointer;
+}
+
+// 이벤트 참여하기 (event1, event2)
+.join-event {
+  @include btn($img: 'btn-join-event.png');
+  &.prize-btn {
+    @include btn($img: 'btn-prize.png');
+  } 
+}
+
+// 이벤트 유의사항(event1, event2)
+.event-caution {
+  @include btn($w: 144px, $h: 19px, $img: 'btn-caution.png');
+}
+
+// layout
+// ==============================================
+.wrap {
+  // @include debug;
+  @include relative;
+  @include box-center;
+  max-width: $width-max;
+  min-width: $width-min;
+}
+
+.inner {
+  // @include debug;
+  @include box-center($width-min);
+}
+
+// nav
+// ==============================================
+$nav-space: 37px;
+
+.nav {
+  // @include debug;
+  @include size(350px, 583px);
+  @include fixed($left: 100%, $top: 515px);
+  @include bg($loc-pc + 'bg-nav.png');
+  z-index: 10;
+  opacity: 0;
+  transition: opacity 0.5s;
+
+  &.is-active {
+    opacity: 1;
+  }
+
+  &__list {
+    margin: {
+      left: 214px;
+      top: 221px;
+    }
+  }
+
+  &__item {
+    margin-bottom: 17px;
+
+    &:last-child .nav__link {
+      @include size(null, 22px);
+    }
+  }
+
+  @for $i from 1 through 3 {
+    &__item:nth-child(#{$i}) {
+      .nav__link {
+        background-position: left (-($i - 1) * $nav-space);
+
+        &.is-active {
+          background-position: right (-($i - 1) * $nav-space);
+        }
+      }
+    }
+  }
+
+  &__link {
+    // @include debug;
+    @include size(97px, 20px);
+    @include bg($loc-pc + 'ir-btn-nav.png');
+    @include text-hidden;
+    display: inline-block;
+  }
+}
+
+// ev1 ~ ev3
+// section bg, height, padding top 설정
+// $sections: (height, padding-top)
+// ===================================================================
+$sections: (1180px 199px, 1190px 72px, 1560px 1395px);
+
+@for $i from 1 through length($sections) {
+  .ev#{$i} {
+    // @include debug;
+    @include size(null, nth(nth($sections, $i), 1));
+    @include bg($loc-pc + 'bg-ev#{$i}-b.jpg');
+    padding-top: nth(nth($sections, $i), 2);
+  }
+}
+
+
+// ev1
+// ===================================================================
+.ev1 {
+
+  // padding-top: 199px;
+
+  &__tit {
+    @include relative($top: -144px, $left: -21px);
+    @include size(756px, 571px);
+    @include bg($loc-pc + 'img-main-tit.png');
+    @include text-hidden;
+    z-index: 10;
+  }
+
+  &__mv {
+    @include size(712px, 401px);
+    @include relative;
+    margin: -570px 0 100px 488px;
+  }
+
+  .play {
+    @include btn($w: 712px, $h: 400px, $img: 'btn-play.jpg');
+    @include absolute($top: 0, $left: 0);
+  }
+
+  &__content {
+    // @include debug;
+    @include size(null, 239px);
+    @include bg($loc-pc + 'txt-event1.png');
+    @include relative;
+  }
+
+  .event-caution {
+    margin: {
+      top: 220px;
+      left: 890px;
+    }
+  }
+
+  .join-event {
+    margin-top: 40px;
+    margin-left: 445px;
+  }
+
+  .arrow-down {
+    // @include debug;
+    @include btn($display: block, $img: 'btn-arrow.png', $w: 54px, $h: 28px);
+    @include box-center;
+    margin-top: 75px;
+  }
+}
+
+// ev2
+// ===================================================================
+.ev2 {
+  text-align: center;
+
+  &__content {
+    @include size(null, 327px);
+    @include relative;
+    @include bg($loc-pc + 'txt-event2.png');
+    margin-bottom: 23px;
+
+    .event-caution {
+      margin: {
+        top: 308px;
+        left: 462px;
+      }
+
+    }
+  }
+
+  .swiper-container {
+    // @include debug;
+    @include size(null, 480px);
+    margin-bottom: 23px;
+  }
+
+  .swiper-slide {
+    // @include debug;
+    @include size(auto, null);
+    // margin: 0 15px;
+
+
+    &:nth-of-type(odd) {
+      padding-top: 48px;
+    }
+
+    &:nth-of-type(even) {
+      padding-top: 128px;
+    }
+  }
+
+  .frame {
+    @include size(260px);
+    @include bg($loc-pc + 'frame.jpg');
+    @include box-center;
+    overflow: hidden;
+    padding: 5px;
+    box-shadow: 31px 31px 70px rgba(120, 88, 54, .4);
+
+    img {
+      @include size(100%);
+      object-fit: cover;
+    }
+
+    &-inner {
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  .swiper-scrollbar {
+    background: $color-scrollbar;
+  }
+
+  .swiper-scrollbar-drag {
+    background: $color-drag;
+  }
+
+  .join-event {
+    // @include debug;
+    margin-top: 65px;
+    margin-left: 8px;
+  }
+}
+
+// ev3
+// ===================================================================
+.ev3 {
+  // padding-top: 1395px;
+  text-align: center;
+
+  .banner {
+    // margin-top: 1330px;
+    padding-left: 340px;
+  }
+
+  .go-gift {
+    @include btn($img: 'btn-go-gift.png');
+  }
+}

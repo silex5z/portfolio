@@ -1,0 +1,327 @@
+$popWidth:640px;
+$popInnerWidth:560px;
+$txtBeige:#7f582e;
+$lineColor:#e5c979;
+$checkboxColor: #9b6945;
+
+body {
+  @include bg($loc-pop + 'bg-card.jpg', $repeat: repeat-x);
+}
+
+%inputText {
+  height: 60px;
+  padding: 0 20px;
+  background: transparent;
+  color: #472412;
+  border: none;
+  font-size: 22px;
+  line-height: 60px;
+  vertical-align: middle;
+  font-family: 'NotoSansKR', sans-serif;
+}
+
+%dimmed {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+
+}
+
+.dimmed {
+  @extend %dimmed;
+  z-index: 30;
+
+  &.loading {
+    z-index: 1000;
+  }
+
+  >img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100px;
+    margin: -50px -50px;
+  }
+}
+
+.wrap {
+  max-width: 640px;
+  margin: 0 auto;
+  position: relative;
+  
+}
+
+.logo {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+
+.pop {
+  $this: &;
+
+  width: $popWidth;
+  padding-top: 143px;
+  font-size: 0;
+  font-family: 'NotoSansKR', sans-serif;
+  letter-spacing: -1.5px;
+
+  // @include bg($loc-pop + 'popup-card-bg.jpg');
+  
+  h2#{&}__header {
+    width: $popInnerWidth;
+    text-align: center;
+    margin: 0 auto;
+    margin-bottom: 30px;
+    font-family: "NotoSerifKR";
+    color: #222222;
+    font-size: 42px;
+    word-break: keep-all;
+
+    > span {
+      font-size: 42px;
+      color: #e95c6d;
+    }
+
+    .subTitle {
+      margin-top: 20px;
+      font-size: 26px;
+      font-family: 'NotoSansKR', sans-serif;
+      font-weight: normal;
+      color: #000;
+      letter-spacing: -2px;
+    }
+
+    &.line {
+      padding-bottom: 50px;
+      border-bottom: 1px solid $lineColor;
+    }
+  }
+
+  &__inner {
+    width: $popInnerWidth;
+    margin: 0 auto;
+  }
+
+  &__header {
+    width: 100%;
+    font-size: 0;
+  }
+
+  &__content {
+    font-size: 0;
+    text-align: center;
+  }
+
+  &__cardWrap {
+    box-shadow: 0px 10px 70px #c49f4a;
+  }
+
+  .card {
+    background: #fff5ca;
+
+    &--reply {
+      background: #f4e8b8;
+      
+    }
+    
+    &__imageWrap {
+      position: relative;
+      width: 560px;
+      height: 575px;
+      padding-top: 40px;
+      padding-left: 40px;
+    }
+
+    &__imageFrame {
+      position: absolute;
+      top: 0;
+      left: 0;
+      display: block;
+      width: 560px;
+      height: 575px;
+      @include bg($loc-pop + 'photo-frame.png');
+    }
+
+    &__inner {
+      padding-left: 40px;
+      padding-bottom: 30px;
+    }
+
+    &__messageWrap {
+      padding: 27px 0 22px 13px; 
+    }
+
+    &__message {
+      width: 460px;
+      font-size: 22px;
+      font-family: 'NotoSansKR', sans-serif;
+      color: #222;
+      padding-right: 25px;
+      word-wrap: break-word;
+      word-break: break-all;
+    }
+
+    .toName {
+      // outline: 1px solid red;
+
+      &__label {
+        display: inline-block;
+        margin-right: 10px;
+        vertical-align: middle;
+         img {
+           vertical-align: middle;
+         }
+      }
+      
+      &__name {
+        width: 240px;
+        font-size: 23px;
+        display: inline-block;
+        vertical-align: middle;
+        font-family: 'NotoSansKR-Bold';
+      }
+  
+    }
+  
+    .fromName {
+      // outline: 1px solid red;
+
+      &__label {
+        display: inline-block;
+        margin-right: 10px;
+        margin-left: 35px;
+        margin-top: 35px;
+        vertical-align: middle;
+         img {
+           vertical-align: middle;
+         }
+      }
+      
+      &__name {
+        width: 150px;
+        margin-top: 25px;
+        font-size: 23px;
+        display: inline-block;
+        vertical-align: middle;
+        font-family: 'NotoSansKR-Bold';
+      }
+    }
+
+      
+  }
+
+  .cardReply {
+    padding-top: 48px;
+    padding-bottom: 25px;
+    margin-bottom: 50px;
+    background: #f4e8b8;
+    &__title {
+      text-align: center;
+      font-size: 26px;
+      font-family: 'NotoSansKR-Bold';
+
+      &::after, &::before {
+        content: '';
+        vertical-align: bottom;
+        display: inline-block;
+        width: 36px;
+        height: 21px;  
+        @include bg($loc-pop + 'deco-heart.png')
+      }
+    }
+
+    &__sender {
+      font-size: 26px;
+      color: #e95c6d;
+      vertical-align: bottom;
+    }
+
+    &__message {
+      background: #dbcd92;
+      margin: 27px auto 25px;
+      @include size(460px, 120px);
+  
+      .messageArea {
+        resize: none;
+        line-height: 45px;
+        padding-top: 10px;
+        overflow-y: hidden;
+        @include size(100%);
+      }
+    }
+
+    .card__messageWrap {
+      padding: 40px 0 22px 53px; 
+    }
+
+    .card__message {
+      width: 460px;
+      font-size: 22px;
+      font-family: 'NotoSansKR', sans-serif;
+      color: #222;
+      
+    }
+
+  }
+
+  .underlined {
+    padding-left: 17px;
+    line-height: 46px;
+    @include bg($loc-pop + 'underline-dotted.png', $repeat: repeat, $pos: left bottom)
+  }
+
+  input[type='text'],
+  input[type='tel'],
+  input[type='number'],
+  textarea,
+  select {
+    @extend %inputText;
+    width: 100%;
+
+    &::placeholder {
+      color: #938161;
+    }
+  }
+
+   &__btnWrap {
+    text-align: center;
+  }
+
+  &__btnText {
+    padding: 20px 0;
+  }
+
+  .btnIr {
+    @include bg($loc-pop + 'btnIr.png');
+    @include size(420px, 95px);
+    margin-bottom: 30px;
+    border-radius: 46px;
+    
+    &--inputComplete {
+      background-position: 0 -380px;
+    }
+
+    &--sendCard {
+      background-position: 0 -570px;
+      box-shadow: 10px 15px 40px #c49f4a;
+      &.on {
+        background-position: 0 -475px;
+      }
+    }
+
+    &--complete {
+      background-position: 0 -760px;
+      box-shadow: 10px 15px 40px #c49f4a;
+      &.on {
+        background-position: 0 -665px;
+      }
+    }
+
+  }
+  
+}
+

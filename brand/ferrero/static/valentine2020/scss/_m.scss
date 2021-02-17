@@ -1,0 +1,222 @@
+$type : 'm';
+
+body {
+  background: #eac775;
+}
+
+[v-cloak] {
+  display: none;
+}
+
+// layout
+// ==============================================
+.wrap {
+  @include relative;
+  @include box-center;
+  width: 640px;
+  
+
+  .inner {
+    position: relative;
+  }
+
+  h1 {
+    position: absolute;
+    left: 264px;
+    top: 176px;
+  }
+}
+
+
+
+// nav
+// ==============================================
+.nav {
+  $navBackColor: #deb45b;  
+  position: fixed;
+  right: 0;
+  top: 0;
+  width: 100%;
+  background-color: $navBackColor;
+  z-index: 1;
+
+  &__list {
+    box-shadow: 0px 21px 60px 10px #b3995a;
+  }
+  
+  &:after {
+    content: '';
+    position: absolute;
+    margin-top: -1px;
+    width: 100%;
+    height: 45px;
+    @include bg($loc-m + 'deco-nav.png');
+  }
+
+  &__item {
+    @include size(230px, 91px);
+    @include bg($loc-m + 'text-nav.png');
+    // @include debug;
+    display: inline-block;
+
+    &:nth-child(1) {
+      background-position: left top;
+    }
+
+    &:nth-child(2) {
+      background-position: center top;
+      width: 180px;
+    }
+
+    &:nth-child(3) {
+      background-position: right top;
+    }
+
+    &.on {
+      background-position-y: bottom;
+    }
+
+    a {
+      display: inline-block;
+      width: 100%;
+      height: 100px;
+    }
+  }
+}
+
+// kv
+// ===================================================================
+.kv {
+  height: 1455px;
+  @include bg($loc-m + 'bg_01.jpg');
+
+  &__mv {
+    position: absolute;
+    top: 577px;
+    right: 54px;
+    width: 533px;
+    height: 300px;
+  }
+
+}
+
+// card
+// ===================================================================
+.card {
+  height: 1362px;
+  @include bg($loc-m + 'bg_02.jpg');
+  margin-top: -1px;
+
+}
+
+// gift
+// ===================================================================
+.gift {
+  height: 1948px;
+  @include bg($loc-m + 'bg_03.jpg');
+  margin-top: -1px;
+}
+
+// shop
+// ===================================================================
+.shop {
+  height: 1275px;
+  @include bg($loc-m + 'bg_04.jpg');
+  margin-top: -1px;
+
+  &__btns {
+    position: absolute;
+    width: 100%;
+    top: 745px;
+    
+    > a {
+      position: relative;
+      margin: 0 auto;
+      display: block;
+      width: 416px;
+      height: 89px;
+      margin-bottom: 27px;
+      border-radius: 46px;
+    }
+
+    &:after {
+      content:'';
+      position: absolute;
+      display: block;
+      width: 204px;
+      height: 183px;
+      top:  333px;
+      left: 405px;
+      @include bg($loc-m + 'label-cu.png');
+    }
+  }
+}
+
+// notice
+// ===================================================================
+.notice {
+  height: 141px;
+  @include bg($loc-m + 'bg_05.jpg');
+  margin-top: -1px;
+}
+
+
+// button
+// ===================================================================
+.btn {
+  position: absolute;
+  @include bg($loc-m + 'btnIr.png');
+  box-shadow: 0px 25px 50px #bea86c;
+
+  &--videoPlay {
+    width: 533px;
+    height: 300px;
+    @include bg($loc-m + 'cover-video.jpg');
+    box-shadow: none;
+  }
+
+  &--joinLotteryEvent {
+    width: 416px;
+    height: 98px;
+    border-radius: 52px;
+    top: 1255px;
+    left: 113px;
+    box-shadow: 0px 25px 50px #806228;
+    background-position: 0 -450px;
+
+  }
+
+  &--eventNotice {
+    width: 233px;
+    height: 71px;
+    background-position: 0 -548px;
+    box-shadow: none;
+    transform: translate(48px, 39px);
+  }
+
+  &--joinCardEvent {
+    width: 416px;
+    height: 98px;
+    border-radius: 52px;
+    top: 1170px;
+    left: 113px;
+    box-shadow: 0px 25px 50px #806228;
+    background-position: 0 -352px;
+  }
+
+  &--emart {
+    background-position: 0 0px;
+  }
+
+  &--lotte {
+    background-position: 0 -89px;
+  }
+
+  &--naver {
+    background-position: 0 -176px;
+  }
+
+  &--cu {
+    background-position: 0 -263px;
+  }
+}

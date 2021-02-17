@@ -1,0 +1,71 @@
+@font-face {
+  font-family: "NotoSansKR";
+  font-style: normal;
+  src: url(/vendor/fonts/NotoSansKR-Regular.otf),
+}
+
+@font-face {
+  font-family: "NotoSerifKR";
+  font-style: normal;
+  font-weight: 500;
+  src: url(/vendor/fonts/noto-serif-kr-v6-korean_latin-regular.eot);
+  /* IE9 Compat Modes */
+  src: url(/vendor/fonts/noto-serif-kr-v6-korean_latin-regular.eot?#iefix) format('embedded-opentype'),
+    /* IE6-IE8 */
+    url(/vendor/fonts/noto-serif-kr-v6-korean_latin-regular.woff2) format('woff2'),
+    /* Super Modern Browsers */
+    url(/vendor/fonts/noto-serif-kr-v6-korean_latin-regular.woff) format('woff'),
+    /* Modern Browsers */
+    url(/vendor/fonts/noto-serif-kr-v6-korean_latin-regular.ttf) format('truetype'),
+    /* Safari, Android, iOS */
+    url(/vendor/fonts/noto-serif-kr-v6-korean_latin-regular.svg#NotoSerifKR) format('svg');
+  /* Legacy iOS */
+}
+
+
+
+//반짝이효과
+.sparkley {
+  border: none;
+  padding: 16px 36px;
+  margin: 0 1em 1em;
+}
+
+.after {
+  position: absolute;
+  top: 0;
+  left: 0;
+  -webkit-transition: all 3s linear;
+  -moz-transition: all 3s linear;
+  -o-transition: all 3s linear;
+  transition: all 3s linear;
+  opacity: 0;
+}
+
+.sparkle-canvas {
+  display: none;
+}
+
+.sparkle {
+  position: relative;
+  display: inline-block;
+
+  &.on {
+    .atter {
+      opacity: 1;
+    }
+  }
+}
+
+li.on .after {
+  opacity: 1;
+}
+
+.canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  opacity: 0;
+  background-color: #542d10;
+}

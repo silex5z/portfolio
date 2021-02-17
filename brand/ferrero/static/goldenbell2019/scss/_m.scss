@@ -1,0 +1,211 @@
+$type : 'm';
+
+[v-cloak] {
+  display: none;
+}
+
+// layout
+// ==============================================
+.wrap {
+  @include relative;
+  @include box-center;
+  width: 640px;
+  overflow: hidden;
+
+  .inner {
+    position: relative;
+  }
+
+  h1 {
+    position: absolute;
+    left: 264px;
+    top: 146px;
+  }
+}
+
+
+
+// nav
+// ==============================================
+.nav {
+  position: fixed;
+  right: 0;
+  top: 0;
+  width: 100%;
+  background-color: #663d0f;
+  z-index: 1;
+
+  &__item {
+
+
+    @for $i from 1 to 5 {
+      &:nth-child(#{$i}) {
+        display: inline-block;
+        width: 160px;
+        height: 110px;
+        @include bg($loc-m + 'nav#{$i}.jpg');
+        background-position-y: top;
+      }
+    }
+
+    &.on {
+      background-position-y: bottom;
+    }
+
+    a {
+      display: inline-block;
+      width: 100%;
+      height: 100px;
+    }
+  }
+}
+
+// kv
+// ===================================================================
+.kv {
+  height: 1385px;
+  @include bg($loc-m + 'bg-ev1.jpg');
+
+  &__mv {
+    position: absolute;
+    top: 550px;
+    right: 50px;
+    width: 542px;
+    height: 305px;
+  }
+
+  .btn__eventNotice {
+    top: 1137px;
+    left: 227px;
+  }
+}
+
+// quiz
+// ===================================================================
+.quiz {
+  height: 1140px;
+  @include bg($loc-m + 'bg-ev2.jpg');
+  margin-top: -1px;
+
+  &__sparkley {
+    position: relative;
+    top: 577px;
+    left: 0;
+    font-size: 0;
+  }
+
+  .sparkle {
+    font-size: 0;
+
+    img {
+      width: 100%;
+    }
+
+    &:nth-child(1) {
+      left: 40px;
+    }
+
+    &:nth-child(2) {
+      top: 45px;
+      left: 17px;
+    }
+
+    &:nth-child(3) {
+      top: 45px;
+      right: -17px;
+    }
+
+    &:nth-child(4) {
+      top: 92px;
+      left: 54px;
+    }
+  }
+
+  .btn__eventNotice {
+    left: 227px;
+    top: 490px;
+  }
+
+}
+
+// gift
+// ===================================================================
+.gift {
+  height: 1445px;
+  @include bg($loc-m + 'bg-ev3.jpg');
+  margin-top: -1px;
+}
+
+// shop
+// ===================================================================
+.shop {
+  height: 1007px;
+  @include bg($loc-m + 'bg-ev4.jpg');
+  margin-top: -1px;
+
+  &__btns {
+    position: absolute;
+    top: 694px;
+    left: 200px;
+
+    >a {
+      position: static;
+      display: inline-block;
+      width: 240px;
+      height: 60px;
+      margin-bottom: 20px;
+    }
+  }
+}
+
+
+// button
+// ===================================================================
+.btn {
+  position: absolute;
+  @include bg($loc-m + 'btns.png');
+  box-shadow: 0px 25px 50px #2f26168f;
+
+  &__momPlay {
+    width: 542px;
+    height: 305px;
+    @include bg($loc-m + 'mov-cover.jpg');
+    box-shadow: none;
+  }
+
+  &__movShare {
+    width: 320px;
+    height: 80px;
+    top: 1226px;
+    left: 158px;
+    background-position: 0 0;
+  }
+
+  &__eventNotice {
+    width: 186px;
+    height: 60px;
+    background-position: 0 -390px;
+    box-shadow: none;
+  }
+
+  &__join {
+    width: 320px;
+    height: 80px;
+    top: 1024px;
+    left: 158px;
+    background-position: 0 -90px;
+    box-shadow: 0px 25px 50px #985d20;
+  }
+
+  &__emart {
+    background-position: 0 -180px;
+  }
+
+  &__11market {
+    background-position: 0 -250px;
+  }
+
+  &__lotte {
+    background-position: 0 -320px;
+  }
+}

@@ -1,0 +1,1304 @@
+﻿/*! normalize.css v8.0.0 | MIT License | github.com/necolas/normalize.css */
+/* Document
+   ========================================================================== */
+/**
+ * 1. Correct the line height in all browsers.
+ * 2. Prevent adjustments of font size after orientation changes in iOS.
+ */
+html {
+  line-height: 1.15;
+  /* 1 */
+  -webkit-text-size-adjust: 100%;
+  /* 2 */ }
+
+/* Sections
+   ========================================================================== */
+/**
+ * Remove the margin in all browsers.
+ */
+body {
+  margin: 0; }
+
+/**
+ * Correct the font size and margin on `h1` elements within `section` and
+ * `article` contexts in Chrome, Firefox, and Safari.
+ */
+h1 {
+  font-size: 2em;
+  margin: 0.67em 0; }
+
+/* Grouping content
+   ========================================================================== */
+/**
+ * 1. Add the correct box sizing in Firefox.
+ * 2. Show the overflow in Edge and IE.
+ */
+hr {
+  box-sizing: content-box;
+  /* 1 */
+  height: 0;
+  /* 1 */
+  overflow: visible;
+  /* 2 */ }
+
+/**
+ * 1. Correct the inheritance and scaling of font size in all browsers.
+ * 2. Correct the odd `em` font sizing in all browsers.
+ */
+pre {
+  font-family: monospace, monospace;
+  /* 1 */
+  font-size: 1em;
+  /* 2 */ }
+
+/* Text-level semantics
+   ========================================================================== */
+/**
+ * Remove the gray background on active links in IE 10.
+ */
+a {
+  background-color: transparent; }
+
+/**
+ * 1. Remove the bottom border in Chrome 57-
+ * 2. Add the correct text decoration in Chrome, Edge, IE, Opera, and Safari.
+ */
+abbr[title] {
+  border-bottom: none;
+  /* 1 */
+  text-decoration: underline;
+  /* 2 */
+  text-decoration: underline dotted;
+  /* 2 */ }
+
+/**
+ * Add the correct font weight in Chrome, Edge, and Safari.
+ */
+b,
+strong {
+  font-weight: bolder; }
+
+/**
+ * 1. Correct the inheritance and scaling of font size in all browsers.
+ * 2. Correct the odd `em` font sizing in all browsers.
+ */
+code,
+kbd,
+samp {
+  font-family: monospace, monospace;
+  /* 1 */
+  font-size: 1em;
+  /* 2 */ }
+
+/**
+ * Add the correct font size in all browsers.
+ */
+small {
+  font-size: 80%; }
+
+/**
+ * Prevent `sub` and `sup` elements from affecting the line height in
+ * all browsers.
+ */
+sub,
+sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline; }
+
+sub {
+  bottom: -0.25em; }
+
+sup {
+  top: -0.5em; }
+
+/* Embedded content
+   ========================================================================== */
+/**
+ * Remove the border on images inside links in IE 10.
+ */
+img {
+  border-style: none; }
+
+/* Forms
+   ========================================================================== */
+/**
+ * 1. Change the font styles in all browsers.
+ * 2. Remove the margin in Firefox and Safari.
+ */
+button,
+input,
+optgroup,
+select,
+textarea {
+  font-family: inherit;
+  /* 1 */
+  font-size: 100%;
+  /* 1 */
+  line-height: 1.15;
+  /* 1 */
+  margin: 0;
+  /* 2 */ }
+
+/**
+ * Show the overflow in IE.
+ * 1. Show the overflow in Edge.
+ */
+button,
+input {
+  /* 1 */
+  overflow: visible; }
+
+/**
+ * Remove the inheritance of text transform in Edge, Firefox, and IE.
+ * 1. Remove the inheritance of text transform in Firefox.
+ */
+button,
+select {
+  /* 1 */
+  text-transform: none; }
+
+/**
+ * Correct the inability to style clickable types in iOS and Safari.
+ */
+button,
+[type="button"],
+[type="reset"],
+[type="submit"] {
+  -webkit-appearance: button; }
+
+/**
+ * Remove the inner border and padding in Firefox.
+ */
+button::-moz-focus-inner,
+[type="button"]::-moz-focus-inner,
+[type="reset"]::-moz-focus-inner,
+[type="submit"]::-moz-focus-inner {
+  border-style: none;
+  padding: 0; }
+
+/**
+ * Restore the focus styles unset by the previous rule.
+ */
+button:-moz-focusring,
+[type="button"]:-moz-focusring,
+[type="reset"]:-moz-focusring,
+[type="submit"]:-moz-focusring {
+  outline: 1px dotted ButtonText; }
+
+/**
+ * Correct the padding in Firefox.
+ */
+fieldset {
+  padding: 0.35em 0.75em 0.625em; }
+
+/**
+ * 1. Correct the text wrapping in Edge and IE.
+ * 2. Correct the color inheritance from `fieldset` elements in IE.
+ * 3. Remove the padding so developers are not caught out when they zero out
+ *    `fieldset` elements in all browsers.
+ */
+legend {
+  box-sizing: border-box;
+  /* 1 */
+  color: inherit;
+  /* 2 */
+  display: table;
+  /* 1 */
+  max-width: 100%;
+  /* 1 */
+  padding: 0;
+  /* 3 */
+  white-space: normal;
+  /* 1 */ }
+
+/**
+ * Add the correct vertical alignment in Chrome, Firefox, and Opera.
+ */
+progress {
+  vertical-align: baseline; }
+
+/**
+ * Remove the default vertical scrollbar in IE 10+.
+ */
+textarea {
+  overflow: auto; }
+
+/**
+ * 1. Add the correct box sizing in IE 10.
+ * 2. Remove the padding in IE 10.
+ */
+[type="checkbox"],
+[type="radio"] {
+  box-sizing: border-box;
+  /* 1 */
+  padding: 0;
+  /* 2 */ }
+
+/**
+ * Correct the cursor style of increment and decrement buttons in Chrome.
+ */
+[type="number"]::-webkit-inner-spin-button,
+[type="number"]::-webkit-outer-spin-button {
+  height: auto; }
+
+/**
+ * 1. Correct the odd appearance in Chrome and Safari.
+ * 2. Correct the outline style in Safari.
+ */
+[type="search"] {
+  -webkit-appearance: textfield;
+  /* 1 */
+  outline-offset: -2px;
+  /* 2 */ }
+
+/**
+ * Remove the inner padding in Chrome and Safari on macOS.
+ */
+[type="search"]::-webkit-search-decoration {
+  -webkit-appearance: none; }
+
+/**
+ * 1. Correct the inability to style clickable types in iOS and Safari.
+ * 2. Change font properties to `inherit` in Safari.
+ */
+::-webkit-file-upload-button {
+  -webkit-appearance: button;
+  /* 1 */
+  font: inherit;
+  /* 2 */ }
+
+/* Interactive
+   ========================================================================== */
+/*
+ * Add the correct display in Edge, IE 10+, and Firefox.
+ */
+details {
+  display: block; }
+
+/*
+ * Add the correct display in all browsers.
+ */
+summary {
+  display: list-item; }
+
+/* Misc
+   ========================================================================== */
+/**
+ * Add the correct display in IE 10+.
+ */
+template {
+  display: none; }
+
+/**
+ * Add the correct display in IE 10.
+ */
+[hidden] {
+  display: none; }
+
+.a11y-hidden {
+  position: absolute;
+  top: auto;
+  left: -9999em;
+  overflow: hidden;
+  width: 1px;
+  height: 1px;
+  clip: rect(0 0 0 0); }
+
+/*@import 'prefix';*/
+body, input, textarea, select {
+  font-family: 'Myriad Pro', 'Malgun Gothic', dotum, sans-serif;
+  line-height: 1.4; }
+
+/*!
+ * tag reset&base
+ * 2017.10.11
+ */
+* {
+  box-sizing: border-box; }
+
+body {
+  margin: 0;
+  padding: 0; }
+
+fieldset {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  vertical-align: top; }
+
+img {
+  border: 0;
+  line-height: 0;
+  font-size: 0;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -o-user-select: none;
+  user-select: none; }
+
+button {
+  border: none;
+  background: none;
+  cursor: pointer;
+  padding: 0;
+  margin: 0;
+  vertical-align: top;
+  background: transparent; }
+  button:focus, button:active {
+    padding: 0; }
+
+button img {
+  position: relative; }
+
+label {
+  display: inline-block; }
+
+span, em, strong, button, input, span, img {
+  vertical-align: top; }
+
+label img {
+  pointer-events: none; }
+
+h1, h2, h3 {
+  margin: 0; }
+
+figure, p, dt, dd {
+  margin: 0; }
+
+a, button {
+  outline: 0; }
+
+a {
+  text-decoration: none;
+  color: black; }
+  a:link {
+    text-decoration: none;
+    color: black; }
+  a:visited {
+    text-decoration: none;
+    color: black; }
+
+ul {
+  padding: 0;
+  margin: 0; }
+
+li {
+  list-style: none; }
+
+input, select {
+  border: none;
+  background: transparent; }
+
+input:focus {
+  outline: none; }
+
+select:focus {
+  outline: none; }
+
+/*a {
+      -webkit-tap-highlight-color: rgba(0,0,0,0);
+      -webkit-tap-highlight-color: transparent;    // For some Androids
+  }*/
+/*a:hover, a:active {
+      text-decoration: none;
+      outline        : 0;
+  }*/
+/*a:link, a:visited {
+      text-decoration: none;
+  }*/
+/* #dimmed {
+      position  : fixed;
+      top       : 0;
+      left      : 0;
+      width     : 100%;
+      height    : 100%;
+      background: url('../../Images/dim.png') repeat center top;
+
+  } */
+.a11y-hidden {
+  width: 1px;
+  height: 1px;
+  position: absolute;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0); }
+
+.test button[type="button"] {
+  width: 100px;
+  height: 60px;
+  border: 1px solid black; }
+
+.btns {
+  background: url("https://fr-ferrerorocher.s3.amazonaws.com/static/goldenBell2018/page-images/pop/btn-popup-ir.png") no-repeat center top; }
+
+.btn--close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 40px;
+  height: 40px;
+  background-position: left top; }
+
+.btn--rect {
+  width: 400px;
+  height: 76px; }
+  .btn--rect-tall {
+    width: 400px;
+    height: 85px; }
+  .btn--rect-middle {
+    width: 279px;
+    height: 76px; }
+  .btn--rect-small {
+    width: 114px;
+    height: 38px; }
+    .popup--userinfo-ev2 .btn--rect-small {
+      height: 28px; }
+  .btn--rect-big {
+    width: 310px;
+    height: 110px; }
+
+.btn--round {
+  width: 200px;
+  height: 74px;
+  border-radius: 20px; }
+
+.btn--share {
+  margin-top: 50px;
+  background-position: left -308px; }
+  .btn--share.isActive {
+    display: inline-block; }
+
+.btn--confirm {
+  margin-top: 160px;
+  background-position: left -50px; }
+  .popup--win .btn--confirm {
+    margin-top: 54px; }
+
+.btn--retry {
+  margin-top: 50px;
+  background-position: left -136px; }
+
+.btn--golottery {
+  margin-top: 50px;
+  background-position: left -222px; }
+
+.btn--detail {
+  background-position: right top;
+  margin-left: 125px; }
+  .popup--userinfo-ev2 .btn--detail {
+    background-position: right bottom; }
+
+.btn--next {
+  margin-top: 50px;
+  background-position: left -585px; }
+
+.btn--check-history {
+  margin-top: 10px;
+  background-position: left -490px; }
+
+.btn--download-img {
+  margin-top: 10px;
+  background-position: left -394px; }
+
+.btn--copy-hash {
+  margin-left: 30px;
+  background-position: right -583px; }
+
+.btn--circle {
+  border-radius: 50%; }
+  .btn--circle-small {
+    width: 49px;
+    height: 49px; }
+  .btn--circle-middle {
+    width: 82px;
+    height: 82px; }
+  .btn--circle-big {
+    width: 116px;
+    height: 116px; }
+  .btn--circle-large {
+    width: 125px;
+    height: 125px; }
+
+.btn-share {
+  background: url("https://fr-ferrerorocher.s3.amazonaws.com/static/goldenBell2018/page-images/pop/btn-share-ir.png") no-repeat left top; }
+  .btn-share:nth-child(2) {
+    margin: 0 30px; }
+    .popup--participation-history .btn-share:nth-child(2) {
+      margin: 0 8px; }
+  .btn-share--kakao {
+    background-position: left top; }
+    .btn-share--kakao.btn--circle-big {
+      background-position: left -126px; }
+    .btn-share--kakao.btn--circle-small {
+      background-position: left bottom; }
+  .btn-share--facebook {
+    background-position: center top; }
+    .btn-share--facebook.btn--circle-big {
+      background-position: -116px -126px; }
+    .btn-share--facebook.btn--circle-small {
+      background-position: -49px bottom; }
+  .btn-share--story {
+    background-position: right top; }
+    .btn-share--story.btn--circle-big {
+      background-position: -232px -126px; }
+    .btn-share--story.btn--circle-small {
+      background-position: -98px bottom; }
+
+.has-shadow {
+  box-shadow: 43px 47px 120px -1px rgba(55, 48, 35, 0.51);
+  -webkit-box-shadow: 43px 47px 120px -1px rgba(55, 48, 35, 0.51);
+  -moz-box-shadow: 43px 47px 120px -1px rgba(55, 48, 35, 0.51); }
+
+/*!
+ * button shining effect
+ * kjh
+ * https://codepen.io/wisterra/pen/qPaOam
+ */
+.shine {
+  position: relative;
+  display: inline-block;
+  font-size: 0;
+  overflow: hidden;
+  z-index: 0; }
+
+/* Shine */
+.shine:after {
+  content: '';
+  top: 0;
+  width: 80%;
+  height: 140px;
+  position: absolute;
+  z-index: 1;
+  animation: slide 2s infinite;
+  transform: rotate(25deg);
+  background: -moz-linear-gradient(left, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.8) 50%, rgba(128, 186, 232, 0) 99%, rgba(125, 185, 232, 0) 100%);
+  /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, right top, color-stop(0%, rgba(255, 255, 255, 0)), color-stop(50%, rgba(255, 255, 255, 0.8)), color-stop(99%, rgba(128, 186, 232, 0)), color-stop(100%, rgba(125, 185, 232, 0)));
+  /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(left, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.8) 50%, rgba(128, 186, 232, 0) 99%, rgba(125, 185, 232, 0) 100%);
+  /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(left, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.8) 50%, rgba(128, 186, 232, 0) 99%, rgba(125, 185, 232, 0) 100%);
+  /* Opera 11.10+ */
+  background: -ms-linear-gradient(left, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.8) 50%, rgba(128, 186, 232, 0) 99%, rgba(125, 185, 232, 0) 100%);
+  /* IE10+ */
+  background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.2) 50%, rgba(128, 186, 232, 0) 99%, rgba(125, 185, 232, 0) 100%);
+  /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', endColorstr='#007db9e8',GradientType=1 );
+  /* IE6-9 */ }
+
+@keyframes slide {
+  0% {
+    transform: translateX(-200%); }
+  100% {
+    transform: translateX(0%); } }
+
+.inner {
+  width: 1380px;
+  margin-left: auto;
+  margin-right: auto; }
+
+.ev-btn-mv {
+  background: url("https://fr-ferrerorocher.s3.amazonaws.com/static/goldenBell2018/page-images/pc/btn-mv-ir.png") no-repeat center top;
+  padding: 0;
+  border: 0;
+  cursor: pointer;
+  width: 112px;
+  height: 112px;
+  background-position: left bottom; }
+
+.ev-btn {
+  background: url("https://fr-ferrerorocher.s3.amazonaws.com/static/goldenBell2018/page-images/pc/btn-ir.png") no-repeat center top;
+  padding: 0;
+  border: 0;
+  cursor: pointer; }
+  .ev-btn--mv {
+    width: 104px;
+    height: 104px;
+    background-position: -89px top; }
+  .ev-btn--join-event {
+    width: 402px;
+    height: 85px;
+    margin-top: 0;
+    background-position: right top;
+    text-indent: -9999em;
+    transform: scale(0.9); }
+  .ev-btn--note--light {
+    width: 140px;
+    height: 21px;
+    background-position: left -178px;
+    margin-top: 400px;
+    margin-left: 290px; }
+  .ev-btn--note--dark {
+    width: 140px;
+    height: 21px;
+    background-position: left bottom;
+    margin-top: -96px;
+    margin-left: 505px; }
+
+#app {
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 2560px;
+  min-width: 1380px;
+  overflow: hidden; }
+  #app .logo {
+    position: absolute;
+    top: 25px;
+    left: 30px; }
+
+.event-share {
+  height: 1028px;
+  background: url("https://fr-ferrerorocher.s3.amazonaws.com/static/goldenBell2018/page-images/pc/bg-mv.jpg") no-repeat center top;
+  padding-top: 460px;
+  text-align: center; }
+
+.event-relay {
+  height: 1164px;
+  background: url("https://fr-ferrerorocher.s3.amazonaws.com/static/goldenBell2018/page-images/pc/bg-relay.jpg") no-repeat center top;
+  padding-top: 365px;
+  text-align: center; }
+  .event-relay .countdown {
+    padding-right: 220px;
+    font-size: 48px;
+    font-family: 'Roboto', sans-serif;
+    color: #3e2820;
+    text-align: right;
+    line-height: 1.4;
+    vertical-align: top; }
+
+.event-gift {
+  height: 791px;
+  background: url("https://fr-ferrerorocher.s3.amazonaws.com/static/goldenBell2018/page-images/pc/bg-gift.jpg") no-repeat center top;
+  text-align: center; }
+
+.relay-slider {
+  position: relative;
+  margin: 60px auto 15px;
+  max-width: 1380px; }
+  .relay-slider .slick-track {
+    display: flex; }
+  .relay-slider .slick-slide {
+    width: 399px;
+    height: 399px;
+    margin: 0 20px; }
+    .relay-slider .slick-slide.slick-center.relay-slider__item {
+      transform: scale(1);
+      box-shadow: none; }
+  .relay-slider__item {
+    display: inline-block;
+    transform: scale(0.777);
+    transition: all .2s;
+    box-shadow: 80px 86px 170px rgba(81, 61, 22, 0.5); }
+    .relay-slider__item img {
+      width: 100%; }
+  .relay-slider .slick-arrow {
+    width: 29px;
+    height: 53px;
+    background: url("https://fr-ferrerorocher.s3.amazonaws.com/static/goldenBell2018/page-images/pc/btn-ir.png") no-repeat center top;
+    position: absolute;
+    top: 170px;
+    z-index: 1;
+    text-indent: -9999em; }
+  .relay-slider .slick-prev {
+    left: 420px;
+    background-position: left -1px; }
+  .relay-slider .slick-next {
+    right: 423px;
+    background-position: -47px -1px; }
+
+.floating-nav {
+  position: absolute;
+  top: 300px;
+  right: 0;
+  width: 140px;
+  height: 548px;
+  z-index: 10;
+  padding: 150px 0 0 30px;
+  background: url("https://fr-ferrerorocher.s3.amazonaws.com/static/goldenBell2018/page-images/pc/bg-nav.png") no-repeat center top; }
+
+.nav-btn {
+  background: url("https://fr-ferrerorocher.s3.amazonaws.com/static/goldenBell2018/page-images/pc/nav-btn.png") no-repeat center top;
+  margin-bottom: 8px; }
+  .nav-btn--rect {
+    display: block;
+    width: 90px;
+    height: 31px;
+    cursor: pointer; }
+  .nav-btn--ev1 {
+    background-position: right -5px; }
+    .nav-btn--ev1:hover, .nav-btn--ev1.isActive {
+      background-position: right -31px; }
+  .nav-btn--ev2 {
+    background-position: right -67px;
+    margin-bottom: 12px; }
+    .nav-btn--ev2:hover, .nav-btn--ev2.isActive {
+      background-position: right -93px; }
+  .nav-btn--gift {
+    background-position: -1px -129px; }
+    .nav-btn--gift:hover, .nav-btn--gift.isActive {
+      background-position: right -160px; }
+  .nav-btn--gift-link {
+    background-position: right -191px;
+    position: relative; }
+    .nav-btn--gift-link:hover, .nav-btn--gift-link:active {
+      background-position: right -222px; }
+
+.popup {
+  display: none;
+  position: absolute;
+  /*margin-top: 100px;*/
+  top: 0;
+  /*background    : white;*/
+  text-align: center;
+  z-index: 100;
+  left: 50%;
+  /*margin-left: -360px;*/
+  /*@include debug();*/
+  /* background     : url(../images/pop/popup-bg.png)no-repeat left top; */ }
+  .popup.isActive {
+    display: block; }
+  .popup--ev1 {
+    width: 720px;
+    margin-left: -360px; }
+  .popup--ev2 {
+    width: 1480px;
+    margin-left: -740px;
+    top: 1100px; }
+
+.is-loading {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7) url("https://fr-ferrerorocher.s3.amazonaws.com/static/goldenBell2018/page-images/pc/loading.gif") no-repeat center center; }
+
+.popup label {
+  display: inline-block; }
+  .popup label[for] {
+    cursor: pointer; }
+
+.dimmed {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 99; }
+  .dimmed.isVisible {
+    display: block; }
+
+.check-box {
+  position: relative;
+  margin: 0 auto 10px;
+  text-align: left;
+  padding: 0; }
+  .check-box__visual {
+    margin-right: 12px;
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    background: url("https://fr-ferrerorocher.s3.amazonaws.com/static/goldenBell2018/page-images/pop/checkbox-on-off.png") no-repeat left top; }
+    .popup--userinfo-ev2 .check-box__visual {
+      width: 28px;
+      height: 28px;
+      background-size: cover; }
+  .check-box input[type="checkbox"], .check-box input[type="radio"] {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    opacity: .01; }
+  .check-box input[type="checkbox"]:checked ~ span,
+  .check-box input[type="radio"]:checked ~ span {
+    background-position: left bottom; }
+
+.form-wrap {
+  width: 560px;
+  margin: 17px auto 0; }
+  .form-wrap .rows:nth-child(2) {
+    margin-bottom: 22px; }
+  .form-wrap .rows:nth-child(3) {
+    margin-bottom: 10px; }
+  .popup--ev2 .form-wrap {
+    width: 495px;
+    margin-top: -8px;
+    margin-bottom: 90px; }
+
+form {
+  text-align: center;
+  padding: 0;
+  font-size: 0;
+  font-family: NanumG, sans-serif; }
+  form dl {
+    margin: 0 auto 34px;
+    width: 100%;
+    height: 50px;
+    text-align: left; }
+    form dl:nth-last-child(1) {
+      margin-bottom: 30px; }
+    .popup--ev2 form dl {
+      margin: 0 auto 24px; }
+      .popup--ev2 form dl:nth-last-child(1) {
+        margin-bottom: 32px; }
+    form dl.underlined {
+      border-bottom: 2px solid #c4a476; }
+  form dt, form dd {
+    display: inline-block;
+    vertical-align: middle; }
+  form dt {
+    width: 160px; }
+  form dd {
+    margin: 0;
+    width: 300px; }
+  form .label-name {
+    width: 63px;
+    height: 23px;
+    margin-bottom: 0; }
+    form .label-name[for="name"] {
+      background: url("https://fr-ferrerorocher.s3.amazonaws.com/static/goldenBell2018/page-images/pop/label-popup.png") no-repeat left top; }
+    form .label-name[for="tel"] {
+      background: url("https://fr-ferrerorocher.s3.amazonaws.com/static/goldenBell2018/page-images/pop/label-popup.png") no-repeat left -82px; }
+    form .label-name[for="age"] {
+      background: url("https://fr-ferrerorocher.s3.amazonaws.com/static/goldenBell2018/page-images/pop/label-popup.png") no-repeat left -164px; }
+    form .label-name[for="gender"] {
+      background: url("https://fr-ferrerorocher.s3.amazonaws.com/static/goldenBell2018/page-images/pop/label-popup.png") no-repeat left bottom; }
+    form .label-name[for="name-ev2"] {
+      background: url("https://fr-ferrerorocher.s3.amazonaws.com/static/goldenBell2018/page-images/pop/label-popup2.png") no-repeat left top; }
+    form .label-name[for="tel-ev2"] {
+      background: url("https://fr-ferrerorocher.s3.amazonaws.com/static/goldenBell2018/page-images/pop/label-popup2.png") no-repeat left center;
+      width: 130px; }
+    form .label-name[for="insta"] {
+      background: url("https://fr-ferrerorocher.s3.amazonaws.com/static/goldenBell2018/page-images/pop/label-popup2.png") no-repeat left bottom;
+      width: 130px; }
+  form [for="man"] {
+    margin-right: 30px; }
+  form fieldset {
+    margin: 0;
+    border: none; }
+  form input[type] {
+    display: inline-block;
+    box-sizing: border-box;
+    max-width: 430px;
+    height: 50px;
+    font-size: 23px;
+    border: none;
+    padding: 0;
+    background: transparent; }
+    form input[type]:focus {
+      outline: none; }
+  form .input {
+    display: inline-block;
+    height: 37px;
+    width: 100%;
+    color: #916238;
+    font-size: 16pt; }
+  form .input::-webkit-input-placeholder {
+    color: #916238; }
+  form .input::placeholder {
+    color: #916238; }
+  form .input:-ms-input-placeholder {
+    /* Internet Explorer 10-11 */
+    color: #916238; }
+  form .input::-ms-input-placeholder {
+    /* Microsoft Edge */
+    color: #916238; }
+
+[class^="popup--"] {
+  padding-top: 260px;
+  display: none; }
+  [class^="popup--"].isActive {
+    display: block; }
+  .popup--ev2 [class^="popup--"] {
+    padding-top: 237px; }
+
+.popup--note {
+  /*display: none;*/
+  height: 1630px;
+  background: url("https://fr-ferrerorocher.s3.amazonaws.com/static/goldenBell2018/page-images/pop/bg-popup-note.jpg") no-repeat center top; }
+
+.popup--fail {
+  /*display: none;*/
+  height: 550px;
+  background: url("https://fr-ferrerorocher.s3.amazonaws.com/static/goldenBell2018/page-images/pop/bg-popup-fail.jpg") no-repeat center top; }
+
+.popup--win {
+  /*display: none;*/
+  height: 875px;
+  background: url("https://fr-ferrerorocher.s3.amazonaws.com/static/goldenBell2018/page-images/pop/bg-popup-win.jpg") no-repeat center top; }
+
+.popup--privacy {
+  /*display: none;*/
+  height: 1196px;
+  background: url("https://fr-ferrerorocher.s3.amazonaws.com/static/goldenBell2018/page-images/pop/bg-popup-privacy.jpg") no-repeat center top; }
+
+.popup--share {
+  /*display: none;*/
+  height: 696px;
+  background: url("https://fr-ferrerorocher.s3.amazonaws.com/static/goldenBell2018/page-images/pop/bg-popup-share.jpg") no-repeat center top; }
+
+.popup--searchzip {
+  /*display: none;*/
+  height: 875px;
+  background: url("https://fr-ferrerorocher.s3.amazonaws.com/static/goldenBell2018/page-images/pop/bg-popup-searchzip.jpg") no-repeat center top; }
+
+.popup--userinfo {
+  /*display: none;*/
+  height: 1188px;
+  background: url("https://fr-ferrerorocher.s3.amazonaws.com/static/goldenBell2018/page-images/pop/bg-popup-userinfo.jpg") no-repeat center top; }
+
+.popup--video {
+  /*display: none;*/
+  height: 1011px;
+  background: url("https://fr-ferrerorocher.s3.amazonaws.com/static/goldenBell2018/page-images/pop/bg-popup-video.jpg") no-repeat center top; }
+
+.popup--win {
+  padding-top: 0; }
+
+.popup--winner {
+  padding-top: 310px;
+  height: 1333px;
+  background: url("https://fr-ferrerorocher.s3.amazonaws.com/static/goldenBell2018/page-images/pop/bg-popup-winner.jpg") no-repeat center top; }
+
+.winner {
+  width: 640px;
+  margin: 0 auto;
+  text-align: left; }
+
+.winner__list {
+  margin: 11px 0 38px;
+  padding: 25px 20px;
+  overflow: hidden;
+  background-color: white;
+  color: #724d2f; }
+  .winner__list-wrap {
+    overflow: hidden; }
+  .winner__list-item {
+    display: inline-block;
+    width: 25%;
+    text-align: center;
+    font-size: 21px; }
+  .winner__list--photo {
+    height: 110px; }
+  .winner__list--pen {
+    height: 144px; }
+  .winner__list--chocolate {
+    width: 658px;
+    height: 216px;
+    overflow-y: scroll; }
+
+.popup .video {
+  margin-top: 100px; }
+
+.popup--userinfo-ev2 {
+  background: url("https://fr-ferrerorocher.s3.amazonaws.com/static/goldenBell2018/page-images/pop/bg-popup2-userinfo-ev2.jpg") no-repeat center top;
+  height: 900px; }
+
+.popup--relay-message-select {
+  background: url("https://fr-ferrerorocher.s3.amazonaws.com/static/goldenBell2018/page-images/pop/bg-popup2-message-select.jpg") no-repeat center top;
+  height: 900px;
+  position: relative; }
+
+.popup--relay-message-result {
+  background: url("https://fr-ferrerorocher.s3.amazonaws.com/static/goldenBell2018/page-images/pop/bg-popup2-message-result.jpg") no-repeat center top;
+  height: 900px; }
+
+.popup--ev2 .popup--participation-history {
+  background: url("https://fr-ferrerorocher.s3.amazonaws.com/static/goldenBell2018/page-images/pop/bg-calendar.jpg") no-repeat center top;
+  height: 900px;
+  padding: 0; }
+  .popup--ev2 .popup--participation-history .share-btn-wrap {
+    float: left;
+    margin-left: 205px;
+    margin-top: 20px; }
+
+.relay-wrap {
+  padding: 0 290px;
+  text-align: left; }
+
+.relay-canvas {
+  position: relative;
+  display: inline-block;
+  margin-right: 67px;
+  width: 405px;
+  height: 405px;
+  color: white;
+  text-align: center;
+  /* .rows {
+    &:nth-child(1){
+        margin-top: 40px;
+    }
+    &:nth-child(2){
+        margin-top: 72px;
+    }
+  } */ }
+  .relay-canvas > img {
+    width: 100%; }
+  .relay-canvas.colored {
+    color: #6f461e; }
+    .relay-canvas.colored .goal--contents {
+      border-bottom: 2px solid #6f461e; }
+    .relay-canvas.colored .goal--title {
+      border-bottom: 2px solid #6f461e; }
+  .relay-canvas .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%; }
+    .relay-canvas .overlay > span {
+      display: block; }
+  .relay-canvas .time {
+    font-family: 'NotoSansKR', sans-serif;
+    font-size: 50px;
+    margin-top: 40px;
+    font-weight: 300; }
+  .relay-canvas span.goal--title {
+    font-family: 'NotoSansKR', sans-serif;
+    font-size: 46px;
+    margin-top: 72px;
+    padding-bottom: 55px;
+    border-bottom: 2px solid white;
+    display: inline-block; }
+    .relay-canvas span.goal--title--small {
+      font-family: 'NotoSansKR', sans-serif;
+      font-size: 26px;
+      font-weight: 300;
+      margin-top: 50px; }
+  .relay-canvas span.goal--contents {
+    font-family: 'NotoSansKR', sans-serif;
+    font-size: 38px;
+    font-weight: 400;
+    padding-bottom: 42px;
+    border-bottom: 2px solid white;
+    display: inline-block; }
+  .relay-canvas .message {
+    font-family: 'NotoSansKR', sans-serif;
+    font-size: 22px;
+    margin-top: 25px;
+    letter-spacing: -1.4pt;
+    font-weight: 300; }
+    .relay-canvas .message-name.message {
+      display: inline-block; }
+    .relay-canvas .message-msg.message {
+      display: inline-block; }
+    .relay-canvas .message-deco {
+      margin-top: 20px; }
+
+.hidden.relay-canvas {
+  position: absolute;
+  z-index: -1000;
+  display: inline-block;
+  top: 0;
+  left: 0;
+  width: 640px;
+  height: 640px;
+  color: white;
+  text-align: center;
+  /* .rows {
+    &:nth-child(1){
+        margin-top: 40px;
+    }
+    &:nth-child(2){
+        margin-top: 72px;
+    }
+  } */ }
+  .hidden.relay-canvas.colored {
+    color: #6f461e; }
+    .hidden.relay-canvas.colored .goal--contents {
+      border-bottom: 2px solid #6f461e; }
+  .hidden.relay-canvas .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%; }
+    .hidden.relay-canvas .overlay > span {
+      display: block; }
+  .hidden.relay-canvas .time {
+    font-family: 'NotoSansKR', sans-serif;
+    font-size: 80px;
+    margin-top: 60px;
+    font-weight: 300; }
+  .hidden.relay-canvas span.goal--title {
+    font-family: 'NotoSansKR', sans-serif;
+    font-size: 66px;
+    margin-top: 72px;
+    padding-bottom: 70px;
+    border-bottom: 2px solid white;
+    display: inline-block;
+    letter-spacing: -2px; }
+    .hidden.relay-canvas span.goal--title--small {
+      font-family: 'NotoSansKR', sans-serif;
+      font-size: 40px;
+      font-weight: 400;
+      margin-top: 80px; }
+  .hidden.relay-canvas span.goal--contents {
+    font-family: 'NotoSansKR', sans-serif;
+    font-size: 65px;
+    font-weight: 400;
+    padding-bottom: 70px;
+    border-bottom: 2px solid white;
+    display: inline-block;
+    letter-spacing: -2px; }
+  .hidden.relay-canvas .message {
+    font-family: 'NotoSansKR', sans-serif;
+    font-size: 36px;
+    margin-top: 42px;
+    letter-spacing: -2px;
+    font-weight: 300; }
+    .hidden.relay-canvas .message-name.message {
+      display: inline-block; }
+    .hidden.relay-canvas .message-msg.message {
+      display: inline-block;
+      margin-left: 2px; }
+    .hidden.relay-canvas .message-deco {
+      margin-top: 20px; }
+
+.relay-form {
+  position: relative;
+  display: inline-block;
+  width: 421px;
+  height: 405px;
+  vertical-align: top; }
+  .relay-form dl {
+    margin: 0; }
+  .relay-form dt {
+    margin-bottom: 15px; }
+  .relay-form dd.underlined:nth-of-type(3), .relay-form dd.underlined:nth-of-type(4) {
+    vertical-align: top;
+    display: inline-block; }
+  .relay-form dd:nth-of-type(1) {
+    margin-bottom: 52px; }
+  .relay-form dd:nth-of-type(2) {
+    margin: 25px 0 35px; }
+  .relay-form dd.underlined {
+    height: 37px;
+    border-bottom: 2px solid #a17f55; }
+  .relay-form dd.underlined:nth-of-type(3) {
+    width: 180px; }
+  .relay-form dd.underlined:nth-of-type(4) {
+    width: 230px; }
+  .relay-form dd.underlined:nth-last-child(1) {
+    display: none;
+    margin-top: 5px; }
+    .relay-form dd.underlined:nth-last-child(1).isActive {
+      display: block; }
+  .relay-form .input {
+    display: inline-block;
+    height: 37px;
+    width: 100%;
+    color: #916238;
+    font-size: 14pt;
+    letter-spacing: -2px; }
+  .relay-form .input:-webkit-input-placeholder {
+    color: #916238; }
+  .relay-form .input::placeholder {
+    color: #916238; }
+  .relay-form .input:-ms-input-placeholder {
+    /* Internet Explorer 10-11 */
+    color: #916238; }
+  .relay-form .input::-ms-input-placeholder {
+    /* Microsoft Edge */
+    color: #916238; }
+  .relay-form .select-box input[type="radio"] {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    opacity: .01; }
+  .relay-form .select-box .type {
+    display: inline-block;
+    width: 75px;
+    height: 75px;
+    margin-right: 4px;
+    background: url("https://fr-ferrerorocher.s3.amazonaws.com/static/goldenBell2018/page-images/pop/thumbnail-type.png") no-repeat center top; }
+    .relay-form .select-box .type--a {
+      background-position: left top; }
+    .relay-form .select-box .type--b {
+      background-position: -86px top; }
+    .relay-form .select-box .type--c {
+      background-position: -172px top; }
+    .relay-form .select-box .type--d {
+      background-position: -258px top; }
+    .relay-form .select-box .type--e {
+      background-position: -344px top; }
+  .relay-form .select-box input[type="radio"]:checked + .type {
+    outline: 3px solid #c68732; }
+
+.relay-canvas-result {
+  position: relative;
+  display: inline-block;
+  margin-right: 67px;
+  width: 405px;
+  height: 405px; }
+
+.relay-result-btns {
+  position: relative;
+  display: inline-block;
+  width: 421px;
+  height: 406px;
+  vertical-align: top; }
+  .relay-result-btns .desc {
+    margin-bottom: 10px; }
+
+.calendar {
+  width: 777px;
+  margin-left: 603px;
+  padding-top: 183px; }
+  .calendar table {
+    width: 100%;
+    table-layout: fixed; }
+  .calendar td {
+    position: relative;
+    width: 111px;
+    height: 140px;
+    /*outline: 1px solid red;*/
+    background: url("https://fr-ferrerorocher.s3.amazonaws.com/static/goldenBell2018/page-images/pop/stamp-off.png") no-repeat 30px 35px; }
+  .calendar td.on:after {
+    content: '';
+    position: absolute;
+    width: 111px;
+    height: 140px;
+    top: 0;
+    left: 0;
+    background: url("https://fr-ferrerorocher.s3.amazonaws.com/static/goldenBell2018/page-images/pop/stamp-on.png") no-repeat 30px 35px; }
+  .calendar td.off {
+    visibility: hidden; }
+
+select {
+  width: 100%;
+  height: 50px;
+  background: transparent;
+  /*font-family: 'Myriad Pro';*/
+  font-size: 14pt;
+  /* padding-left: 15px; */
+  border: none;
+  background: url("https://fr-ferrerorocher.s3.amazonaws.com/static/goldenBell2018/page-images/pop/selectbox-arrow.png") no-repeat right center;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  -o-appearance: none;
+  appearance: none; }
+  select[name="Age"] {
+    width: 400px; }
+  .form-wrap .underlined select {
+    font-size: 23px; }
+
+select::-ms-expand {
+  display: none; }
+
+.input::-webkit-input-placeholder {
+  color: #916238; }
+
+.input::placeholder {
+  color: #916238; }
+
+.input:-ms-input-placeholder {
+  /* Internet Explorer 10-11 */
+  color: #916238; }
+
+.input::-ms-input-placeholder {
+  /* Microsoft Edge */
+  color: #916238; }

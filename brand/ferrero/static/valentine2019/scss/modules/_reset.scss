@@ -1,0 +1,63 @@
+// ==============================================
+// reset
+// ==============================================
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+@for $i from 1 through 2 {
+  h#{$i} {
+    margin: 0;
+  }
+}
+
+ul {
+  margin: {
+    top: 0;
+    bottom: 0;
+  }
+
+  padding-left: 0;
+  list-style: none;
+}
+
+p {
+  margin: 0;
+}
+
+dl {
+  margin: {
+    top: 0;
+    bottom: 0;
+  }
+}
+
+dd {
+  margin-left: 0;
+}
+
+button {
+  padding: 0;
+  border: 0;
+}
+
+button,
+span,
+a,
+img,
+strong,
+b {
+  vertical-align: top;
+}
+
+figure {
+  margin: 0;
+}
+
+fieldset {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}

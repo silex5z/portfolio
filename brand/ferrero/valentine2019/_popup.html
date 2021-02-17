@@ -1,0 +1,317 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Awards popup</title>
+</head>
+
+<body>
+  <!-- fragment -->
+  <div th:fragment="partial-popup">
+
+    <div v-bind:class="['dim', dim ? 'is-active' : '']"></div>
+
+    <!-- 로멘틱 이벤트 당첨 결과 -->
+    <div v-bind:style="popupTopStyle" v-bind:class="['popup popup--' + resultType, visiblePopupData.result ? 'is-active' : '']">
+      <div v-if="resultType === 'win'">
+        <h2 class="a11y-hidden">로멘틱 이벤트 당첨</h2>
+        <p class="a11y-hidden">축하합니다</p>
+        <em class="a11y-hidden">경품은 2월 11일 일괄 발송 될 예정입니다</em>
+        <button v-on:click="visibleSnsPopup('romantic')" class="btn-ok vtag-event" vtag-depth="5" id="valentine-2019-win-btn"
+          type="button">확인</button>
+      </div>
+      <div v-else>
+        <h2 class="a11y-hidden">로멘틱이벤트 꽝</h2>
+        <p class="a11y-hidden">아쉽지만 꽝</p>
+        <em class="a11y-hidden">SNS에 이벤트를 공유하고 다시 참여해보세요!</em>
+        <button v-on:click="visibleSnsPopup('romantic')" class="btn-again vtag-event" vtag-depth="6" type="button">다시도전</button>
+      </div>
+      <button v-on:click="onInvisiblePopup()" class="btn-close" type="button">닫기</button>
+    </div>
+    <!-- // 로멘틱 이벤트 당첨 결과 -->
+
+    <!-- sns -->
+    <div v-bind:style="popupTopStyle" v-bind:class="['popup popup--sns-' + typeOfUserInfo, visiblePopupData.sns ? 'is-active' : '']">
+      <h2 class="a11y-hidden">이벤트 sns 공유</h2>
+      <p class="a11y-hidden">SNS에 이벤트를 공유해주세요</p>
+
+      <ul class="sns">
+        <li class="sns__item">
+          <button class="sns__btn sns__talk" v-on:click="shareKakaotalk()" v-bind:class="typeOfUserInfo" type="button">카카오톡</button>
+        </li>
+        <li class="sns__item">
+          <button class="sns__btn sns__face" v-on:click="shareFacebook()" v-bind:class="typeOfUserInfo" type="button">face
+            book</button>
+        </li>
+        <li class="sns__item">
+          <button class="sns__btn" v-on:click="shareKakaostory()" v-bind:class="typeOfUserInfo" type="button">카카오 스토리</button>
+        </li>
+      </ul>
+      <button v-on:click="onInvisiblePopup()" class="btn-ok vtag-event" v-bind:vtag-depth="typeOfUserInfo == 'romantic' ? 7 : 10"
+        v-bind:class="typeOfUserInfo" type="button">닫기</button>
+      <button v-on:click="onInvisiblePopup()" class="btn-close" type="button">닫기</button>
+    </div>
+    <!-- // sns -->
+
+    <!-- 로멘틱 사용자 정보 -->
+    <div v-bind:style="popupTopStyle" v-bind:class="['popup popup--romantic', visiblePopupData.romantic ? 'is-active' : '']">
+      <h2 class="a11y-hidden">로멘틱 이벤트 개인정보 입력</h2>
+      <p class="a11y-hidden">개인 정보를 입력해 주세요</p>
+      <form>
+        <!-- 정보 -->
+        <fieldset class="romantic__field-info user-info">
+          <legend class="a11y-hidden">이름, 연락처, 연령대, 성별</legend>
+          <p class="row clear-fix">
+            <label class="lb lb--tit lb--name row__left" for="name">
+              <span class="a11y-hidden">이름</span>
+            </label>
+            <span class="row__right"><input v-model="romanticUserData.name" id="name1" type="text"></span>
+          </p>
+          <p class="row clear-fix">
+            <label class="lb lb--tit lb--phone row__left" for="mobile">
+              <span class="a11y-hidden">연락처</span>
+            </label>
+            <span class="row__right"><input v-model="romanticUserData.mobile" id="mobile1" type="tel" maxlength="11"></span>
+          </p>
+          <p class="row clear-fix">
+            <label class="lb lb--tit lb--age row__left" for="age"><span class="a11y-hidden">이름</span></label>
+            <span class="row__right">
+              <select v-model="romanticUserData.age" class="select select--user-info" id="age1">
+                <option value="">선택</option>
+                <option v-for="(age, idx) in selectDatas.ages" v-bind:value="age">{{ age }}</option>
+              </select>
+            </span>
+          </p>
+          <p class="row clear-fix">
+            <span class="lb lb--tit lb--gender row__left" for="gender"><span class="a11y-hidden">성별</span></span>
+            <span class="row__right clear-fix radio-wrap">
+              <span class="radio radio--float">
+                <input v-model="romanticUserData.gender" id="man1" type="radio" value="male">
+                <label class="check-radio radio__lb radio__lb--man" for="man1"><span class="a11y-hidden">남</span></label>
+              </span>
+              <span class="radio radio--float">
+                <input v-model="romanticUserData.gender" id="woman1" type="radio" value="female">
+                <label class="check-radio radio__lb radio__lb--woman" for="woman1"><span class="a11y-hidden">여</span></label>
+              </span>
+            </span>
+          </p>
+        </fieldset>
+        <!-- // 정보 -->
+        <!-- 로멘틱 설문 -->
+        <fieldset>
+          <legend class="a11y-hidden">설문 작성</legend>
+          <p><strong><img src="https://fr-ferrerorocher.s3.amazonaws.com/static/2019-valentine/popup/tit-question.png"
+                alt="페레로 로쉐가 더욱 로맨틱한 발렌타인 데이를 준비할 수 있도록 아래 내용에도 답해주세요"></strong></p>
+
+          <div class="survey">
+            <dl class="survey__inner">
+              <dt class="survey__tit"><label for="q1"><img src="https://fr-ferrerorocher.s3.amazonaws.com/static/2019-valentine/popup/txt-romantic-q1.png"
+                    alt="발렌타인 데이에 페레로 로쉐를 선물하고 싶은 사람을 선택해주세요"></label></dt>
+              <dd class="survey__answer">
+                <select v-model="romanticUserData.q1.num" v-on:change="visibleDirectInput('q1')" class="select select--question"
+                  id="q1">
+                  <option value="">선택</option>
+                  <option v-for="(data, idx) in selectDatas.q1" v-bind:value="idx">{{data}}</option>
+                </select>
+                <p v-if="romanticUserData.q1.visibleDirectInput" class="survey__input">
+                  <input v-model="romanticUserData.q1.answer" type="text" maxlength="20" placeholder="직접 입력해주세요.">
+                </p>
+              </dd>
+              <dt class="survey__tit">
+                <label for="q2"><img src="https://fr-ferrerorocher.s3.amazonaws.com/static/2019-valentine/popup/txt-romantic-q2.png"
+                    alt="연인에게 발렌타인 데이에 초콜릿과 함께 가장 주고싶은/받고싶은 선물을 선택해주세요 "></label>
+              </dt>
+              <dd class="survey__answer">
+                <select v-model="romanticUserData.q2.num" v-on:change="visibleDirectInput('q2')" class="select select--question"
+                  id="q2">
+                  <option value="">선택</option>
+                  <option v-for="(data, idx) in selectDatas.q2" v-bind:value="idx">{{data}}</option>
+                </select>
+                <p v-if="romanticUserData.q2.visibleDirectInput" class="survey__input">
+                  <input v-model="romanticUserData.q2.answer" type="text" maxlength="20" placeholder="직접 입력해주세요.">
+                </p>
+              </dd>
+            </dl>
+          </div>
+
+        </fieldset>
+        <!-- // 로멘틱 설문 -->
+
+        <!-- 동의 -->
+        <ul class="agree">
+          <li class="agree__item">
+            <input v-model="romanticUserData.agree1" id="agree11" type="checkbox" name="agree1">
+            <label class="check-radio agree__lb agree__lb1" for="agree11"><span class="a11y-hidden">개인정보 수집 및 이용 동의</span></label>
+            <button v-on:click="visibleAgree(0)" class="btn-detail" type="button">자세히 보기</button>
+          </li>
+          <li class="agree__item">
+            <input v-model="romanticUserData.agree2" id="agree21" type="checkbox" name="agree2">
+            <label class="check-radio agree__lb agree__lb2" for="agree21"><span class="a11y-hidden">개인정보처리 위탁 동의</span></label>
+            <button v-on:click="visibleAgree(0)" class="btn-detail" type="button">자세히 보기</button>
+          </li>
+        </ul>
+        <!-- // 동의 -->
+        <em class="a11y-hidden">* 만 14세 미만인 이용자는 본 서비스 이용이 제한됩니다.</em>
+
+        <!-- 확인 -->
+        <button v-on:click="enterRomanticEvent" class="btn-romantic-ok vtag-event" vtag-depth="4" type="button">당첨결과 보기</button>
+        <!-- // 확인 -->
+      </form>
+      <button v-on:click="onInvisiblePopup()" class="btn-close" type="button">닫기</button>
+    </div>
+    <!-- // 로멘틱 사용자 정보 -->
+
+    <!-- 발렌타인데이 사용자 정보 -->
+    <div v-bind:style="popupTopStyle" v-bind:class="['popup popup--valentine', visiblePopupData.valentine ? 'is-active' : '']">
+      <h2 class="a11y-hidden">발렌타인 이벤트 개인정보</h2>
+      <p class="a11y-hidden">개인 정보를 입력해 주세요</p>
+      <form id="userForm">
+        <input v-model="valentineUserData.orientation" type="hidden" name="orientation">
+        <!-- 정보 -->
+        <fieldset class="valentine__field-info user-info">
+          <legend class="a11y-hidden">이름, 연락처, 연령대, 성별</legend>
+          <p class="row clear-fix">
+            <label class="lb lb--tit lb--name row__left" for="name">
+              <span class="a11y-hidden">이름</span>
+            </label>
+            <span class="row__right"><input v-model="valentineUserData.name" id="name" name="name" type="text"></span>
+          </p>
+          <p class="row clear-fix">
+            <label class="lb lb--tit lb--phone row__left" for="mobile">
+              <span class="a11y-hidden">연락처</span>
+            </label>
+            <span class="row__right"><input v-model="valentineUserData.mobile" id="mobile" name="mobile" type="tel"
+                maxlength="11"></span>
+          </p>
+          <p class="row clear-fix">
+            <label class="lb lb--tit lb--age row__left" for="age"><span class="a11y-hidden">이름</span></label>
+            <span class="row__right">
+              <select v-model="valentineUserData.age" class="select select--user-info" name="age" id="age">
+                <option value="">선택</option>
+                <option v-for="(age, idx) in selectDatas.ages" v-bind:value="age">{{ age }}</option>
+              </select>
+            </span>
+          </p>
+          <p class="row clear-fix">
+            <span class="lb lb--tit lb--gender row__left" for="gender"><span class="a11y-hidden">성별</span></span>
+            <span class="row__right clear-fix radio-wrap">
+              <span class="radio radio--float">
+                <input v-model="valentineUserData.gender" id="man" type="radio" name="gender" value="male">
+                <label class="check-radio radio__lb radio__lb--man" for="man"><span class="a11y-hidden">남</span></label>
+              </span>
+              <span class="radio radio--float">
+                <input v-model="valentineUserData.gender" id="woman" type="radio" name="gender" value="female">
+                <label class="check-radio radio__lb radio__lb--woman" for="woman"><span class="a11y-hidden">여</span></label>
+              </span>
+            </span>
+          </p>
+        </fieldset>
+        <!-- // 정보 -->
+
+        <!-- 발렌타인 사진업로드 -->
+        <fieldset>
+          <legend class="a11y-hidden">사진 업로드</legend>
+          <p><img src="https://fr-ferrerorocher.s3.amazonaws.com/static/2019-valentine/popup/img-txt-valentine.png" alt="2월 14일 6시 30분까지 청담 씨네시티 방문이 가능합니다"></p>
+          <p class="clear-fix radio-wrap" style="margin: 22px 0 269px; text-align: left;">
+            <span class="row__right">
+              <span class="radio">
+                <input v-model="valentineUserData.isVisit" id="yes" type="radio" name="isVisit" value="true">
+                <label class="check-radio radio__lb radio__lb--yes" for="yes"><span class="a11y-hidden">예</span></label>
+              </span>
+              <span class="radio">
+                <input v-model="valentineUserData.isVisit" id="no" type="radio" name="isVisit" value="false">
+                <label class="check-radio radio__lb radio__lb--no" for="no"><span class="a11y-hidden">아니오</span></label>
+              </span>
+            </span>
+          </p>
+          <p class="image-upload">
+            <button class="btn-upload" type="button">파일 업로드</button>
+            <input v-on:change="onUploadImg" ref="file" type="file" name="imageFile">
+            <span v-if="userImg"><img class="prev-img" id="prev-img" v-bind:src="userImg"></span>
+          </p>
+        </fieldset>
+        <!-- // 발렌타인 사진업로드 -->
+
+        <!-- 동의 -->
+        <ul class="agree">
+          <li class="agree__item">
+            <input v-model="valentineUserData.agree1" id="agree1" type="checkbox" name="agree1">
+            <label class="check-radio agree__lb agree__lb1" for="agree1"><span class="a11y-hidden">개인정보 수집 및 이용 동의</span></label>
+            <button v-on:click="visibleAgree(1260)" class="btn-detail" type="button">자세히 보기</button>
+          </li>
+          <li class="agree__item">
+            <input v-model="valentineUserData.agree2" id="agree2" type="checkbox" name="agree2">
+            <label class="check-radio agree__lb agree__lb2" for="agree2"><span class="a11y-hidden">개인정보처리 위탁 동의</span></label>
+            <button v-on:click="visibleAgree(1260)" class="btn-detail" type="button">자세히 보기</button>
+          </li>
+        </ul>
+        <!-- // 동의 -->
+        <em class="a11y-hidden">* 만 14세 미만인 이용자는 본 서비스 이용이 제한됩니다.</em>
+        <!-- 확인 -->
+        <button class="btn-valentine-ok vtag-event" vtag-depth="9" v-on:click="enterValentineEvent" type="button">참여완료</button>
+        <!-- // 확인 -->
+      </form>
+      <button v-on:click="onInvisiblePopup()" class="btn-close" type="button">닫기</button>
+    </div>
+    <!-- // 사용자 정보 -->
+
+    <!-- 유의사항 -->
+    <div v-bind:style="popupTopStyle" v-bind:class="['popup', visiblePopupData.caution ? 'is-active' : '']">
+      <img src="https://fr-ferrerorocher.s3.amazonaws.com/static/2019-valentine/popup/img-caution.jpg" alt="">
+      <button v-on:click="onInvisiblePopup()" class="btn-close" type="button">닫기</button>
+    </div>
+    <!-- // 유의사항 -->
+
+    <!-- 개인정보 동의 자세히보기 -->
+    <div v-bind:style="popupTopStyle" v-bind:class="['popup', visiblePopupData.agree ? 'is-active' : '']">
+      <img src="https://fr-ferrerorocher.s3.amazonaws.com/static/2019-valentine/popup/img-agree.jpg" alt="">
+      <button v-on:click="visibleUserInfo(typeOfUserInfo)" class="btn-close" type="button">닫기</button>
+    </div>
+    <!-- // 개인정보 동의 자세히보기 -->
+
+    <div class="loading"><img src="https://fr-ferrerorocher.s3.amazonaws.com/static/2019-valentine/popup/loading.gif"
+        alt=""></div>
+
+    <!-- 당첨자 -->
+    <div v-bind:class="['popup prize-valentine', visiblePopupData.prize ? 'is-active' : '']">
+      <h2 class="a11y-hidden">발렌타인 데이 이벤트 당첨을 축하합니다.</h2>
+
+      <h3 class="a11y-hidden">로맨틱 골든 시네마 <em>(20명)</em></h3>
+      <ul class="prize-list">
+        <li v-for="(prize, idx) in valentinePrizeList.first" v-bind:key="idx">{{ prize }}</li>
+      </ul>
+
+      <h3 class="a11y-hidden">페레로 로쉐 96개입 <em>(10명)</em></h3>
+      <ul class="prize-list">
+        <li v-for="(prize, idx) in valentinePrizeList.sec" v-bind:key="idx">{{ prize }}</li>
+      </ul>
+
+      <h3 class="a11y-hidden">페레로 로쉐 5개입 <em>(50명)</em></h3>
+      <ul class="prize-list">
+        <li v-for="(prize, idx) in valentinePrizeList.third" v-bind:key="idx">{{ prize }}</li>
+      </ul>
+
+      <h3 class="a11y-hidden">참고사항</h3>
+      <ul class="a11y-hidden">
+        <li>
+          <b>ctrl+f</b> 로 <em>전화번호 뒷자리(4자리)</em>를 검색하시면 편리합니다
+        </li>
+        <li>
+          청담 CGV, 96개입 당첨자들에게는 <em>개별적으로 연락드릴 예정</em>입니다
+        </li>
+        <li>
+          5개입 기프티콘은 <em>2월 12일 일괄 발송 될 예정</em>입니다
+        </li>
+      </ul>
+      <button v-on:click="onInvisiblePopup()" class="btn-close" type="button">닫기</button>
+    </div>
+    <!-- // 당첨자 -->
+
+
+  </div>
+  <!-- // fragment -->
+
+</body>
+
+</html>

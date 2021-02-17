@@ -1,0 +1,11 @@
+.clear-fix::after {
+  display: table;
+  clear: both;
+  content: '';
+}
+
+.a11y-hidden {
+  @include absolute($top: auto, $left: -9999em);
+  @include size(1px);
+  overflow: hidden;
+}

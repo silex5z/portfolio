@@ -1,0 +1,55 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>valentine2018 popup</title>
+</head>
+
+<body>
+  <!-- fragment -->
+  <div th:fragment="partial-popup">
+	
+  <div class="dimmed"></div>
+  
+    <div class="popup popup--ev1 isActive">
+     	
+<div class="popup--winner isActive">
+  <h2 class="a11y-hidden">당첨자 발표</h2>
+  <p class="a11y-hidden">골든벨 릴레이 이벤트 당첨을 축하드립니다!</p>
+
+  <div class="winner">
+    <h3 class="winner__title"><img src="https://fr-ferrerorocher.s3.amazonaws.com/static/goldenBell2018/page-images/pop/text-winner-photo.png" alt="포토매틱 촬영권(5명)" /></h3>
+    <ul class="winner__list winner__list--photo">
+      <li v-for="item in ferreroPhotoList" class="winner__list-item">
+        {{ item }}
+      </li>
+    </ul>
+
+    <h3 class="winner__title"><img src="https://fr-ferrerorocher.s3.amazonaws.com/static/goldenBell2018/page-images/pop/text-winner-ferreropen.png" alt="페레로로쉐 골드 라미펜(10명)" /></h3>
+    <ul class="winner__list winner__list--pen">
+      <li v-for="item in ferreroPenList" class="winner__list-item">
+        {{ item }}
+      </li>
+    </ul>
+
+    <h3 class="winner__title"><img src="https://fr-ferrerorocher.s3.amazonaws.com/static/goldenBell2018/page-images/pop/text-winner-ferrerorocher.png" alt="페레로로쉐 5개입(500명)" /></h3>
+    <div class="winner__list-wrap">
+      <ul class="winner__list winner__list--chocolate">
+        <li v-for="item in ferreroChocolateList" class="winner__list-item">
+          {{ item }}
+        </li>
+      </ul>
+    </div>
+  </div>
+  <button type="button" class="btns btn--close" onClick="$('.popup--winner').hide(); $('.dimmed').hide()"><span class="a11y-hidden">닫기</span></button>
+</div>
+
+<div class="loading" :class="{ 'is-loading': isLoading }"></div>
+  </div>
+  </div>
+  	
+  <!-- // fragment -->
+</body>
+
+</html>

@@ -1,0 +1,482 @@
+<div th:fragment="partial-popup">
+  <!-- dimmed -->
+  <div class="dimmed" v-show="dimmed"></div>
+  <div class="dimmed loading" v-show="loading">
+    <img src="https://fr-ferrerorocher.s3.ap-northeast-2.amazonaws.com/static/loading.gif" alt="로딩중" />
+  </div>
+  <!-- 영상공유 즉당 : 개인정보 -->
+  <div class="pop lottery-user" v-show="currentPopup === 'lottery-user'">
+    <div class="pop__inner">
+      <div class="pop__header">
+        <h4>
+          <img
+            src="https://fr-ferrerorocher.s3.ap-northeast-2.amazonaws.com/static/2020-valentine/popup/title-lottery.png"
+            alt="영상 공유 이벤트" />
+        </h4>
+      </div>
+      <div class="pop__content">
+        <form action="" @submit.prevent>
+          <dl>
+            <div class="row">
+              <dt>이름</dt>
+              <dd class="input-name"><input type="text" v-model="lotteryUserData.name" maxlength="4" /></dd>
+            </div>
+
+            <div class="row">
+              <dt>연락처</dt>
+              <dd class="input-phone">
+                <input type="tel" v-model="lotteryUserData.mobile" placeholder="'-'기호를 제외하고 입력해 주세요." maxlength="11" />
+              </dd>
+            </div>
+          </dl>
+
+          <div>
+            <img
+              src="https://fr-ferrerorocher.s3.ap-northeast-2.amazonaws.com/static/2020-valentine/popup/text-share.png"
+              alt="공유하기">
+          </div>
+
+          <div class="pop__btnWrap">
+            <button class="popbtnShare popbtnShare__ktShare" type="button" @click="shareEvent('VS01',
+            'share1', 'kakaotalk')">event1 카카오톡 공유</button>
+            <button class="popbtnShare popbtnShare__fbShare" type="button" @click="shareEvent('VS01',
+            'share1', 'facebook')">event1 페이스북 공유</button>
+            <button class="popbtnShare popbtnShare__ksShare" type="button" @click="shareEvent('VS01',
+            'share1', 'kakaostory')">event1 카카오스토리 공유</button>
+          </div>
+
+          <ul class="agreeWrap">
+            <li>
+              <label for="lotteryAgree1">
+                <input type="checkbox" id="lotteryAgree1" name="agree1" value="true" v-model="lotteryUserData.agree1" />
+                <span></span>
+                <p class="agreeWrap--text">개인정보 수집 및 위탁 동의</p>
+              </label>
+              <button type="button" class="popbtn popbtn__agreeDetail" @click="openPop('privacy-policy-lottery')">
+                개인정보 수집 및 이용동의 자세히보기
+              </button>
+            </li>
+          </ul>
+          <p class="pop__ageNotice">
+            <img
+              src="https://fr-ferrerorocher.s3.ap-northeast-2.amazonaws.com/static/2020-valentine/popup/text-age-restriction.png"
+              alt="">
+          </p>
+        </form>
+        <button class="popbtn popbtn__lotteryResult" @click="sendValentineLottery">당첨결과 확인하기</button>
+        <button class="popbtn popbtn__close" @click="closePop()" type="button">닫기</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 즉당 : 결과 -->
+  <div class="pop lottery-result" :class="[lotteryResult ==='Rhkdlek3dl1a2ak' ? 'fail' : 'won']" v-if="currentPopup === 'lottery-result'">
+    <div class="pop__inner">
+      <!-- <div class="pop__header">
+          <h4></h4>
+        </div> -->
+      <div class="pop__content">
+        <div class="pop__winGift">
+          <img
+            :src="'https://fr-ferrerorocher.s3.ap-northeast-2.amazonaws.com/static/2020-valentine/popup/'+lotteryResult+'.png'"
+            alt="" />
+        </div>
+
+        <p class="pop__lotteryCount">본 이벤트 1일 3회 참여 가능합니다 ({{ lotteryCount }}/3)</p>
+
+        <button class="popbtn popbtn__close" @click="closePop()" type="button">닫기</button>
+
+        
+        <button v-if="lotteryResult === 'Rhkdlek3dl1a2ak'" class="popbtn popbtn__retry" @click="popupClose('lose');">다시 도전하기</button>
+        <button v-else class="popbtn popbtn__confirm" @click="popupClose('win')">당첨 확인</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 즉당 : 공유하기 (횟수 초과) -->
+  <div class="pop lottery-share" v-if="currentPopup === 'lottery-share'">
+    <div class="pop__inner">
+      <!-- <div class="pop__header">
+        <h4></h4>
+      </div> -->
+      <div class="pop__content">
+        <div class="pop__exceededText">
+          <img
+            src="https://fr-ferrerorocher.s3.ap-northeast-2.amazonaws.com/static/2020-valentine/popup/text-exceeded.png"
+            alt="" />
+        </div>
+        <p class="pop__lotteryCount">본 이벤트 1일 3회 참여 가능합니다 ({{ lotteryCount }}/3)</p>
+        <p class="pop__exceededText--sub">
+          <img
+            src="https://fr-ferrerorocher.s3.ap-northeast-2.amazonaws.com/static/2020-valentine/popup/text-exceeded-sub.png"
+            alt="">
+        </p>
+        <div class="pop__shareEvent">
+          <img
+            src="https://fr-ferrerorocher.s3.ap-northeast-2.amazonaws.com/static/2020-valentine/popup/text-share-lined.png"
+            alt="">
+        </div>
+
+        <div class="pop__btnWrap">
+          <button class="popbtnShare popbtnShare__ktShare" type="button" @click="shareEvent('VS01',
+          'share2', 'kakaotalk')">event1 추가 기회 카카오톡 공유</button>
+          <button class="popbtnShare popbtnShare__fbShare" type="button" @click="shareEvent('VS01',
+          'share2', 'facebook')">event1 추가 기회 페이스북 공유</button>
+          <button class="popbtnShare popbtnShare__ksShare" type="button" @click="shareEvent('VS01',
+          'share2', 'kakaostory')">event1 추가 기회  카카오스토리 공유</button>
+        </div>
+
+        <button class="popbtn popbtn__close" @click="closePop()" type="button">닫기</button>
+
+        <button class="popbtn popbtn__retry" @click="tryLottery()">event1 다시 도전하기</button>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- card 만들기 : 개인정보-->
+  <div class="pop card-user" v-show="currentPopup === 'card-user'">
+    <div class="pop__inner">
+      <div class="pop__header">
+        <!-- <h4><img src="https://fr-ferrerorocher.s3.ap-northeast-2.amazonaws.com/static/goldenBell2019/popup/tl-ev2-step1.png" alt="YOU퀴즈 이벤트"></h4> -->
+        <h4>
+          보내시는 분의 개인정보를 입력해주세요
+          <p class="subTitle">이벤트 당첨 시 연락드리는 용도로 활용됩니다.</p>
+        </h4>
+      </div>
+      <div class="pop__content">
+        <form action="" @submit.prevent>
+          <dl>
+            <div class="row">
+              <dt>이름</dt>
+              <dd class="input-name">
+                <input type="text" v-model="cardUserData.name" maxlength="4" />
+              </dd>
+            </div>
+
+            <div class="row">
+              <dt>연락처</dt>
+              <dd class="input-phone">
+                <input type="tel" v-model="cardUserData.mobile" placeholder="'-'기호를 제외하고 입력해 주세요." maxlength="11" />
+              </dd>
+            </div>
+
+            <div class="row">
+              <dt>연령대</dt>
+              <dd>
+                <select class="sido" v-model="cardUserData.age" name="age">
+                  <option value="" selected disabled>연령대를 선택하세요</option>
+                  <option v-for="idx in 6" :value="(idx * 10)" :key="idx">
+                    {{ (idx * 10) + '대' }}
+                  </option>
+                </select>
+              </dd>
+            </div>
+
+            <div class="row">
+              <dt>SNS ID</dt>
+              <dd>
+                <input type="url" v-model="cardUserData.snsid" placeholder="" maxlength="11" />
+              </dd>
+            </div>
+
+            <dt>성별</dt>
+            <dd class="radioOption">
+              <label for="male">
+                <input type="radio" name="gender" id="male" v-model="cardUserData.gender" value="남" />
+                <span class="checkboxVisual"></span>
+                <img
+                  src="https://fr-ferrerorocher.s3.ap-northeast-2.amazonaws.com/static/2020-valentine/popup/text-label-popup-male.png"
+                  alt="">
+              </label>
+            </dd>
+            <dd class="radioOption">
+              <label for="female">
+                <input type="radio" name="gender" id="female" v-model="cardUserData.gender" value="여" />
+                <span class="checkboxVisual"></span>
+                <img
+                  src="https://fr-ferrerorocher.s3.ap-northeast-2.amazonaws.com/static/2020-valentine/popup/text-label-popup-female.png"
+                  alt="">
+              </label>
+            </dd>
+
+            <div class="radioWrap">
+              <dt class="radioText">
+                <img
+                  src="https://fr-ferrerorocher.s3.ap-northeast-2.amazonaws.com/static/2020-valentine/popup/radioText.png"
+                  alt="2월 14일 저녁 6시 30분 까지 청담 씨네시티 방문이 가능합니다.">
+              </dt>
+              <dd class="radioOption">
+                <label for="available">
+                  <input type="radio" name="available" id="available" v-model="cardUserData.visitAgree" value="true" />
+                  <span class="checkboxVisual"></span>
+                  <img
+                    src="https://fr-ferrerorocher.s3.ap-northeast-2.amazonaws.com/static/2020-valentine/popup/text-label-popup-yes.png"
+                    alt="">
+                </label>
+              </dd>
+              <dd class="radioOption">
+                <label for="unavailable">
+                  <input type="radio" name="available" id="unavailable" v-model="cardUserData.visitAgree"
+                    value="false" />
+                  <span class="checkboxVisual"></span>
+                  <img
+                    src="https://fr-ferrerorocher.s3.ap-northeast-2.amazonaws.com/static/2020-valentine/popup/text-label-popup-no.png"
+                    alt="">
+                </label>
+              </dd>
+            </div>
+
+          </dl>
+
+          <ul class="agreeWrap agreeWrap--line">
+            <li>
+              <label for="cardAgree1">
+                <input type="checkbox" id="cardAgree1" name="cardAgree1" value="true" v-model="cardUserData.agree" />
+                <span></span>
+                <p class="agreeWrap--text">개인정보 수집 및 위탁 동의</p>
+              </label>
+              <button type="button" class="popbtn popbtn__agreeDetail" @click="openPop('privacy-policy-card')">
+                개인정보 수집 및 이용동의 자세히보기
+              </button>
+            </li>
+            
+          </ul>
+          <p class="pop__ageNotice">
+            <img
+              src="https://fr-ferrerorocher.s3.ap-northeast-2.amazonaws.com/static/2020-valentine/popup/text-age-restriction.png"
+              alt="">
+          </p>
+        </form>
+        <button class="popbtn popbtn__next" @click="checkCardUserInfo()">다음(사진 업로드 팝업)</button>
+        <button class="popbtn popbtn__close" @click="closePop()" type="button">닫기</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- card 만들기 : 이미지 업로드 -->
+  <div class="pop card-message" v-show="currentPopup === 'card-message'">
+    <div class="pop__inner">
+      <div class="pop__header">
+        <h4>
+          <img
+            src="https://fr-ferrerorocher.s3.ap-northeast-2.amazonaws.com/static/2020-valentine/popup/title-card-message.png"
+            alt="발렌타인 데이를 함께 하고 싶은 사람에게 보낼 카드를 완성해주세요" />
+        </h4>
+      </div>
+
+      <div class="pop__content">
+        <div class="pop__cardMessageWrap">
+          <div class="pop__imageUploadWrap">
+            <div class="pop__imagePreview" id="imagePreview">
+              <img
+                src="https://fr-ferrerorocher.s3.ap-northeast-2.amazonaws.com/static/2020-valentine/popup/imageplaceholder.jpg"
+                alt="" id="previewCanvas">
+            </div>
+
+            <input id="imageUpload" type="file" accept="image/*" hidden @change="onUpload($event)" />
+            <label for="imageUpload" class="pop__uploadPlaceholder">
+            </label>
+          </div>
+
+          <p class="pop__toName">
+            <label for="toName">
+              <img
+                src="https://fr-ferrerorocher.s3.ap-northeast-2.amazonaws.com/static/2020-valentine/popup/text-to-name.png"
+                alt="to">
+            </label>
+            <input type="text" class="pop__input--toName" v-model="cardUserData.toName" maxlength="8"
+              placeholder="받는 분 이름을 써주세요">
+          </p>
+
+          <p class="pop__message">
+            <!-- <textarea name="message" id="message" class="messageArea" cols="24" rows="2" v-model="cardUserData.message"
+              maxlength="24" v-on:keyup="countLength($event)">
+              소중한 사람에게 하고 싶은 말을 입력해주세요
+            </textarea> -->
+            <textarea name="message" id="message" class="messageArea" cols="24" rows="2" maxlength="25" v-on:input="onInput" v-on:keyup="countLength" v-on:keyup.enter="countLine" />
+              
+            </textarea>
+          </p>
+
+          <p class="pop__fromName">
+            <img
+              src="https://fr-ferrerorocher.s3.ap-northeast-2.amazonaws.com/static/2020-valentine/popup/deco-card.png"
+              class="fromName__deco" />
+            <label for="fromName">
+              <img
+                src="https://fr-ferrerorocher.s3.ap-northeast-2.amazonaws.com/static/2020-valentine/popup/text-from-name.png"
+                alt="from">
+            </label>
+            <input type="text" class="pop__input--fromName" v-model="cardUserData.name" disabled />
+            <!-- <div style="font-size:20px">{{ messageLength }}</div> -->
+          </p>
+        </div>
+
+        <button class="popbtn popbtn__close" @click="closePop()" type="button">닫기</button>
+        <button class="popbtn popbtn__completeCard" type="button" @click="sendCardUserInfo()">입력 완료(카드 완성하기)</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- card 결과  -->
+  <div class="pop card-result" v-show="currentPopup === 'card-result'">
+    <div class="pop__inner">
+      <h2 class="pop__header">
+        <!-- <span>가나다라</span> 님이 보낸 <br />소중한 마음에 답해주세요 -->
+        <img
+          src="https://fr-ferrerorocher.s3.ap-northeast-2.amazonaws.com/static/2020-valentine/popup/title-card-result.png"
+          alt="">
+      </h2>
+      <div class="pop__card">
+        <div class="card__imageWrap">
+          <div class="card__image">
+            <img :src="cardImgUrl" alt="">
+          </div>
+          <div class="card__imageFrame">
+
+          </div>
+        </div>
+
+        <div class="card__inner">
+          <div class="card__toName toName">
+            <span class="toName__label">
+              <img
+                src="https://fr-ferrerorocher.s3.ap-northeast-2.amazonaws.com/static/2020-valentine/popup/text-to-name.png"
+                alt="to">
+            </span>
+            <p class="toName__name underlined">
+              {{ cardResultData.toName }}
+            </p>
+          </div>
+
+          <div class="card__messageWrap">
+            <p class="card__message underlined" v-html="cardResultData.message">
+              <!-- {{ cardResultData.message }} -->
+            </p>
+          </div>
+
+          <div class="card__fromName fromName">
+            <img
+              src="https://fr-ferrerorocher.s3.ap-northeast-2.amazonaws.com/static/2020-valentine/popup/deco-card.png"
+              class="fromName__deco" />
+            <span class="fromName__label">
+              <img
+                src="https://fr-ferrerorocher.s3.ap-northeast-2.amazonaws.com/static/2020-valentine/popup/text-from-name.png"
+                alt="from">
+            </span>
+            <p class="fromName__name underlined">
+              {{ cardResultData.fromName }}
+            </p>
+          </div>
+        </div> //inner
+
+      </div> // pop card
+
+      <div class="popbtnWrap">
+        <button class="popbtn popbtn__sendCard" @click="shareCard()">카드보내기</button>
+        <button class="popbtn popbtn__completeAll" @click="popupClose('card')" type="button">event2 완료</button>
+      </div>
+
+      <button class="popbtn popbtn__close" @click="closePop()" type="button">닫기</button>
+    </div> // pop inner
+  </div>
+
+  <!-- card : 공유하기 (횟수 초과) -->
+  <div class="pop card-share" v-show="currentPopup === 'card-share'">
+    <div class="pop__inner">
+      <div class="pop__content">
+        <div class="pop__exceededText">
+          <img
+            src="https://fr-ferrerorocher.s3.ap-northeast-2.amazonaws.com/static/2020-valentine/popup/text-exceeded.png"
+            alt="" />
+        </div>
+        <p class="pop__lotteryCount">본 이벤트 1일 3회 참여 가능합니다 ({{ cardCount }}/3)</p>
+        <p class="pop__exceededText--sub">
+          <img
+            src="https://fr-ferrerorocher.s3.ap-northeast-2.amazonaws.com/static/2020-valentine/popup/text-exceeded-sub.png"
+            alt="">
+        </p>
+        <div class="pop__shareEvent">
+          <img
+            src="https://fr-ferrerorocher.s3.ap-northeast-2.amazonaws.com/static/2020-valentine/popup/text-share-lined.png"
+            alt="">
+        </div>
+
+        <!-- <span class="pop__snsShare-txt">SNS로 링크 공유하기</span> -->
+        <div class="pop__btnWrap">
+          <button class="popbtnShare popbtnShare__ktShare" type="button" @click="shareEvent('CD01',
+          'share3', 'kakaotalk')">event2 카카오톡</button>
+          <button class="popbtnShare popbtnShare__fbShare" type="button" @click="shareEvent('CD01',
+          'share3', 'facebook')">event2 페이스북</button>
+          <button class="popbtnShare popbtnShare__ksShare" type="button" @click="shareEvent('CD01',
+          'share3', 'kakaostory')">event2 카카오스토리</button>
+        </div>
+
+        <button class="popbtn popbtn__close" @click="closePop()" type="button">닫기</button>
+        <button class="popbtn popbtn__retry" @click="tryCard()" type="button">event2 다시 참여하기</button>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- 참여안내 및 유의사항 -->
+  <div class="pop event-notice" v-show="currentPopup === 'event-notice'">
+    <img src="https://fr-ferrerorocher.s3.ap-northeast-2.amazonaws.com/static/2020-valentine/popup/content-event-notice.png"
+      alt="" />
+    <button class="popbtn popbtn__close" @click="closePop()" type="button">닫기</button>
+  </div>
+
+  <!-- 개인정보 수집 이용 및 위탁 방침안내//event1 -->
+  <div class="pop event-personal-notice" v-show="currentPopup === 'privacy-policy-lottery'">
+    <img
+      src="https://fr-ferrerorocher.s3.ap-northeast-2.amazonaws.com/static/2020-valentine/popup/content-privacy-policy.png"
+      alt="" />
+    <button class="popbtn popbtn__close" @click="openPop('lottery-user')" type="button">닫기</button>
+  </div>
+
+  <!-- 개인정보 수집 이용 및 위탁 방침안내//event2 -->
+  <div class="pop event-personal-notice" v-show="currentPopup === 'privacy-policy-card'">
+    <img
+      src="https://fr-ferrerorocher.s3.ap-northeast-2.amazonaws.com/static/2020-valentine/popup/content-privacy-policy.png"
+      alt="" />
+    <button class="popbtn popbtn__close" @click="openPop('card-user')" type="button">닫기</button>
+  </div>
+
+  <!-- 당첨자발표 -->
+  <!-- <div class="pop winner" v-if="currentPopup === 'winner'">
+    <div class="pop__inner">
+      <div class="pop__header">
+        <h4><img src="https://fr-ferrerorocher.s3.ap-northeast-2.amazonaws.com/static/goldenBell2019/popup/tl-winner.png" alt="당첨을 축하합니다"></h4>
+
+      </div>
+      <div class="pop__content">
+        <div class="winner__box">
+          <h5 class="winner__header">미술 심리 상담권 (5명)</h5>
+          <ul class="winner__box-first">
+            <li v-for="winner in winnerList[0]" :key="winner">{{winner}}</li>
+          </ul>
+        </div>
+        <div class="winner__box">
+          <h5 class="winner__header">외식 상품권 & 페레로 로쉐 16개입 (10명)</h5>
+          <ul>
+            <li v-for="winner in winnerList[1]" :key="winner">{{winner}}</li>
+          </ul>
+        </div>
+        <div class="winner__box">
+          <h5 class="winner__header">페레로 로쉐 5개입 기프티콘 (50명)</h5>
+          <ul>
+            <li v-for="winner in winnerList[2]" :key="winner">{{winner}}</li>
+          </ul>
+        </div>
+
+        <ul class="winner__notice">
+          <li><span></span>ctrl+f 로 전화번호 뒷자리(4자리)를 검색하시면 편리합니다</li>
+          <li><span></span>1등, 2등 경품 당첨자들에게는 개별적으로 연락드릴 예정입니다</li>
+          <li><span></span>5개입 기프티콘은 11월 22일 일괄 발송 될 예정입니다</li>
+        </ul>
+        <button class="popbtn popbtn__close" @click="closePop()" type="button">닫기</button>
+      </div>
+    </div>
+  </div> -->
+</div>

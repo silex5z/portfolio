@@ -1,0 +1,113 @@
+﻿<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="shared/layout">
+
+<head>
+	<title>페레로로쉐 골든벨 2018</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700,900" rel="stylesheet">
+    <link href="//cdn.jsdelivr.net/korean-webfonts/1/corps/google/NotoSansKR/NotoSansKR.css" rel="stylesheet">
+    <link href="/goldenbell2018/css/event.css" rel="stylesheet">
+</head>
+
+  <!-- 이벤트 Meta 태그 추가 -->
+ <th:block layout:fragment="meta" th:remove="tag">
+   <meta property="og:url" th:attr="content=${url}" />
+   <meta property="og:title" th:attr="content=${title}" />
+   <meta property="og:image" th:attr="content=${image}" />
+   <meta property="og:description" th:attr="content=${contents}" />
+ </th:block>
+
+<body>
+  <!-- layout -->
+  <div layout:fragment="content">
+ 	<div id="app">
+  <h1 class="logo"><img src="https://fr-ferrerorocher.s3.amazonaws.com/static/goldenBell2018/page-images/pc/ferrero_rocher-logo.png" alt="logo" /></h1>
+  <nav class="floating-nav">
+    <ul>
+      <li><a href="#event1" class="nav-btn nav-btn--rect nav-btn--ev1 ga-event" data-action="[네비]Event01"><span class="a11y-hidden">event1</span></a></li>
+      <li><a href="#event2" class="nav-btn nav-btn--rect nav-btn--ev2 ga-event" data-action="[네비]Event02"><span class="a11y-hidden">event2</span></a></li>
+      <li><a href="#gift" class="nav-btn nav-btn--rect nav-btn--gift ga-event" data-action="[네비]Gift"><span class="a11y-hidden">gift</span></a></li>
+      <li><a href="http://item.gmarket.co.kr/Item?goodscode=1505661030" class="nav-btn nav-btn--rect nav-btn--gift-link ga-event" data-action="[네비]선물하기" target="_blank"><span class="a11y-hidden">선물하기</span></a></li>
+    </ul>
+  </nav>
+
+  <!-- share event -->
+  <section class="event-share" id="event1">
+    <div class="inner">
+      <h1 class="a11y-hidden">페레로로쉐 수능 이벤트</h1>
+      <h2 class="a11y-hidden">golden bell</h2>
+      <p class="a11y-hidden">황금빛 마음이 담긴 페레로 로쉐 골든벨과 함께 당신의 진심을 전하세요.</p>
+      <button class="ev-btn-mv ga-event" data-action="영상보기" type="button" v-on:click="openPopTracking('video',3661,2,1944,2)"><span class="a11y-hidden">영상보기</span></button>
+    </div>
+    <h3 class="a11y-hidden">영상공유 이벤트</h3>
+    <p class="a11y-hidden">소중한 사람에게 황금빛 응원 영상을 보내주세요! 즉석당첨을 통해 500분께 페레로 로쉐를 선물로 드립니다.</p>
+    <p class="a11y-hidden"><em>영상을 재생하면 이벤트 참여가 시작됩니다</em></p>
+    <dl class="a11y-hidden">
+      <dt>이벤트 기간:</dt>
+      <dd>2018.10.15 ~ 2018.11.8</dd>
+    </dl>
+    <button type="button" class="ev-btn ev-btn--note--light" onClick="alert('이벤트가 종료되었습니다.');"><span class="a11y-hidden">이벤트 유의사항</span></button>
+  </section>
+  <!-- // share event -->
+
+  <!-- relay event -->
+  <section class="event-relay" id="event2">
+    <div class="inner">
+      <h2 class="a11y-hidden">골든벨 릴레이 이벤트</h2>
+      <p class="a11y-hidden">친구들과 함께 오늘의 공부 목표를 설정하고 인증해보세요! 릴레이 이벤트에 참여하면 황금빛 응원이 담긴 경품을 드립니다.</p>
+      <dl class="a11y-hidden">
+        <dt>이벤트 기간:</dt>
+        <dd>2018.10.15 ~ 2018.11.8</dd>
+        <dt>당첨자 발표:</dt>
+        <dd>2018.11.13</dd>
+      </dl>
+
+      <button type="button" class="ev-btn ev-btn--note--dark" onClick="alert('이벤트가 종료되었습니다.');"><span class="a11y-hidden">이벤트 유의사항</span></button>
+      <p class="countdown"><span class="a11y-hidden">수능</span><strong>D-0</strong></p>
+    </div>
+      <!-- slider -->
+      <div class="relay-slider">
+          <div class="relay-slider__item" v-for="item in slideImgList"><img :src="item.image"></div>
+      </div>
+          <!-- // slider -->
+
+      <button class="ev-btn ev-btn--join-event ga-event" data-action="이벤트 참여하기" type="button" onClick="alert('이벤트가 종료되었습니다.');">이벤트 참여하기</button>
+
+</section>
+  <!-- // relay event -->
+
+  <section class="event-gift" id="gift">
+    <h2 class="a11y-hidden">골든 릴리이 이벤트 Gift</h2>
+
+    <ol class="a11y-hidden">
+      <li>1 등 - 포토매틱 촬영권 (15분 2인 기준, 원본파일 제공 - 5명)</li>
+      <li>2 등 - 페레로 로쉐 골드 라미펜 (10명)</li>
+      <li>3 등 - 페레로 로쉐 5개입 (500명)</li>
+    </ol>
+  </section>  
+</div>
+  </div>
+  <!-- // layout -->
+  <th:block layout:fragment="body-script" th:remove="tag">
+  	<script src="/vendor/jquery/jquery-1.10.2.min.js"></script>
+  	
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.17/vue.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script>
+    <script src="/vendor/slick/js/slick.min.js"></script>
+    <script src="/goldenbell2018/js/html2canvas.js"></script>
+    <script src="/goldenbell2018/js/es-promise.js"></script>
+    <script src="/goldenbell2018/js/deviceCheck.js"></script>
+
+    <script>
+    	var isClose = 'True';
+	    
+    </script>
+    <script src="/goldenbell2018/js/winner.js"></script>
+    <script src="/goldenbell2018/js/dev.js"></script>
+    <script src="/goldenbell2018/js/app.js"></script>
+    <script src="/goldenbell2018/js/pub.js"></script>
+      <!--랩사 트래킹코드-->
+    <script src='https://vtag11.midas-i.com/vat-tag?cmp_no=3661&depth=1'></script>
+  </th:block>
+</body>
+	
+</html>

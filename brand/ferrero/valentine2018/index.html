@@ -1,0 +1,362 @@
+﻿<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="shared/layout">
+
+<head>
+	<title>페레로로쉐 : 발렌타인데이 캠페인</title>
+    <link href="/vendor/slick/css/slick.css" rel="stylesheet" />
+    <link href="/vendor/slick/css/slick-theme.css" rel="stylesheet" />
+    <link href="/valentine2018/css/event.css" rel="stylesheet">
+    <style>
+    </style>
+</head>
+
+  <!-- 이벤트 Meta 태그 추가 -->
+ <th:block layout:fragment="meta" th:remove="tag">
+   <meta property="og:url" th:attr="content=${url}" />
+   <meta property="og:title" content="#페레로로쉐 #페레로로쉐_띠아모" />
+   <meta property="og:image" content="https://fr-ferrerorocher.s3.amazonaws.com/static/2018-valentine/sns/facebook-new.jpg" />
+   <meta property="og:description" content="페레로 로쉐로 발렌타인 선물 걱정은 끝! 영상 공유만 해도 마음을 표현할 수 있는 선물을 드려요" />
+ </th:block>
+
+<body>
+  <!-- layout -->
+  <div layout:fragment="content">
+ 	<!-- video -->
+    <div class="video-wrap">
+        <div class="video-wrap-inner">
+            <div id="backgroundPlayer">
+                <!-- <video class="main-video" autoplay="1" muted="1" loop="1" id="backgroundVideo" poster=""><source src="https://fr-kinderjoy.s3.amazonaws.com/fr-ferrerorocher/ValentineEvent/ferrerorocher_5s.mp4" type="video/mp4"></video> -->
+            </div>
+        </div>
+    </div>
+    <div class="video-dimm"></div>
+    <!-- // video -->
+
+    <!-- background -->
+    <div class="bacgkround-wrap">
+        <div class="bg1"></div>
+        <div class="video-upper-bg"><!-- NOTE : video 덮는 배경 -->
+                <div class="bg2"></div>
+                <div class="bg3"></div>
+                <div class="bg4"></div>
+        </div>
+        <!-- // video-upper-bg -->
+        </div>
+    <!-- // background -->
+
+    <!-- contents -->
+    <div class="event-container" id="valentineday">
+        <h1>Ferrero Rocher - Valentine Event</h1>
+        <div class="brand-logo"><img src="https://fr-ferrerorocher.s3.amazonaws.com/static/2018-valentine/w/brand-logo.png" alt="FERRERO ROCHER 로고" /></div>
+        <!-- 상단영역 -->
+        <section class="event-intro" id="eventIntro">
+            <div class="section-deco"></div>
+            <div class="heading">
+                <div class="a11y-hidden">
+                    <h2>Ferrero Rocher</h2>
+                    <p>Tiamo event</p>
+                    <p>페레로 로쉐로 사랑을 표현하세요</p>
+                </div>
+            </div>
+            <div class="intro-btns">
+                <div class="intro-btns-inner">
+                    <div class="event1-go">
+                        <button type="button" onclick="goPosition('#eventArea'); return false;"><img src="https://fr-ferrerorocher.s3.amazonaws.com/static/2018-valentine/w/blank.gif" class="ga-event" data-action="[상단네비]즉석 당첨 이벤트" alt="EVENT1 즉석 당첨 이벤트" /></button>
+                    </div>
+                    <div class="event2-go">
+                        <button type="button" onclick="goPosition('#eventProofShot'); return false;"><img src="https://fr-ferrerorocher.s3.amazonaws.com/static/2018-valentine/w/blank.gif" class="ga-event" data-action="[상단네비]띠아모 인증샷 이벤트" alt="EVENT2 띠아모 인증샷 이벤트" /></button>
+                    </div>
+                    <div class="product-go">
+                        <button type="button" onclick="goPosition('#productInfo'); return false;"><img src="https://fr-ferrerorocher.s3.amazonaws.com/static/2018-valentine/w/blank.gif" class="ga-event" data-action="[상단네비]스페셜 패키지 구매하기" alt="Ferrero Rocher 스페셜 패키지 구매하기" /></button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="icon-down" onclick="goPosition('#eventArea');" style="cursor:pointer;"><img src="https://fr-ferrerorocher.s3.amazonaws.com/static/2018-valentine/w/icon-scroll-down.png" class="dongdong ga-event" data-action="[상단네비]아래로" alt="아래로" /></div>
+        </section>
+        <!-- // 상단영역 -->
+
+        <div class="container-deco-wrap">
+            <!-- 이벤트1 -->
+            <section class="event-area" id="eventArea">
+                <div class="heading">
+                    <div class="a11y-hidden">
+                        <h2>EVENT1 즉석 당첨 이벤트</h2>
+                        <p>영상을 SNS에 고유하고 사랑을 표현하면, 즉석 당첨을 통해 발렌타인 데이 한정판 페레로 로쉐 패키지를 드립니다.</p>
+                        <p>이벤트 기간 : 2018년 1월 22일 ~ 2월 14일</p>
+                        <p>경품 배송 : 2018년 2월 5일(1차), 2018년 2월 19일(2차)</p>
+                    </div>
+                </div>
+                <div class="mov-box">
+                    <div id="mainPlayer"></div>
+                </div>
+                <div class="event-txt">
+                    <p><img src="https://fr-ferrerorocher.s3.amazonaws.com/static/2018-valentine/w/event-area-txt.png" alt="" /></p>
+                    <!-- <button onclick="openPop('notice'); return false;" class="ga-event" data-action="즉석당첨 이벤트 유의사항"><img src="https://fr-ferrerorocher.s3.amazonaws.com/static/2018-valentine/w/btn-event-notice.png" alt="이벤트 유의사항" /></button> -->
+                </div>
+                <div class="btns">
+                    <button class="shine ga-event" data-action="즉석당첨 이벤트 참여하기" onclick="alert('이벤트가 종료되었습니다.'); return false;"><img src="https://fr-ferrerorocher.s3.amazonaws.com/static/2018-valentine/w/btn-event-go.png" alt="이벤트 참여하기" /></button>
+                </div>
+                <div class="event-info">
+                    <div class="a11y-hidden">
+                        <h3>이벤트 상품</h3>
+                        <p>페레로 로쉐 한정판 패키지(100명)</p>
+                        <ul>
+                            <li>페레로 로쉐 8개입</li>
+                            <li>영화 관람권(2인)</li>
+                            <li>한정판 엽서 및 쇼핑백</li>
+                        </ul>
+                        <p>페레로 로쉐 5개입(1000명)</p>
+                    </div>
+                </div>
+            </section>
+            <!-- // 이벤트1 -->
+            <!-- 이벤트2 -->
+            <section class="event-proofshot" id="eventProofShot">
+                <div class="heading">
+                    <div class="a11y-hidden">
+                        <h2>EVENT2 띠아모 인증샷 이벤트</h2>
+                        <p>페레로 로쉐를 SNS에 업로드하고 이벤트에 참여해보세요. 로맨틱한 화이트 데이를 즐길 수 있는 경품을 드립니다.</p>
+                        <p>해시태그 : #페레로로쉐 #페레로로쉐_띠아모</p>
+                        <p>이벤트 기간 : 2018년 2월 1일 ~ 2월 25일</p>
+                        <p>경품 배송 : 2018년 2월 28일</p>
+                    </div>
+                </div>
+                <!-- slider -->
+                <div class="proofshot-list-wrap">
+                    <!-- slick-container-custom -->
+                    <!-- 로딩전일때 노출 -->
+                    <div class="list-loading"></div>
+                    <div class="list-box-container">
+                        <div class="list-box" style="display:none;">
+                            <div v-for="(item,index) in data.items">
+                                <img src="https://fr-ferrerorocher.s3.amazonaws.com/static/2018-valentine/proofshot/froofshot1.png"  style="width:203px; height:203px" alt="" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="list-paging">
+                        <button class="btn-prev"><img src="https://fr-ferrerorocher.s3.amazonaws.com/static/2018-valentine/w/btn-prev.png" alt="이전" /></button>
+                        <button class="btn-next"><img src="https://fr-ferrerorocher.s3.amazonaws.com/static/2018-valentine/w/btn-next.png" alt="다음" /></button>
+                    </div>
+                    <div class="list-dim">
+                        <div class="dim-prev"></div>
+                        <div class="dim-next"></div>
+                    </div>
+                    <div class="list-indicator">
+
+                    </div>
+                </div>
+                <!-- // slider -->
+                <div class="event-txt">
+                    <p><img src="https://fr-ferrerorocher.s3.amazonaws.com/static/2018-valentine/w/event-proofshot-txt.png" alt="" /></p>
+                 
+                    <!-- <button onclick="openPop('notice'); return false;" class="ga-event" data-action="인증샷 이벤트 유의사항"><img src="https://fr-ferrerorocher.s3.amazonaws.com/static/2018-valentine/w/btn-event-notice.png" alt="이벤트 유의사항" /></button> -->
+                </div>
+                <div class="btns">
+                 	<button class="shine ga-event" data-action="인증샷 이벤트 참여하기" onclick="alert('이벤트가 종료되었습니다.'); return false;"><img src="https://fr-ferrerorocher.s3.amazonaws.com/static/2018-valentine/w/btn-event-go.png" alt="이벤트 참여하기" /></button>
+                </div>
+                <div class="event-info2">
+                    <div class="a11y-hidden">
+                        <h3>이벤트 상품</h3>
+                        <p>그랜드 하얏트 1박 숙박권 1명(1명)</p>
+                        <p>YES24 상품권 20만 원 상당(3명)</p>
+                        <p>페레로 로쉐 5개입(100명)</p>
+                        <h3>이벤트 참여방법</h3>
+                        <ol>
+                            <li>황금빛의 페레로 로쉐 사진 찍기</li>
+                            <li>SNS에 #페레로로쉐 #페레로로쉐_띠아모 해시태그와 함께 업로드</li>
+                            <li>이벤트 참여하기 버튼 클릭</li>
+                            <li>개인 정보 입력</li>
+                        </ol>
+                    </div>
+                </div>
+            </section>
+            <!-- // 이벤트2 -->
+            <!-- 제품 -->
+            <section class="product-info" id="productInfo">
+                <div class="heading">
+                    <div class="a11y-hidden">
+                        <h2>Valentine's Day Ferrero Rocher Special package</h2>
+                        <p>페레로 로쉐 스페셜 패키지로 더욱 스페셜하게 마음을 전해보세요</p>
+                    </div>
+                </div>
+                <div class="product-img"></div>
+                <a class="shine ga-event" role="button" onclick="openPop('buy');" data-action="구매하기" ><img src="https://fr-ferrerorocher.s3.amazonaws.com/static/2018-valentine/w/btn-purchase-go.png" alt="구매하기" /></a>
+            </section>
+            <!-- // 제품 -->
+        </div>
+        <!-- // container-deco-wrap -->
+
+        <!-- floating navi -->
+        <div class="floating-navi" id="floatingNavi">
+            <div class="floating-navi-inner">
+                <div class="event1-go">
+                    <button onclick="goPosition('#eventArea');" class="ga-event" data-action="[우측네비]즉석 당첨 이벤트">Event1 즉석 당첨 이벤트</button>
+                </div>
+                <div class="event2-go">
+                    <button onclick="goPosition('#eventProofShot');" class="ga-event" data-action="[우측네비]띠아모 인증샷 이벤트">Event2 띠아모 인증샷 이벤트</button>
+                </div>
+                <div class="product-go">
+                    <button onclick="goPosition('#productInfo');" class="ga-event" data-action="[우측네비]스페셜 패키지 구매하기">Ferrero Rocher 스페셜 패키지 구매하기</button>
+                </div>
+            </div>
+        </div>
+        <!-- // floating navi -->
+        
+		<!-- popup group : start -->
+      <div th:include="valentine2018/_popup :: partial-popup"></div>
+      <!-- popup group : end -->
+	</div>
+  </div>
+  <!-- // layout -->
+  <th:block layout:fragment="body-script" th:remove="tag">
+  	<script src="/vendor/jquery/jquery-3.3.1.min.js"></script>
+    <script src="/vendor/slick/js/slick.min.js"></script>
+    <script src="/valentine2018/js/pub-deviceCheck.js"></script>
+    <script src="/valentine2018/js/pub-common.js"></script>
+    <script src="/valentine2018/js/pub-effect-particle.js"></script>
+    <script type="text/javascript" src="https://spi.maps.daum.net/imap/map_js_init/postcode.v2.js"></script>
+    <script src="/vendor/vue/vue.min.js"></script>
+    <script>
+	    $(window).on('load',function (e) {
+	        var hash = location.hash;
+	        if (hash == "#package") {
+	            goPosition('#productInfo');
+	            setTimeout(function () {
+	                openPop('buy');
+	            }, 1000);
+	           
+	        } 
+	        setTimeout(function () {
+	            $('.list-box').show();
+	            $('.list-loading').hide();
+	        },1000);
+	    });
+    </script>
+    <script src="/valentine2018/js/dev.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.5/ScrollMagic.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.5/plugins/debug.addIndicators.min.js"></script>
+    <script src="/valentine2018/js/pub-event.js"></script>
+    <script src="/valentine2018/js/pub-scrollmagic.js"></script>
+    <script type="text/javascript">
+    //---------------------------------------------------
+    // [YoutubeAPI]
+    // - 페이지, 팝업 영상 제어
+    // - js파일로 연결할 경우 IE에서 로드에 실패하는 경우가 있어 partial방식으로 적용함 (2017년 11월)
+    // https://developers.google.com/youtube/iframe_api_reference#Requirements
+    //---------------------------------------------------
+
+    // This code loads the IFrame Player API code asynchronously.
+    var tag = document.createElement('script');
+    tag.src = "//www.youtube.com/iframe_api";
+    var firstScriptTag = document.getElementsByTagName('script')[0];
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+    var mainPlayer;
+    var mainPlayerSize;
+    var popPlayer;
+
+    var device = getDeviceName(); //웹인지 모바일인지
+    var deviceOs = getMobileKind(); // 모바일 os
+
+
+    if (device == 'w') {
+        mainPlayerSize = {
+            height: 540,
+            width: 960
+        }
+    } else {
+        mainPlayerSize = {
+            height: 330,
+            width: 590
+        }
+    }
+
+    // var stId = 'ndR720FOSBA';
+    // var stId = 'UNNvBFB_fCI';
+    var stId = 'Yq91Hoa9PJM';
+
+    function onYouTubeIframeAPIReady() {
+        mainPlayer = new YT.Player('mainPlayer', {
+            height: mainPlayerSize.height,
+            width: mainPlayerSize.width,
+            videoId: stId,
+            playerVars: {
+                //controls: 0,
+                loop: 1,
+                playlist: stId,
+                rel: 0,
+                showinfo: 0
+            },
+            events: {
+                'onReady': onPlayerReady,
+                'onStateChange': mainPlayerEvent
+            }
+        });
+        popPlayer = new YT.Player('popPlayer', {
+            height: '360',
+            width: '640',
+            videoId: stId,
+            playerVars: {
+                //controls: 0,
+                rel: 0,
+                showinfo: 0
+            },
+            events: {
+                //'onReady': onPlayerReady,
+                'onStateChange': popPlayerEvent
+            }
+        });
+    }
+
+    function onPlayerReady(event) {
+        //event.target.playVideo();
+    }
+
+    function mainPlayerEvent(event) {
+        //event.target.setPlaybackQuality('hd720');
+    }
+
+    //$(function () {
+    //  $(".btn-cover").click(function () {
+    //      alert('영상을 끝까지 시청하셔야 이벤트에 참여하실 수 있습니다');
+    //      var scrolltop = $(window).scrollTop();
+    //      $('#pop-messageWriteView').css('top', scrolltop + 'px');
+    //  });
+    //});
+
+    function popPlayerEvent(event) {
+        if (event.data == YT.PlayerState.ENDED) {
+            $('.btns.before').hide();
+            $('.btns.after').show();
+            event.target.stopVideo();
+        }
+        //if (event.data == YT.PlayerState.PLAYING) {
+        //    setTimeout(function () {
+        //        $('.btns.before').hide();
+        //        $('.btns.after').show();
+        //    }, 6000);
+        //}
+    }
+
+    function playVideo(player) {
+        if (!player) return;
+        player.playVideo();
+    }
+
+    function stopVideo(player) {
+        if (!player) return;
+        player.stopVideo();
+    }
+
+    //function onPlayerStateChange(event) {
+    //    if (event.data == YT.PlayerState.PLAYING && !done) {
+    //        //setTimeout(stopVideo, 6000);
+    //        //popupState = true;
+    //    }
+    //}
+</script>
+  </th:block>
+</body>
+	
+</html>

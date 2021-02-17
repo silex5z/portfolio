@@ -1,0 +1,97 @@
+// ==============================================
+// reset
+// ==============================================
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+@for $i from 1 through 2 {
+  h#{$i} {
+    margin: 0;
+  }
+}
+
+ul {
+  margin: {
+    top: 0;
+    bottom: 0;
+  }
+
+  padding-left: 0;
+  list-style: none;
+}
+
+p {
+  margin: 0;
+}
+
+dl {
+  margin: {
+    top: 0;
+    bottom: 0;
+  }
+}
+
+dd {
+  margin-left: 0;
+}
+
+button {
+  padding: 0;
+  border: 0;
+}
+
+button,
+span,
+a,
+img,
+strong,
+b {
+  vertical-align: top;
+  font-size: 0;
+}
+
+figure {
+  margin: 0;
+}
+
+fieldset {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+button,
+a {
+  cursor: pointer;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+//ios reset
+select::-ms-expand {
+  display: none;
+}
+
+select,
+input {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  border-radius: 0;
+  -webkit-border-radius: 0;
+  outline: none;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+textarea {
+  &:focus {
+    outline: none;
+  }
+}

@@ -1,0 +1,12 @@
+// ==============================================
+// share
+// vender, variable, mixin, reset, util
+// ==============================================
+@import '../../scss/modules/all';
+
+$loc: $loc + 'quiz/pc';
+@import 'font';
+@import 'btn';
+@import 'pc';
+@import 'popup';
+@import 'state';

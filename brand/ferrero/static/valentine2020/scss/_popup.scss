@@ -1,0 +1,672 @@
+$popWidth:640px;
+$popInnerWidth:560px;
+$txtBeige:#7f582e;
+$lineColor:#e5c979;
+$checkboxColor: #9b6945;
+
+%inputText {
+  height: 60px;
+  padding: 0 20px;
+  background: transparent;
+  color: #472412;
+  border: none;
+  font-size: 22px;
+  line-height: 60px;
+  vertical-align: middle;
+  font-family: 'NotoSansKR', sans-serif;
+}
+
+%dimmed {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+
+}
+
+.dimmed {
+  @extend %dimmed;
+  z-index: 30;
+
+  &.loading {
+    z-index: 1000;
+  }
+
+  >img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100px;
+    margin: -50px -50px;
+  }
+}
+
+.pop {
+  $this: &;
+  position: absolute;
+  left: 50%;
+  width: $popWidth;
+  padding-bottom: 50px;
+  text-align: left;
+  transform: translateX(-50%);
+  @include bg($loc-pop + 'popup_bg.jpg');
+  font-size: 0;
+  font-family: 'NotoSansKR', sans-serif;
+  letter-spacing: -1.5px;
+  z-index: 110;
+
+  h4 {
+    width: $popInnerWidth;
+    text-align: center;
+    margin: 140px auto 30px;
+    font-family: "NotoSerifKR";
+    color: #000;
+    font-size: 40px;
+    word-break: keep-all;
+    
+
+    > span {
+      font-size: 40px;
+      color: #e95c6d;
+    }
+
+    .subTitle {
+      margin-top: 20px;
+      font-size: 26px;
+      font-family: 'NotoSansKR', sans-serif;
+      font-weight: normal;
+      color: #000;
+      letter-spacing: -2px;
+    }
+
+    &.line {
+      padding-bottom: 50px;
+      border-bottom: 1px solid $lineColor;
+    }
+  }
+
+  &__inner {
+    width: $popInnerWidth;
+    margin: 0 auto;
+  }
+
+  &__header {
+    width: 100%;
+    font-size: 0;
+  }
+
+  &__content {
+    font-size: 0;
+    text-align: center;
+  }
+
+  input[type='text'],
+  input[type='tel'],
+  input[type='number'],
+  input[type='url'],
+  textarea,
+  select {
+    @extend %inputText;
+    width: 100%;
+
+    &::placeholder {
+      color: #938161;
+    }
+  }
+
+  select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    @include bg($loc-pop + 'selectbox.png');
+    background-position: 95% 50%;
+
+    &::-ms-expand {
+      display: none;
+    }
+    & > option {
+      background-color: #f1d581;
+    }
+  }
+
+  input[type='checkbox'], input[type='radio'] {
+    position: absolute;
+    opacity: 0.01;
+
+    &~span {
+      display: inline-block;
+      border: 1px solid $checkboxColor;
+      width: 40px;
+      height: 40px;
+      vertical-align: middle;
+      @include bg($loc-pop + 'checkbox.png');
+      background-position: 0 -40px;
+      cursor: pointer;
+    }
+
+    &:checked~span {
+      background-position: 5px 10px;
+    }
+  }
+   
+
+  dl {
+    text-align: left;
+  }
+
+  dt {
+    display: inline-block;
+    width: 100px;
+    line-height: 60px;
+    vertical-align: -10px;
+    text-align: left;
+    font-size: 24px;
+    color: $txtBeige;
+    font-family: 'NotoSansKR-Bold';
+  }
+
+  dd {
+    display: inline-block;
+    width: 460px;
+    
+  }
+
+  .agreeWrap {
+    &--line {
+      margin-top: 20px;
+
+      border-top: 1px solid $lineColor;
+    }
+
+    li {
+      margin-bottom: 10px;
+      text-align: left;
+    }
+
+    &--text {
+      display: inline-block;
+      margin: 0 20px;
+      vertical-align: middle;
+      color: $txtBeige;
+      font-size: 26px;
+    }
+  }
+
+  // 카드 개인정보
+  .radioWrap{
+    text-align: center;
+    margin-top: 50px;
+    padding-bottom: 50px;
+    background-color: #fce9a3;
+  }
+
+  .radioText {
+    width: 100%;
+
+  }
+
+  .radioOption {
+    // outline: 1px solid red;
+    width: 140px;
+    text-align: left;
+
+    &:nth-of-type(1) {
+      margin-left: 20px;
+    }
+  }
+
+  .row {
+    border-bottom: 2px solid $lineColor;
+    margin-bottom: 25px;
+  }
+  
+  // 카드 메세지
+  &__cardMessageWrap {
+    background: #fff5ca;
+    box-shadow: 0px 10px 70px #c49f4a;
+  }
+
+  
+  &__imageUploadWrap {
+    position: relative;
+    width: 560px;
+    height: 575px;
+    padding: 40px;
+    
+  }
+  
+  &__uploadPlaceholder {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+    width: 560px;
+    height: 575px;
+    cursor: pointer;
+    @include bg($loc-pop + 'photo-frame.png')
+  }
+
+  input[type="text"].underlined {
+    @include bg($loc-pop + 'underline-dotted.png', $repeat: repeat, $pos: left bottom)
+  }
+
+  &__toName {
+    text-align: left;
+    margin-left: 40px;
+
+    #{$this}__input--toName[type="text"] {
+      background: #f0e1a3;
+      margin-left: 5px;
+      line-height: 52px;
+      @include size(260px, 52px);
+    }
+
+    img {
+      vertical-align: middle;
+    }
+  }
+
+  &__message {
+    background: #f0e1a3;
+    margin: 20px auto 25px;
+    @include size(460px, 120px);
+
+    .messageArea {
+      resize: none;
+      line-height: 45px;
+      padding-top: 10px;
+      overflow-y: hidden;
+      @include size(100%);
+    }
+  }
+
+  &__fromName {
+    text-align: right;
+    padding-bottom: 30px;
+    margin-right: 40px;
+
+    #{$this}__input--fromName[type="text"] {
+      background: #f0e1a3;
+      margin-left: 5px;
+      line-height: 52px;
+      @include size(160px, 52px);
+    }
+    img {
+      vertical-align: middle;
+      margin-left: 30px;
+    }
+  }
+
+  /* card 결과 */
+  h2#{&}__header {
+    width: $popInnerWidth;
+    text-align: center;
+    margin: 0 auto;
+    margin-bottom: 30px;
+    font-family: "NotoSerifKR";
+    color: #222222;
+    font-size: 42px;
+    word-break: keep-all;
+    padding-top: 143px;
+
+    > span {
+      font-size: 42px;
+      color: #e95c6d;
+    }
+
+    .subTitle {
+      margin-top: 20px;
+      font-size: 26px;
+      font-family: 'NotoSansKR', sans-serif;
+      font-weight: normal;
+      color: #000;
+      letter-spacing: -2px;
+    }
+
+    &.line {
+      padding-bottom: 50px;
+      border-bottom: 1px solid $lineColor;
+    }
+  }
+
+  &__card {
+    margin-bottom: 50px;
+    background: #fff5ca;
+    .card {
+
+      &--reply {
+        background: #f4e8b8;
+      }
+      
+      &__imageWrap {
+        position: relative;
+        width: 560px;
+        height: 575px;
+        padding-top: 40px;
+        padding-left: 40px;
+      }
+
+      &__imageFrame {
+        position: absolute;
+        top: 0;
+        left: 0;
+        display: block;
+        width: 560px;
+        height: 575px;
+        @include bg($loc-pop + 'photo-frame.png');
+      }
+
+      &__inner {
+        padding-left: 40px;
+        padding-bottom: 30px;
+      }
+
+      &__messageWrap {
+        padding: 27px 0 22px 13px; 
+      }
+
+      &__message {
+        width: 460px;
+        font-size: 22px;
+        font-family: 'NotoSansKR', sans-serif;
+        color: #222;
+        padding-right: 25px;
+        word-wrap: break-word;
+        word-break: break-all;
+      }
+
+    }
+
+    .toName {
+      // outline: 1px solid red;
+
+      &__label {
+        display: inline-block;
+        margin-right: 10px;
+        vertical-align: middle;
+        img {
+          vertical-align: middle;
+        }
+      }
+      
+      &__name {
+        width: 240px;
+        font-size: 23px;
+        display: inline-block;
+        vertical-align: middle;
+        font-family: 'NotoSansKR-Bold';
+      }
+  
+    }
+  
+    .fromName {
+      // outline: 1px solid red;
+
+      &__label {
+        display: inline-block;
+        margin-right: 10px;
+        margin-left: 35px;
+        margin-top: 35px;
+        vertical-align: middle;
+        img {
+          vertical-align: middle;
+        }
+      }
+      
+      &__name {
+        width: 150px;
+        margin-top: 25px;
+        font-size: 23px;
+        display: inline-block;
+        vertical-align: middle;
+        font-family: 'NotoSansKR-Bold';
+      }
+    }
+    
+    .underlined {
+      padding-left: 17px;
+      line-height: 46px;
+      @include bg($loc-pop + 'underline-dotted.png', $repeat: repeat, $pos: left bottom)
+    }
+  }
+
+}
+
+.popbtn {
+  font-size: 0;
+  border-radius: 46px;
+  @include size(420px, 95px);
+  
+  @include bg($loc-pop + 'btnIr.png');
+  
+  &__close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 40px;
+    height: 40px;
+    font-size: 0;
+    background-position: 0 0;
+    box-shadow: none;
+    @include bg($loc-pop + 'btn-close.png');
+  }
+
+  /* 공유 버튼 */
+  &Share {
+    width: 131px;
+    height: 131px;
+    margin-left: 24px;
+    border-radius: 50%;
+    box-shadow: 10px 15px 40px #daba60;
+    @include bg($loc-pop + 'btn-share.png');
+
+    &#{&}__ktShare {
+      background-position: left top;
+    }
+  
+    &#{&}__fbShare {
+      background-position: center top;
+    }
+  
+    &#{&}__ksShare {
+      background-position: right top;
+    }
+  }
+  
+
+  &__agreeDetail {
+    width: 114px;
+    height: 38px;
+    background-position: 0 -855px;
+    border-radius: 0;
+    margin-left: 90px;
+  }
+
+  &__lotteryResult {
+    background-position: 0 -95px;
+  }
+  
+  &__retry {
+    background-position: 0 -190px;
+    .lottery-result & {
+      margin-top: 50px;
+    }
+  }
+
+  &__confirm {
+    background-position: 0 -95px;
+    margin-top: 50px;
+  }
+
+  &__next {
+    background-position: 0 -285px;
+  }
+
+  &__completeCard {
+    margin-top: 50px;
+    background-position: 0 -380px;
+  }  
+
+  &__completeAll {
+    
+    background-position: 0 -665px;
+  }
+
+  &__sendCard {
+    margin-bottom: 30px;
+    background-position: 0 -475px;
+  }
+
+  &__copy {
+    width: 100px;
+    height: 60px;
+    background-position: -442px 0;
+    box-shadow: none;
+  }
+  
+  &Wrap {
+    text-align: center;
+  }
+}
+
+
+//즉당 / 퀴즈 : 개인정보
+.pop {
+  &__snsShare-txt {
+    margin-right: 20px;
+    line-height: 60px;
+    vertical-align: middle;
+    font-size: 24px;
+    color: $txtBeige;
+  }
+
+  &__ageNotice {
+    margin: 30px 0 50px;
+    font-size: 23px;
+    text-align: left;
+  }
+
+  &__btnWrap {
+    padding: 10px 0;
+    margin: 20px 0 30px;
+    // border-bottom: 1px solid $lineColor;
+    // border-top: 1px solid $lineColor;
+  }
+
+  &__winGift {
+    margin-top: 120px;
+  }
+
+  &__lotteryCount {
+    font-size: 23px;
+    color: #222222;
+  }
+
+  &__exceededText {
+    margin-top: 120px;
+  }
+
+  &__exceededText--sub {
+    margin: 15px 0 50px;
+  }
+}
+
+/* 팝업 background */
+$popups: (
+  'lottery-user' : 1045,
+  'lottery-result' : 	800,
+  'lottery-share' : 	737,
+  'card-user' : 1335,
+  'card-message' : 1363,
+  'card-result' : 1490,
+  'card-share' : 	737,
+  'event-notice' : 1851,
+  'event-personal-notice':1050
+);
+
+
+.pop {
+  @each $name, $height in $popups {
+    &.#{$name} {
+        /*display: none;*/
+        height: #{$height}px;
+        @include bg($loc-pop + 'bg-popup-' + $name + '.jpg');
+    }
+  }
+}
+
+.pop.lottery-result.fail {
+  height: 559px;
+  @include bg($loc-pop + 'bg-popup-lottery-result-fail.jpg');
+}
+
+/* ios input disabled */
+
+input:disabled  {
+  opacity:1;
+  -webkit-text-fill-color: inherit;
+}
+
+
+
+/* 
+.winner {
+  &__box {
+    margin-bottom: 30px;
+
+
+
+    ul {
+      width: 100%;
+      height: 180px;
+      padding: 15px 0;
+      background-color: #e6c788;
+      text-align: left;
+      overflow-y: scroll;
+
+      &.winner__box-first {
+        overflow: auto;
+      }
+    }
+
+    li {
+      display: inline-block;
+      width: 50%;
+      text-align: center;
+      color: #7f582e;
+      font-size: 20px;
+      line-height: 50px;
+    }
+  }
+
+  &__header {
+    height: 60px;
+    background-color: #794410;
+    color: #ffebb1;
+    font-size: 24px;
+    margin: 0;
+    line-height: 60px;
+    font-weight: normal;
+  }
+
+
+  &__notice {
+    >li {
+      line-height: 26px;
+      color: #ffebb1;
+      font-size: 18px;
+
+      span {
+        display: inline-block;
+        width: 4px;
+        height: 4px;
+        margin-right: 5px;
+        vertical-align: middle;
+        background: #ffebb1;
+      }
+    }
+  }
+} */
+

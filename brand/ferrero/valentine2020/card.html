@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorator="shared/layout-mobile">
+
+<head>
+  <title>페레로로쉐 : 발렌타인 이벤트 카드</title>
+  <link href="/valentine2020/css/style.card.min.css" rel="stylesheet">
+</head>
+
+<!-- 이벤트 Meta 태그 추가 -->
+<th:block layout:fragment="meta" th:remove="tag">
+  <meta property="og:url" th:attr="content=${metadata.url}" />
+  <meta property="og:title" th:attr="content=${metadata.title}" />
+  <meta property="og:image" th:attr="content=${metadata.image}" />
+  <meta property="og:description" th:attr="content=${metadata.description}" />
+</th:block>
+
+<th:block layout:fragment="content">
+  <div id="app" class="wrap">
+    <h1 class="logo">
+      <img src="https://fr-ferrerorocher.s3.ap-northeast-2.amazonaws.com/static/2020-valentine/popup/logo-card-page.png" alt="FerreroRocher Logo" >
+    </h1>
+    <!-- dimmed -->
+    <div class="dimmed" v-show="dimmed"></div>
+    <div class="dimmed loading" v-show="loading">
+      <img src="https://fr-ferrerorocher.s3.ap-northeast-2.amazonaws.com/static/loading.gif" alt="로딩중" />
+    </div>
+    <div class="pop">
+      <div class="pop__inner">
+        <h2 class="pop__header">
+          <span th:text="${data.name}"></span><span>님</span>이 보낸 <br/>소중한 마음에 답해주세요!
+        </h2>
+        
+        <div class="pop__cardWrap">
+          <div class="pop__card card">
+            <div class="card__imageWrap">
+              <div class="card__image">
+                <img th:src="${data.image}">
+              </div>
+              <div class="card__imageFrame">
+                
+              </div>
+            </div>
+  
+            <div class="card__inner">
+              <div class="card__toName toName">
+                <span class="toName__label">
+                  <img src="https://fr-ferrerorocher.s3.ap-northeast-2.amazonaws.com/static/2020-valentine/popup/text-to-name.png" alt="to">
+                </span>
+                <p class="toName__name underlined" th:text="${data.toName}">
+                </p>
+              </div>
+    
+              <div class="card__messageWrap">
+                <p class="card__message underlined" th:utext="${data.getConvertToContent()}">
+                </p>
+              </div>
+    
+              <div class="card__fromName fromName">
+                <img src="https://fr-ferrerorocher.s3.ap-northeast-2.amazonaws.com/static/2020-valentine/popup/deco-card.png" class="fromName__deco" />
+                <span class="fromName__label">
+                  <img src="https://fr-ferrerorocher.s3.ap-northeast-2.amazonaws.com/static/2020-valentine/popup/text-from-name.png" alt="from">
+                </span>
+                <p class="fromName__name underlined" th:text="${data.name}">
+                  
+                </p>
+              </div>
+            </div>
+  
+          </div>
+  
+          <div class="pop__cardReply cardReply">
+            <div class="cardReply__title">
+              <span class="cardReply__sender" th:text="${data.name}"></span>님에게 답해주세요
+            </div>
+  
+            <div v-if="!hasReply" class="cardReply__message">
+              <textarea class="messageArea" name="reply" id="reply" cols="24" rows="2" maxlength="24" v-model="reply" v-on:keyup="countLength($event)"></textarea>
+            </div>
+  
+            <div v-else class="card__messageWrap">
+              <p class="card__message underlined" th:utext="${data.getConvertToReply()}">
+                
+              </p>
+            </div>
+  
+          </div>
+        </div>
+
+        <div class="pop__btnWrap">
+          <button type="button" class="btnIr btnIr--inputComplete" @click="sendCardReply" v-if="!hasReply" >
+            입력 완료
+          </button>
+          <p class="pop__btnText">
+            <img v-if="hasReply" src="https://fr-ferrerorocher.s3.ap-northeast-2.amazonaws.com/static/2020-valentine/popup/text-card-send.png" alt="카드를 다시 보내 둘만의 추억을 만들어보세요!" />
+            <img v-else src="https://fr-ferrerorocher.s3.ap-northeast-2.amazonaws.com/static/2020-valentine/popup/text-card-send-fade.png" alt="카드를 다시 보내 둘만의 추억을 만들어보세요!" />
+          </p>
+          <button type="button" class="btnIr btnIr--sendCard" :class="[hasReply ? 'on' : '' ]" @click="shareKakaotalk" :disabled="!hasReply">
+            카드 보내기
+          </button>
+          <!-- <button type="button" class="btnIr btnIr--complete" :class="[hasReply ? 'on' : '' ]" @click="shareKakaotalk" :disabled="!hasReply">
+            완료
+          </button> -->
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- <div>
+		<ul>
+			<li><img th:src="${data.image}"></li>
+			<label>To. </label>
+			<li th:text="${data.toName}"></li>
+			<label>내용</label>
+			<li th:utext="${data.getConvertToContent()}"></li>			
+			<label>From. </label>
+			<li th:text="${data.name}"></li>
+			<label>공유 이미지</label>			
+			<li><img th:src="${data.cardImage}"></li>
+			<label>rcode</label>			
+      <li th:text="${data.rcode}"></li>
+      
+		</ul>
+  </div> -->
+</th:block>
+
+<th:block layout:fragment="body-script" th:remove="tag">
+  <script src="/vendor/jquery/jquery-1.10.2.min.js"></script>
+
+  <script src="/vendor/vue/vue.min.js"></script>
+
+  <script src="/valentine2020/js/deviceCheck.js"></script>
+
+  <script th:inline="javascript">
+  /*<![CDATA[*/
+    var rcode = /*[[${data.rcode}]]*/ ;
+    var fetchedReply = /*[[${data.getConvertToReply()}]]*/ ;
+    // var fetchedReply = true;
+    /*]]>*/
+  </script>
+
+  <script src="/valentine2020/js/main.card.js"></script>
+</th:block>
+

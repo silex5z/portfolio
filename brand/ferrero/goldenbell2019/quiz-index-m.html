@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <title>페레로로쉐 골든벨 2019 퀴즈 모바일</title>
+  <meta name="viewport" content="width=640, user-scalable=no">
+  <!-- <link href="https://fonts.googleapis.com/css?family=Roboto:400,700,900" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:400,500,700&display=swap" rel="stylesheet"> -->
+  <link href="/goldenbell2019/quiz/css/style.m.min.css" rel="stylesheet">
+  <!-- 이벤트 Meta 태그 추가 -->
+  <th:block layout:fragment="meta" th:remove="tag">
+    <meta property="og:url" th:attr="content=${url}" />
+    <meta property="og:title" th:attr="content=${title}" />
+    <meta property="og:image" th:attr="content=${image}" />
+    <meta property="og:description" th:attr="content=${contents}" />
+  </th:block>
+  <!-- Google Tag Manager -->
+	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+	})(window,document,'script','dataLayer','GTM-P8D9F9X');</script>
+	<!-- End Google Tag Manager -->
+</head>
+
+<body>
+<!-- Google Tag Manager (noscript) -->
+	<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P8D9F9X"
+	height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+	<!-- End Google Tag Manager (noscript) -->	
+  <!-- <div th:text="${path}"></div> -->
+
+  <div id="app" class="wrap" v-cloak>
+    <!-- <div class="debug">
+      <button type="button" class="btnIr btn--entry">문제풀기</button>
+      <button type="button" class="btnIr btn--next">다음</button>
+      <button type="button" class="btnIr btn--makeQuiz">퀴즈만들기</button>
+    </div> -->
+    <h1 class="ferreroLogo"><img
+        src="https://fr-ferrerorocher.s3.ap-northeast-2.amazonaws.com/static/goldenBell2019/quiz/m/logo.png"
+        alt="페레레로쉐"></h1>
+
+    <!-- 퀴즈 엔트리 페이지 -->
+    <section :class="['view', 'entryBoard', currentPage == 'entryBoard' ? 'on' : '']">
+      <div class="inner">
+        <div class="view__header">
+          <p>YOU퀴즈 이벤트</p>
+          <h2>{{ userName }} 탐구영역</h2>
+          <p class="view__header--txt">함께하는 마음으로 황금빛 응원을 전하고<br>푸짐한 경품 당첨의 기회도 잡아보세요!</p>
+        </div>
+
+        <!-- 개인정보 -->
+        <form v-on:submit.prevent>
+          <fieldset>
+            <legend class="a11y-hidden">개인 정보 입력</legend>
+            <dl>
+              <dt><label for="name" class="name">이름</label></dt>
+              <dd class="input--name"><input id="name" name="name" type="text" maxlength="4" v-model="userModel.name" />
+              </dd>
+
+              <dt><label for="number" class="number">연락처</label></dt>
+              <dd class="input--phone"><input id="number" name="number" type="tel" maxlength="11" placeholder="'-'기호를 제외하고 입력해 주세요."
+                  v-model="userModel.number" /></dd>
+              <dt><label for="ages" class="ages">연령대</label></dt>
+              <dd>
+                <select id="ages" name="ages" v-model="userModel.userAge">
+                  <option value="null" selected disabled hidden>연령대를 선택하세요</option>
+                  <option v-for="idx in 6" :value="(idx * 10)" :key="idx">
+                    {{ (idx * 10) + '대' }}
+                  </option>
+                </select>
+              </dd>
+            </dl>
+
+            <ul class="agree--wrap">
+              <li>
+                <label for="quizAgree1">
+                  <input type="checkbox" id="quizAgree1" name="quizAgree1" value="true" v-model="userModel.agree1" />
+                  <span></span>
+                  <p class="agree--text">개인정보 수집 및 이용동의</p>
+                </label>
+                <button type="button" class="btnIr btn--agreeDetail" @click="openPop('privacyPolicy')">
+                  자세히보기
+                </button>
+              </li>
+              <li>
+                <label for="quizAgree2">
+                  <input type="checkbox" id="quizAgree2" name="quizAgree2" value="true" v-model="userModel.agree2" />
+                  <span></span>
+                  <p class="agree--text">개인정보 처리 위탁동의</p>
+                </label>
+                <button type="button" class="btnIr btn--agreeDetail" @click="openPop('privacyPolicy')">
+                  자세히보기
+                </button>
+              </li>
+            </ul>
+          </fieldset>
+
+          <p class="agree--notice">만 14세 미만인 이용자는 본 서비스 이용이 제한됩니다</p>
+
+          <div class="btnWrap">
+            <button type="button" class="btnIr btn--entry" v-on:click="onSubmitUserInfo">문제풀기</button>
+          </div>
+        </form>
+
+        <!-- 참여자 리스트 -->
+        <h3>지금까지 YOU퀴즈에 참여한<br>사람들의 응원을 확인해보세요!</h3>
+        <div class="messageBoard">
+          <div class="messageBoard__header messageBoard__row">
+            <div class="messageBoard__col">이름</div>
+            <div class="messageBoard__col">점수</div>
+            <div class="messageBoard__col">응원의 한마디</div>
+          </div>
+
+          <div class="messageBoard__body messageBoard__row">
+            <div class="messageBoard__row" v-if="quizUserList.length == 0">
+              <div class="messageBoard__col col--row">참여자가 없습니다.</div>
+            </div>
+            <div class="messageBoard__row" v-else v-for="(item, idx) in quizUserList">
+              <div class="messageBoard__col">{{ item.name }}</div>
+              <div class="messageBoard__col">{{ item.score }}</div>
+              <div class="messageBoard__col">{{ item.message }}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+    </section>
+
+    <!-- 퀴즈 문제 페이지 -->
+    <section :class="['view', 'questionBoard', currentPage == 'questionBoard' ? 'on' : '']">
+      <div class="inner">
+        <div class="view__header">
+          <p>YOU퀴즈 이벤트</p>
+          <h2>{{ userName }} 탐구영역</h2>
+          <p class="view__header--txt">함께하는 마음으로 황금빛 응원을 전하고<br>푸짐한 경품 당첨의 기회도 잡아보세요!</p>
+        </div>
+
+
+        <div class="view__content">
+          <!-- 문제 1 -->
+          <div class="question question--1">
+            <div class="question__title">
+              <span class="question__number">문제 1</span>
+              <p class="question__q">
+                {{userName}} 님이 가족/친구들과 가장 하고 싶은것은?
+              </p>
+            </div>
+            <div class="question__visual">
+              <img
+                :src="'https://fr-ferrerorocher.s3.ap-northeast-2.amazonaws.com/static/goldenBell2019/quiz/m/quiz1-'+ userModel.q1Ans + '.png'"
+                alt="">
+            </div>
+            <div class="question__selectBox selectBox">
+              <div class="selectBox__options">
+                <div class="selectBox__option">
+                  <label for="q1--opt1">
+                    <b class="text">1) 외식</b>
+                    <input type="radio" name="q1" id="q1--opt1" value="1" v-model="userModel.q1Ans" />
+                    <span class="radioVisual"></span>
+                  </label>
+                </div>
+                <div class="selectBox__option">
+                  <label for="q1--opt2">
+                    <b class="text">2) 문화 생활</b>
+                    <input type="radio" name="q1" id="q1--opt2" value="2" v-model="userModel.q1Ans" />
+                    <span class="radioVisual"></span>
+                  </label>
+                </div>
+                <div class="selectBox__option">
+                  <label for="q1--opt3">
+                    <b class="text">3) 국내외 여행</b>
+                    <input type="radio" name="q1" id="q1--opt3" value="3" v-model="userModel.q1Ans" />
+                    <span class="radioVisual"></span>
+                  </label>
+                </div>
+                <div class="selectBox__option">
+                  <label for="q1--opt4">
+                    <b class="text">4) 쇼핑</b>
+                    <input type="radio" name="q1" id="q1--opt4" value="4" v-model="userModel.q1Ans" />
+                    <span class="radioVisual"></span>
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 문제2 -->
+          <div class="question question--2">
+            <div class="question__title">
+              <span class="question__number">문제 2</span>
+              <p class="question__q">
+                {{ userName}} 님이 수능 또는 중요한 날 전에 가장 듣고 싶은 말은?
+              </p>
+            </div>
+            <div class="question__visual">
+              <img
+                :src="'https://fr-ferrerorocher.s3.ap-northeast-2.amazonaws.com/static/goldenBell2019/quiz/m/quiz2-'+ userModel.q2Ans + '.png'"
+                alt="">
+            </div>
+            <div class="question__selectBox selectBox">
+              <div class="selectBox__options">
+                <div class="selectBox__option">
+                  <label for="q2--opt1">
+                    <input type="radio" name="q2" id="q2--opt1" :value="1" v-model="userModel.q2Ans" />
+                    <span class="radioVisual"></span>
+                    <b>걱정하지마, 다 잘 될거야</b>
+                  </label>
+                </div>
+                <div class="selectBox__option">
+                  <label for="q2--opt2">
+                    <input type="radio" name="q2" id="q2--opt2" :value="2" v-model="userModel.q2Ans" />
+                    <span class="radioVisual"></span>
+                    <b>넌 언제나 최고야</b>
+                  </label>
+                </div>
+                <div class="selectBox__option">
+                  <label for="q2--opt3">
+                    <input type="radio" name="q2" id="q2--opt3" :value="3" v-model="userModel.q2Ans" />
+                    <span class="radioVisual"></span>
+                    <b>지금까지 수고했어, 힘내자!</b>
+                  </label>
+                </div>
+                <div class="selectBox__option">
+                  <label for="q2--opt4">
+                    <input type="radio" name="q2" id="q2--opt4" :value="4" v-model="userModel.q2Ans" />
+                    <span class="radioVisual"></span>
+                    <b>넌 할 수 있어</b>
+                  </label>
+                </div>
+                <div class="selectBox__option">
+                  <label for="q2--opt5">
+                    <input type="radio" name="q2" id="q2--opt5" value="5" v-model="userModel.q2Ans" />
+                    <span class="radioVisual"></span>
+                    <b>기타</b>
+                    <input type="text" v-model="userModel.q2UserAns" maxlength="14" :disabled="userModel.q2Ans != '5'">
+                  </label>
+
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 문제 3 -->
+          <div class="question question--3">
+            <div class="question__title">
+              <span class="question__number">문제 3</span>
+              <p class="question__q">
+                {{ userName }} 님에게 보내는 응원의 메세지!
+              </p>
+            </div>
+            <input type="text" class="question__userAnswer" maxlength="20" v-model="userModel.userCheerMessage" />
+          </div>
+
+          <div class="btnWrap">
+            <button type="button" class="btnIr btn--next" v-on:click="onSubmitAnswer">다음</button>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- 퀴즈 정답확인 페이지 -->
+    <section :class="['view', 'scoreBoard', currentPage == 'scoreBoard' ? 'on' : '']">
+      <div class="inner">
+        <div class="view__header">
+          <h2>YOU퀴즈 이벤트</h2>
+          <p class="view__header--txt">아래 점수를 확인하고 나만의 퀴즈도 만들어보세요!</p>
+        </div>
+
+        <div class="view__content">
+          <div class="scoreBoard__score">
+            <div class="scoreBoard__scoreWarp">
+              <p class="scoreBoard__text">
+                {{ userName }} 영역에서<br>당신의 점수는
+              </p>
+              <div :class="['scoreBoard__scoreVisual', userScoreVisual]">
+
+              </div>
+            </div>
+          </div>
+
+          <div class="question question--1">
+            <div class="question__title">
+              <span class="question__number">문제 1</span>
+              <p class="question__q">
+                {{ userName }} 님이 가족/친구들과 가장 하고 싶은것은?
+              </p>
+            </div>
+
+            <div class="question__answer answer">
+              <div v-if="!isCorrectAns1" class="answer__yourAnswer">
+                <span class="answer__text">{{ yourAnswer1Text }}</span> <span class="visualOx visualOx--x">X</span>
+              </div>
+              <div :class="['answer__correctAnswer', !isCorrectAns1 ? 'isBold' : '']">
+                <span class="answer__text">{{ correctAnswer1Text }}</span> <span class="visualOx visualOx--o">O</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="question question--2">
+            <div class="question__title">
+              <span class="question__number">문제 2</span>
+              <p class="question__q">
+                {{ userName }} 님이 수능 또는 중요한 날 전에 가장 듣고 싶은 말은?
+              </p>
+            </div>
+
+            <div class="question__answer answer">
+              <div v-if="!isCorrectAns2" class="answer__yourAnswer">
+                <span class="answer__text">{{ yourAnswer2Text }}</span> <span class="visualOx visualOx--x">X</span>
+              </div>
+              <div :class="['answer__correctAnswer', !isCorrectAns2 ? 'isBold' : '']">
+                <span class="answer__text">{{ correctAnswer2Text }}</span> <span class="visualOx visualOx--o">O</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- <div v-for="(question, idx) in answerSheet" class="question">
+            <div class="question__title">
+              Q. 문제 {{ idx + 1 }}
+            </div>
+            <div class="answer">
+              <div v-if="!(question.yourAnswer == question.correctAnswer)" class="answer__your-answer">
+                {{ question.yourAnswer }} <span>X</span></div>
+              <div :class="['answer__correct-answer', !(question.yourAnswer == question.correctAnswer) ? 'is-bold' : '']">
+                {{ question.correctAnswer }} <span>O</span></div>
+            </div>
+          </div> -->
+        </div>
+
+        <p class="text--promotion">
+          이제 YOU 차례!<br>지금 YOU 퀴즈를 만들고,<br>황금빛 응원과 경품을 받아보세요!
+        </p>
+
+        <div class="btnWrap">
+          <a href="/2019_goldenbell" target="_self" class="btnIr btn--makeQuiz">퀴즈 만들기</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- dim -->
+    <div class="dimmed" v-show="currentPopup === 'privacyPolicy'"></div>
+
+    <!-- 개인정보 수집 이용 및 위탁 방침안내 -->
+    <div id="popup" class="pop event-personal-notice" v-show="currentPopup === 'privacyPolicy'">
+      <button class="btnIr btn--close" type="button" v-on:click="closePop">개인정보 수집 이용안내 팝업 닫기</button>
+      <img
+        src="https://fr-ferrerorocher.s3.ap-northeast-2.amazonaws.com/static/goldenBell2019/popup/pop-personal-notice.png"
+        alt="">
+    </div>
+
+    <!-- 로딩 -->
+    <div class="dimmed isLoading" v-show="isLoading">
+      <img src="https://fr-ferrerorocher.s3.ap-northeast-2.amazonaws.com/static/loading.gif" alt="로딩중">
+    </div>
+
+  </div>
+
+  <th:block layout:fragment="body-script" th:remove="tag">
+    <script src="/vendor/jquery/jquery-1.10.2.min.js"></script>
+
+    <script src="/vendor/vue/vue.min.js"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.17/vue.js"></script> -->
+    <script src="/goldenbell2019/quiz/js/pub-quiz-app.js"></script>
+     <script th:inline="javascript">
+    /*<![CDATA[*/
+    var quizIsOpen = /*[[${quizIsOpen}]]*/ ;
+	/*]]>*/
+  	</script>
+  </th:block>
+</body>
+
+</html>
